@@ -181,19 +181,22 @@ for (const city in worldCities) {
   largeCities[city] = worldCities[city];
 }
 
-//7
+//7 VVI
 
-let teaCollection = ["earl grey", "green tea", "chai", "oolong tea"];
-let availableTeas = [];
+let teaPaglu = ["earl grey", "green tea", "chai", "oolong tea"]
+let availableTeas = []
+let foundChai = false  // Flag to track if we hit "chai"
 
-teaCollection.forEach(function (tea) {
-  if (tea === "chai") {
-    return;
-  }
-  availableTeas.push(tea);
+teaPaglu.forEach(element => {
+    if (foundChai) return;  // Skip all elements after "chai"
+    
+    if (element === "chai") {
+        foundChai = true;   // Set flag, don't add "chai"
+        return;
+    }
+    availableTeas.push(element)
 });
-
-// console.log(availableTeas);
+console.log(availableTeas)  // Output: [ 'earl grey', 'green tea' ]
 
 
 //8
