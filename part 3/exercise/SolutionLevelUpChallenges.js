@@ -171,3 +171,17 @@ for(let i = 0; i< aray.length; i++){
     }
 }
 console.log(doubledNumbers)
+
+
+//challenge 10
+
+let tea = ["chai", "green tea", "black tea", "jasmine tea", "herbal tea"]
+let shortTeas = []
+
+for (const element of tea) {
+    if(element.length > 10){
+        break
+    }
+    shortTeas.push(element)
+}
+console.log(shortTeas)
