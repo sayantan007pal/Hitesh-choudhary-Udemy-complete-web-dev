@@ -1,4 +1,34 @@
-//here we are creating constructor function which is used to create objects. i.e it is a blueprint for creating objects
+// ═══════════════════════════════════════════════════════════════════════════════
+// CONSTRUCTOR FUNCTIONS in JavaScript
+// ═══════════════════════════════════════════════════════════════════════════════
+// 
+// Constructor functions are BLUEPRINTS for creating multiple similar objects.
+// They are regular functions invoked with the "new" keyword.
+//
+// Key Concepts:
+// 1. NAMING CONVENTION → Constructor names start with Capital letter
+//    Example: function Car(brand) { ... }
+//
+// 2. "new" KEYWORD → When used, it:
+//    a) Creates a new empty object {}
+//    b) Sets "this" to point to the new object
+//    c) Executes the constructor code (adds properties to "this")
+//    d) Returns the new object automatically
+//
+// 3. "this" KEYWORD → Refers to the newly created object instance
+//    Example: this.brand = brand; // adds property to the new object
+//
+// 4. PROTOTYPE METHODS → Add shared methods to Constructor.prototype
+//    This saves memory - all instances share the same function!
+//    Example: Car.prototype.start = function() { ... }
+//
+// 5. "new.target" → Safety check to ensure function is called with "new"
+//    Returns undefined if called without "new"
+//    Example: if (!new.target) throw new Error("Use new keyword!")
+//
+// Without "new": this → global object (window/undefined in strict mode)
+// With "new":    this → the newly created instance
+// ═══════════════════════════════════════════════════════════════════════════════
 function car(brand, model){
     this.brand = brand;
     this.model = model;

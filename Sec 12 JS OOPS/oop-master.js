@@ -11,7 +11,37 @@ console.log(car.start())
 
 
 
-//PROTOTYPAL CHAINING
+// ═══════════════════════════════════════════════════════════════════════════════
+// PROTOTYPAL CHAINING in JavaScript
+// ═══════════════════════════════════════════════════════════════════════════════
+// 
+// Prototypal Inheritance allows objects to inherit properties and methods from other objects.
+// This is a fundamental concept in JavaScript's object model.
+//
+// Key Concepts:
+// 1. PROTOTYPE CHAIN → JS looks up the chain: Child → Parent → Object
+//    If a property/method isn't found in child, it searches up the chain
+//
+// 2. __proto__ → Internal property pointing to parent object
+//    Example: obj.__proto__ = parentObj
+//
+// 3. Object.create() → Creates an object with a specified prototype
+//    Example: const childObj = Object.create(parentObj)
+//
+// 4. Constructor functions → Can be used to create objects with shared prototypes
+//    Example: function Person(name) { this.name = name }
+//
+// 5. Instanceof operator → Checks if an object is an instance of a class
+//    Example: obj instanceof ParentClass
+//
+// 6. Object.getPrototypeOf() → Retrieves the object's prototype
+//    Example: const proto = Object.getPrototypeOf(obj)
+//
+// 7. Object.setPrototypeOf() → Sets the object's prototype
+//    Example: Object.setPrototypeOf(obj, proto)
+//
+// This forms the foundation for object-oriented programming in JavaScript.
+// ═══════════════════════════════════════════════════════════════════════════════
 
 
 function Animal(species){
@@ -32,7 +62,30 @@ console.log(secondRatings.myRatings())
 
 
 
-//INHERITENCE
+// ═══════════════════════════════════════════════════════════════════════════════
+// INHERITANCE in JavaScript
+// ═══════════════════════════════════════════════════════════════════════════════
+// 
+// Inheritance allows a CHILD class to acquire properties and methods from a PARENT class.
+// This promotes code reusability and establishes an "is-a" relationship.
+//
+// Key Concepts:
+// 1. EXTENDS keyword → Creates a child class that inherits from parent
+//    Example: class Car extends Vehicle { ... }
+//
+// 2. SUPER keyword → Calls the parent class constructor & methods
+//    - super(args) → Must be called FIRST in child constructor
+//    - super.methodName() → Calls parent's method from child
+//
+// 3. METHOD OVERRIDING → Child can redefine parent's methods
+//    The child's version will be used when called on child instances
+//
+// 4. PROTOTYPE CHAIN → JS looks up the chain: Child → Parent → Object
+//    If a property/method isn't found in child, it searches up the chain
+//
+// 5. Child classes CAN add their own properties and methods beyond
+//    what they inherit from the parent
+// ═══════════════════════════════════════════════════════════════════════════════
 
 
 class Vechile{
@@ -64,3 +117,33 @@ class Car extends Vechile{
 
 let audi = new Car("Audi", "A4", "2024")
 console.log(audi.start())
+
+
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// ENCAPSULATION using Private Fields (#)
+// ═══════════════════════════════════════════════════════════════════════════════
+// 
+// The '#' prefix in JavaScript creates TRUE private class fields and methods.
+// Unlike the old convention of using '_' (which was just a naming hint), 
+// '#' provides actual privacy enforced by the JavaScript engine.
+//
+// Key Points:
+// 1. DECLARE private fields with '#' prefix at the top of the class body
+//    Example: #privateField = "secret";
+//
+// 2. CANNOT be accessed directly from outside the class
+//    Example: obj.#privateField → SyntaxError!
+//
+// 3. Use GETTERS (get) and SETTERS (set) to expose controlled access
+//    Example: get publicName() { return this.#privateField; }
+//
+// 4. Private fields are only accessible within the class where they are defined
+//    (Not even subclasses can access them directly!)
+//
+// 5. CONSTRUCTOR can initialize private fields using this.#fieldName
+//
+// This ensures ENCAPSULATION by hiding internal implementation details while
+// exposing only a clean, controlled public interface.
+// ═══════════════════════════════════════════════════════════════════════════════
+
