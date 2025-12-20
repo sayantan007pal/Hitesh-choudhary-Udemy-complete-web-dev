@@ -147,3 +147,206 @@ console.log(audi.start())
 // exposing only a clean, controlled public interface.
 // ═══════════════════════════════════════════════════════════════════════════════
 
+class myBank{
+    #balance = 505;
+    getBalance(){
+
+        return this.#balance
+    }
+}
+let account = new myBank()
+// console.log(myBank.#balance) // SyntaxError: Private field '#balance' must be declared in an enclosing class
+
+console.log(account.getBalance())
+
+
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// ABSTRACTION in JavaScript
+// ═══════════════════════════════════════════════════════════════════════════════
+// 
+// Abstraction means HIDING complex implementation details and showing only
+// the essential features to the user. "Show WHAT it does, hide HOW it does it."
+//
+// Key Concepts:
+// 1. HIDE COMPLEXITY → Internal workings are hidden from the outside world
+//    Users don't need to know HOW something works, just how to USE it
+//
+// 2. EXPOSE SIMPLE INTERFACE → Provide public methods for interaction
+//    Example: car.start() - user doesn't need to know ignition mechanics!
+//
+// 3. Implementation in JavaScript:
+//    a) Use PRIVATE fields (#) to hide internal data/methods
+//    b) Use PUBLIC methods to expose controlled functionality
+//    c) Use CLOSURES to create private scope (pre-ES6 approach)
+//
+// 4. BENEFITS:
+//    - Reduces code complexity for users of the class
+//    - Allows internal changes without affecting external code
+//    - Improves security by hiding sensitive logic
+//    - Makes code more maintainable and modular
+//
+// Example Pattern:
+// class Database {
+//     #connection;           // Hidden: users don't manage connections
+//     #executeQuery(sql) {}  // Hidden: complex query logic
+//     getData(id) {}         // Exposed: simple, clean interface
+// }
+// ═══════════════════════════════════════════════════════════════════════════════
+
+class coffeeMachine{
+    start(){
+        return `starting the machine,`
+    }
+    brew(coffee){
+         coffee = 50
+         return `${coffee}gm cofee mixed with ${coffee}ml milk,`
+    }
+    startButton(){
+        let go = this.start()
+        let startProcess = this.brew()
+        return `first ${go} then ${startProcess}`
+    }
+}
+let me = new coffeeMachine()
+console.log(me.startButton())
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// POLYMORPHISM in JavaScript
+// ═══════════════════════════════════════════════════════════════════════════════
+// 
+// Polymorphism means "many forms" - the same method name can behave differently
+// depending on which object calls it. "One interface, multiple implementations."
+//
+// Key Types:
+// 1. METHOD OVERRIDING → Child class redefines parent's method
+//    The child's version is used when called on child instances
+//    Example:
+//      class Animal { speak() { return "..."; } }
+//      class Dog extends Animal { speak() { return "Woof!"; } }
+//      class Cat extends Animal { speak() { return "Meow!"; } }
+//
+// 2. DUCK TYPING → "If it walks like a duck, quacks like a duck..."
+//    JS doesn't check types - if an object has the method, it works!
+//    Example: Any object with a .speak() method can be used
+//
+// 3. METHOD OVERLOADING (simulated) → Same method handles different arguments
+//    JS doesn't have true overloading, but we can check arguments manually
+//    Example: function greet(name, age) { if (!age) {...} else {...} }
+//
+// Benefits:
+// - Write flexible, reusable code
+// - Process different objects through the same interface
+// - Easily extend functionality without modifying existing code
+//
+// Example Pattern:
+// function makeSound(animal) { console.log(animal.speak()); }
+// makeSound(new Dog());  // "Woof!"
+// makeSound(new Cat());  // "Meow!"  ← Same function, different behavior!
+// ═══════════════════════════════════════════════════════════════════════════════
+
+class Bird {
+    fly=()=> {
+        return "bird is flying";
+    }
+}
+class Ostrich extends Bird{
+    fly=()=> {
+        return "ostrich is running";
+    }
+}
+let bird = new Bird()
+let ostrich = new Ostrich()
+console.log(bird.fly())
+console.log(ostrich.fly())
+
+
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// STATIC METHODS in JavaScript
+// ═══════════════════════════════════════════════════════════════════════════════
+// 
+// Static methods belong to the CLASS itself, NOT to instances of the class.
+// They are called directly on the class: ClassName.methodName()
+//
+// Key Concepts:
+// 1. STATIC keyword → Defines a method that belongs to the class, not instances
+//    Example: static myMethod() { ... }
+//
+// 2. CANNOT use 'this' → Static methods don't have access to instance properties
+//    because they're not called on an object instance
+//
+// 3. CALL ON CLASS → Use the class name to call static methods
+//    Example: Math.random(), Array.isArray(), Object.keys()
+//
+// 4. COMMON USE CASES:
+//    - Utility/helper functions that don't need instance data
+//    - Factory methods that create instances (e.g., User.create())
+//    - Caching or counting instances of a class
+//    - Comparison functions between instances
+//
+// 5. CANNOT BE CALLED on instances → obj.staticMethod() will throw an error!
+//    Only works as: ClassName.staticMethod()
+//
+// Example Pattern:
+
+// ═══════════════════════════════════════════════════════════════════════════════
+
+
+class Calculator {
+    static add(a, b) { return a + b; }      // No 'this' needed
+    static multiply(a, b) { return a * b; }
+}
+Calculator.add(5, 3);      // ✅ Returns 8
+// new Calculator().add(5,3); // ❌ Error! add is not a function
+
+console.log(Calculator.add(5,3))
+// console.log(new Calculator().add(5,3))
+//output: 8
+//output: Error! add is not a function
+
+
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// GETTERS and SETTERS in JavaScript
+// ═══════════════════════════════════════════════════════════════════════════════
+// 
+// Getters and Setters allow you to define methods that are accessed like properties.
+// They provide controlled access to an object's internal data.
+//
+// Key Concepts:
+// 1. GET keyword → Defines a method that returns a value when accessed like a property
+//    Example: get fullName() { return this.firstName + ' ' + this.lastName; }
+//    Usage: obj.fullName (NOT obj.fullName())
+//
+// 2. SET keyword → Defines a method that sets a value when assigned like a property
+//    Example: set fullName(value) { this.firstName = value.split(' ')[0]; }
+//    Usage: obj.fullName = "John Doe" (NOT obj.fullName("John Doe"))
+//
+// 3. WHY USE THEM:
+//    - Validate data before setting (e.g., check if age is positive)
+//    - Compute values on-the-fly (e.g., calculate fullName from first+last)
+//    - Hide internal implementation while exposing a clean interface
+//    - Add side effects (e.g., logging when a property changes)
+//
+// 4. COMMON PATTERN → Use with private fields (#) for true encapsulation
+//    Example: #_age; set age(val) { if(val > 0) this.#_age = val; }
+//
+// 5. NAMING CONVENTION → Often use underscore prefix for backing field
+//    Example: this._name for internal storage, get/set name() for access
+//
+// Example Pattern:
+// class Person {
+//     #_age;
+//     constructor(age) { 
+//         this.#_age = age; 
+//     }
+//     get age() { 
+//         return this.#_age; 
+//     }           // Access: person.age
+//     set age(value) {                            // Assign: person.age = 25
+//         if (value > 0) this.#_age = value;
+//         else console.log("Age must be positive!");
+//     }
+// }
+// ═══════════════════════════════════════════════════════════════════════════════
