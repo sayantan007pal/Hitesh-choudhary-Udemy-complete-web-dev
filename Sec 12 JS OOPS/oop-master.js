@@ -336,17 +336,25 @@ console.log(Calculator.add(5,3))
 //    Example: this._name for internal storage, get/set name() for access
 //
 // Example Pattern:
-// class Person {
-//     #_age;
-//     constructor(age) { 
-//         this.#_age = age; 
-//     }
-//     get age() { 
-//         return this.#_age; 
-//     }           // Access: person.age
-//     set age(value) {                            // Assign: person.age = 25
-//         if (value > 0) this.#_age = value;
-//         else console.log("Age must be positive!");
-//     }
-// }
+
 // ═══════════════════════════════════════════════════════════════════════════════
+
+class Person {
+    #_age;
+    constructor(age) { 
+        this.#_age = age; 
+    }
+    get age() { 
+        return this.#_age; 
+    }           // Access: person.age
+    set age(value) {                            // Assign: person.age = 25
+        if (value > 0) this.#_age = value;
+        else console.log("Age must be positive!");
+    }
+}
+let person = new Person(25)
+console.log(person.age)
+person.age = 30
+console.log(person.age)
+person.age = -5
+console.log(person.age)
