@@ -1,34 +1,211 @@
-// ═══════════════════════════════════════════════════════════════════════════════
-// CONSTRUCTOR FUNCTIONS in JavaScript
-// ═══════════════════════════════════════════════════════════════════════════════
-// 
-// Constructor functions are BLUEPRINTS for creating multiple similar objects.
-// They are regular functions invoked with the "new" keyword.
-//
-// Key Concepts:
-// 1. NAMING CONVENTION → Constructor names start with Capital letter
-//    Example: function Car(brand) { ... }
-//
-// 2. "new" KEYWORD → When used, it:
-//    a) Creates a new empty object {}
-//    b) Sets "this" to point to the new object
-//    c) Executes the constructor code (adds properties to "this")
-//    d) Returns the new object automatically
-//
-// 3. "this" KEYWORD → Refers to the newly created object instance
-//    Example: this.brand = brand; // adds property to the new object
-//
-// 4. PROTOTYPE METHODS → Add shared methods to Constructor.prototype
-//    This saves memory - all instances share the same function!
-//    Example: Car.prototype.start = function() { ... }
-//
-// 5. "new.target" → Safety check to ensure function is called with "new"
-//    Returns undefined if called without "new"
-//    Example: if (!new.target) throw new Error("Use new keyword!")
-//
-// Without "new": this → global object (window/undefined in strict mode)
-// With "new":    this → the newly created instance
-// ═══════════════════════════════════════════════════════════════════════════════
+/**
+ * ╔══════════════════════════════════════════════════════════════════════════════╗
+ * ║                   CONSTRUCTOR FUNCTIONS IN JAVASCRIPT                        ║
+ * ║                 🎯 Interview Revision Guide for Beginners 🎯                  ║
+ * ╚══════════════════════════════════════════════════════════════════════════════╝
+ * 
+ * 
+ * 📖 SIMPLE DEFINITION (Learn this for interviews!)
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * "Constructor functions are BLUEPRINTS for creating multiple similar objects.
+ *  They're regular functions called with the 'new' keyword, which creates a 
+ *  new object instance with the properties defined inside the constructor."
+ * 
+ * 
+ * 🍪 EASY ANALOGY: COOKIE CUTTER
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * Think of a cookie cutter:
+ *   - The CONSTRUCTOR FUNCTION is like the cookie cutter (mold/template)
+ *   - Each time you use it (call with 'new'), you get a NEW cookie (object)
+ *   - All cookies have the same SHAPE (structure) but can have DIFFERENT flavors (data)
+ * 
+ *   function Cookie(flavor) { this.flavor = flavor; }  ← The cutter (template)
+ *   new Cookie("chocolate")  → { flavor: "chocolate" } ← A new cookie!
+ *   new Cookie("vanilla")    → { flavor: "vanilla" }   ← Another new cookie!
+ * 
+ * 
+ * 🔗 VISUAL: WHAT 'new' KEYWORD DOES (4 STEPS)
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * 
+ *   function Car(brand) {
+ *       this.brand = brand;         // Step 3: Add properties
+ *   }
+ *   
+ *   const myCar = new Car("Toyota");
+ *   
+ *   ┌─────────────────────────────────────────────────────────────────┐
+ *   │        WHAT HAPPENS BEHIND THE SCENES WITH 'new':              │
+ *   ├─────────────────────────────────────────────────────────────────┤
+ *   │  Step 1: Create empty object     │  {}                         │
+ *   │  Step 2: Set 'this' = new object │  this → {}                  │
+ *   │  Step 3: Execute constructor     │  this.brand = "Toyota"      │
+ *   │  Step 4: Return the object       │  return { brand: "Toyota" } │
+ *   └─────────────────────────────────────────────────────────────────┘
+ *   
+ *   Result: myCar = { brand: "Toyota" }
+ * 
+ * 
+ * 🔑 KEY RULES FOR CONSTRUCTOR FUNCTIONS:
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * 
+ *   ┌─────────────────────────────────┬────────────────────────────────────┐
+ *   │ Rule                            │ Example                            │
+ *   ├─────────────────────────────────┼────────────────────────────────────┤
+ *   │ Name starts with Capital letter │ function Person() NOT person()    │
+ *   │ Must be called with 'new'       │ new Person(), not Person()        │
+ *   │ 'this' refers to new instance   │ this.name = name                  │
+ *   │ Don't use arrow functions!      │ Arrow functions don't have 'this' │
+ *   │ No explicit return needed       │ 'new' returns the object for you  │
+ *   └─────────────────────────────────┴────────────────────────────────────┘
+ * 
+ * 
+ * 💻 COMPLETE EXAMPLE:
+ * ━━━━━━━━━━━━━━━━━━━━
+ * 
+ *   // ─────────── CONSTRUCTOR FUNCTION ───────────
+ *   function Person(name, age) {
+ *       // 'this' refers to the new object being created
+ *       this.name = name;
+ *       this.age = age;
+ *       
+ *       // Method defined inside (each instance gets its own copy - not ideal!)
+ *       this.sayHello = function() {
+ *           return `Hi, I'm ${this.name}`;
+ *       };
+ *   }
+ *   
+ *   // ─────────── PROTOTYPE METHOD (Better! Shared by all) ───────────
+ *   Person.prototype.greet = function() {
+ *       return `${this.name} says hello!`;
+ *   };
+ *   
+ *   // ─────────── CREATING INSTANCES ───────────
+ *   const john = new Person("John", 25);
+ *   const jane = new Person("Jane", 30);
+ *   
+ *   john.name;        // "John"
+ *   john.sayHello();  // "Hi, I'm John"
+ *   john.greet();     // "John says hello!"
+ *   
+ *   jane.name;        // "Jane"
+ *   jane.greet();     // "Jane says hello!"
+ *   
+ *   // Check if instance:
+ *   john instanceof Person;  // true
+ * 
+ * 
+ * ⚠️ WITH vs WITHOUT 'new' KEYWORD:
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * 
+ *   function Car(brand) {
+ *       this.brand = brand;
+ *   }
+ *   
+ *   // ✅ WITH 'new' - Correct!
+ *   const car1 = new Car("Toyota");
+ *   console.log(car1.brand);        // "Toyota"
+ *   console.log(car1);              // Car { brand: "Toyota" }
+ *   
+ *   // ❌ WITHOUT 'new' - WRONG! (common mistake)
+ *   const car2 = Car("Honda");      // 'this' is undefined or global!
+ *   console.log(car2);              // undefined (nothing returned)
+ *   console.log(globalThis.brand);  // "Honda" - polluted global scope!
+ * 
+ * 
+ * 🛡️ SAFETY CHECK: new.target
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * 
+ *   function SafeCar(brand) {
+ *       // Check if called with 'new'
+ *       if (!new.target) {
+ *           throw new Error("Must use 'new' keyword!");
+ *           // OR: return new SafeCar(brand);  // Auto-fix
+ *       }
+ *       this.brand = brand;
+ *   }
+ *   
+ *   new SafeCar("BMW");    // ✅ Works
+ *   SafeCar("BMW");        // ❌ Error: Must use 'new' keyword!
+ * 
+ * 
+ * 📦 ADDING METHODS - TWO WAYS:
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * 
+ *   ┌─────────────────────────────┬───────────────────────────────────────┐
+ *   │ INSIDE CONSTRUCTOR          │ ON PROTOTYPE                          │
+ *   ├─────────────────────────────┼───────────────────────────────────────┤
+ *   │ function Car(brand) {       │ function Car(brand) {                 │
+ *   │   this.brand = brand;       │   this.brand = brand;                 │
+ *   │   this.start = function() { │ }                                     │
+ *   │     return "Vroom!";        │ Car.prototype.start = function() {    │
+ *   │   };                        │   return "Vroom!";                    │
+ *   │ }                           │ };                                    │
+ *   ├─────────────────────────────┼───────────────────────────────────────┤
+ *   │ ❌ Each instance gets copy  │ ✅ All instances SHARE one function   │
+ *   │ ❌ Uses more memory          │ ✅ Memory efficient                   │
+ *   │ ✅ Can access closure vars   │ ❌ Can't access constructor closure  │
+ *   └─────────────────────────────┴───────────────────────────────────────┘
+ * 
+ * 
+ * 🆚 CONSTRUCTOR FUNCTION vs ES6 CLASS:
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * 
+ *   // CONSTRUCTOR FUNCTION (ES5 way)
+ *   function Animal(name) {
+ *       this.name = name;
+ *   }
+ *   Animal.prototype.speak = function() {
+ *       return `${this.name} speaks`;
+ *   };
+ *   
+ *   // ES6 CLASS (Syntactic sugar - same thing under the hood!)
+ *   class Animal {
+ *       constructor(name) {
+ *           this.name = name;
+ *       }
+ *       speak() {
+ *           return `${this.name} speaks`;
+ *       }
+ *   }
+ *   
+ *   💡 Classes are just cleaner syntax for constructor functions!
+ *      Both work the same way with prototypes behind the scenes.
+ * 
+ * 
+ * 📝 QUICK INTERVIEW CHEAT SHEET:
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * 
+ *   Q: "What is a constructor function?"
+ *   A: "A constructor function is a blueprint for creating objects. It's a 
+ *       regular function called with the 'new' keyword, which creates a new 
+ *       object, binds 'this' to it, runs the code, and returns the object."
+ * 
+ *   Q: "What does the 'new' keyword do?"
+ *   A: "It does 4 things: (1) Creates an empty object, (2) Sets 'this' to 
+ *       point to that object, (3) Executes the constructor function, and 
+ *       (4) Returns the newly created object automatically."
+ * 
+ *   Q: "Why add methods to prototype instead of inside constructor?"
+ *   A: "Methods on the prototype are shared by all instances - one copy in 
+ *       memory. Methods inside the constructor create a new copy for each 
+ *       instance, wasting memory."
+ * 
+ *   Q: "What happens if you forget 'new'?"
+ *   A: "'this' will refer to the global object (or undefined in strict mode),
+ *       causing bugs. Use new.target to check if 'new' was used."
+ * 
+ *   Q: "What's the difference between constructor functions and classes?"
+ *   A: "ES6 classes are syntactic sugar over constructor functions. They 
+ *       work the same way under the hood using prototypes, but classes 
+ *       provide cleaner, more readable syntax."
+ * 
+ * 
+ * 💡 ONE-LINER TO REMEMBER:
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━
+ *    "Constructor = Blueprint. 'new' = Build it. 'this' = The new object!"
+ * 
+ * ═══════════════════════════════════════════════════════════════════════════════
+ */
 function car(brand, model){
     this.brand = brand;
     this.model = model;
