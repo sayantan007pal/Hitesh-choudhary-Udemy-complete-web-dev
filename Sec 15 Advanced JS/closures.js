@@ -114,3 +114,24 @@
  * 
  */
 
+let outer = () => {
+    let counter = 1
+    return () =>{
+        counter++
+        return counter
+    }
+}
+let incrementedNumber = outer()
+console.log(incrementedNumber) // output is [Function (anonymous)] as here we //are printing the function itself instead of calling the function 
+// When you call outer(), it returns the inner function. To actually increment the counter, you need to call that returned function
+console.log(incrementedNumber())
+
+// function outer1() {
+//     let counter = 1
+//     return  function() {
+//         counter++
+//         return counter
+//     }
+// }
+// let incrementedNumber1 = outer1()
+// console.log(incrementedNumber1())
