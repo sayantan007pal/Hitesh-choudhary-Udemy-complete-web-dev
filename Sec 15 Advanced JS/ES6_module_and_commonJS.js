@@ -1,3 +1,17 @@
+/**
+ * ============================================================================
+ * 🚨 NOTE: CommonJS examples are in separate .cjs files!
+ * ============================================================================
+ *
+ * You CANNOT use require() in this file because it's an ES6 module.
+ * 
+ * To see CommonJS examples, run:
+ *   node testCommonJS.cjs
+ *
+ * ============================================================================
+ */
+
+//MODULE IMPORTS AND EXPORTS
 //default export
 
 import multiply from "./math.js";
