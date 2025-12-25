@@ -424,8 +424,8 @@ const filePath = "./todo.json";
 
 const loadFile = async() => {
     try {
-        let dataBuffer = fs.readFileSync(filePath)
-        let dataJSON = dataBuffer.toString()
+        let dataBuffer = fs.readFileSync(filePath) // returns buffer 
+        let dataJSON = dataBuffer.toString() // returns string
         return JSON.parse(dataJSON)
         
     } catch (err) {
@@ -434,7 +434,7 @@ const loadFile = async() => {
 }
 
 const saveFile = async(data) => {
-    const dataJSON = JSON.stringify(data)
+    const dataJSON = JSON.stringify(data) // returns string
     fs.writeFileSync(filePath,dataJSON)
 }
 

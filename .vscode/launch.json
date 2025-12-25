@@ -1,0 +1,27 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "Containers: Attach to Node",
+            "remoteRoot": "/usr/src/app"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug Server (server.js)",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/Sec 19 Journey of Backend with NodeJs and Projects/tod0/server/server.js",
+            "cwd": "${workspaceFolder}/Sec 19 Journey of Backend with NodeJs and Projects/tod0/server",
+            "console": "integratedTerminal",
+            "restart": true,
+            "runtimeArgs": ["--experimental-modules"]
+        }
+    ]
+}
