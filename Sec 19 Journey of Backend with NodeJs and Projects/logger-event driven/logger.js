@@ -332,7 +332,7 @@ const logToFile = (event) => {
     //    (free / total) * 100 = Percentage of FREE memory
     //    Example: (4GB / 16GB) * 100 = 25% free memory
     
-    logger.log(`Memory usage: ${memoryUse}`);
+    logger.log(`Memory usage: ${memoryUse.toFixed(2)}%`); // here toFixed(2) is used to limit the decimal places to 2
     // 🔹 Log the memory usage - this triggers the event!
     
  },3000)

@@ -1,7 +1,0 @@
-2025-12-25T18:09:30.267Z - [object Object]
-2025-12-25T18:10:29.721Z - [object Object]
-2025-12-25T18:10:32.728Z - [object Object]
-2025-12-25T18:10:39.342Z - [object Object]
-2025-12-25T18:10:41.848Z - [object Object]
-2025-12-25T18:11:04.528Z - [object Object]
-2025-12-25T18:12:21.261Z - Application started
