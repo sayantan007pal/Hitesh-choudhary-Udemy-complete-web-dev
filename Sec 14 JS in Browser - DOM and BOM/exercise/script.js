@@ -40,20 +40,49 @@ let highlightOnClickButton = gettingCityNames.addEventListener("click", function
 */
 
 
+//example 3 by me 
+
+document.getElementById("changeOrder").addEventListener("click", function(){
+  document.getElementById("coffeeType").textContent = "Espresso"
+})
+
+
+
+document.getElementById("addNewItem").addEventListener("click", function(){
+  let addedItem = document.createElement("li")     // this will create a new element of type li
+  addedItem.textContent= "eggs"
+  
+  document.getElementById("shoppingList").appendChild(addedItem) // this will add the element to the list
+})
+
+/**
+ * why when i gave "document.getElementById("addNewItem").addEventListener("click", function(){
+  let addedItem = document.createElement("li").textContent= "eggs"
+  
+  document.getElementById("shoppingList").appendChild(addedItem)" this, i got this error "script.js:54 Uncaught TypeError: Failed to execute 'appendChild' on 'Node': parameter 1 is not of type 'Node'.
+    at HTMLButtonElement.<anonymous> (script.js:54:43)"
+    but 
+    on correcting that to "
+document.getElementById("addNewItem").addEventListener("click", function(){
+  let addedItem = document.createElement("li")
+  addedItem.textContent= "eggs"
+  
+  document.getElementById("shoppingList").appendChild(addedItem)
+})" i got eggs added to the list???
+ */
 
 
 
 
 
 
+//example 5 by me 
 
-
-
-
-
-
-
-
+document.getElementById("removeLastTask").addEventListener("click", function(){
+  let grabTaskList = document.getElementById("taskList")
+  let getLastTask = grabTaskList.lastElementChild //this will get the last element of the list
+  getLastTask.remove()
+})
 
 
 
