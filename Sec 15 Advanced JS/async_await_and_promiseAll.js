@@ -288,11 +288,20 @@ async function fetchInParallel() {
  *        const data = await mightFail();  // If this fails, app crashes!
  *    }
  * 
- * ❌ Using await in a loop when you could use Promise.all:
- *    for (const id of ids) {
- *        await fetch(id);  // SLOW! Each waits for previous
- *    }
- *    // Better: await Promise.all(ids.map(id => fetch(id)));
+ * ╔═══════════════════════════════════════════════════════════════════════════╗
+ * ║  ⚠️⚠️⚠️ VERY IMPORTANT - COMMON INTERVIEW QUESTION ⚠️⚠️⚠️                  ║
+ * ╠═══════════════════════════════════════════════════════════════════════════╣
+ * ║  ❌ Using await in a loop when you could use Promise.all:                 ║
+ * ║     for (const id of ids) {                                               ║
+ * ║         await fetch(id);  // SLOW! Each waits for previous                ║
+ * ║     }                                                                     ║
+ * ║                                                                           ║
+ * ║  ✅ BETTER: await Promise.all(ids.map(id => fetch(id)));                  ║
+ * ║                                                                           ║
+ * ║  💡 This is a MAJOR performance optimization!                             ║
+ * ║     → Loop with await: O(n) time (sequential)                             ║
+ * ║     → Promise.all: O(1) time complexity (parallel)                        ║
+ * ╚═══════════════════════════════════════════════════════════════════════════╝
  * 
  * ============================================================================
  */

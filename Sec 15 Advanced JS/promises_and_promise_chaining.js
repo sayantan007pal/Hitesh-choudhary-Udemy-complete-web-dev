@@ -182,7 +182,7 @@ async function getUserData() {
 }
 
 // Call the async function
-// getUserData();
+getUserData();
 
 /*
 ────────────────────────────────────────────────────────────────────────────────
