@@ -129,23 +129,113 @@ let fetchUserData1 = () => {
     });
 };
 
-const getUserData1 = async () => {
+/*
+╔══════════════════════════════════════════════════════════════════════════════╗
+║  ⚠️⚠️⚠️ WHY ARE YOU GETTING `undefined`? - VERY IMPORTANT! ⚠️⚠️⚠️             ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  🍕 PIZZA ANALOGY:                                                           ║
+║  ─────────────────                                                           ║
+║  Imagine you order a pizza at a restaurant:                                  ║
+║                                                                              ║
+║  ❌ WHAT YOUR CODE DOES (No return):                                         ║
+║     Chef makes pizza → Chef EATS it himself → Chef says "Yum!" (console.log) ║
+║     You ask: "Where's MY pizza?" → Chef: "I don't have anything for you"     ║
+║     Result: undefined (you got nothing!)                                     ║
+║                                                                              ║
+║  ✅ WHAT YOUR CODE SHOULD DO (With return):                                  ║
+║     Chef makes pizza → Chef GIVES it to you → You enjoy it!                  ║
+║     Result: The actual pizza (data)!                                         ║
+║                                                                              ║
+║  🔍 THE PROBLEM IN YOUR CODE:                                                ║
+║  ────────────────────────────                                                ║
+║  Your function console.log(fetchedData) but does NOT return fetchedData!     ║
+║  When a function doesn't explicitly return anything, it returns undefined.   ║
+║                                                                              ║
+║  ┌────────────────────────────────────────────────────────────────────────┐  ║
+║  │ ❌ YOUR CODE (No return):                                              │  ║
+║  │ const getUserData1 = async () => {                                     │  ║
+║  │     let fetchedData = await fetchUserData1();                          │  ║
+║  │     console.log(fetchedData);  // Just prints, doesn't return!         │  ║
+║  │     // ← No return statement = function returns undefined              │  ║
+║  │ };                                                                     │  ║
+║  │                                                                        │  ║
+║  │ let myData1 = await getUserData1();                                    │  ║
+║  │ console.log(myData1);  // undefined (because function didn't return!)  │  ║
+║  └────────────────────────────────────────────────────────────────────────┘  ║
+║                                                                              ║
+║  ┌────────────────────────────────────────────────────────────────────────┐  ║
+║  │ ✅ FIXED CODE (With return):                                           │  ║
+║  │ const getUserData1 = async () => {                                     │  ║
+║  │     let fetchedData = await fetchUserData1();                          │  ║
+║  │     console.log(fetchedData);                                          │  ║
+║  │     return fetchedData;  // ← NOW it returns the data!                 │  ║
+║  │ };                                                                     │  ║
+║  │                                                                        │  ║
+║  │ let myData1 = await getUserData1();                                    │  ║
+║  │ console.log(myData1);  // { name: 'Sayantan Pal', url: '...' } ✅      │  ║
+║  └────────────────────────────────────────────────────────────────────────┘  ║
+║                                                                              ║
+║  🎯 KEY RULE: If you want to USE the result of an async function,            ║
+║     you MUST return it! console.log() is just for viewing, not returning.    ║
+║                                                                              ║
+║  🎓 INTERVIEW TIP: A function without an explicit return statement           ║
+║     returns `undefined` by default in JavaScript.                            ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+*/
+
+// ❌ PROBLEMATIC VERSION (No return - causes undefined):
+const getUserData1_broken = async () => {
     try {
         let fetchedData = await fetchUserData1();
-        console.log(fetchedData);
-        
+        console.log(fetchedData);  // This just PRINTS, doesn't RETURN!
+        // No return statement → function returns undefined
     } catch (err) {
         console.error(err.message)
     }
-
 };
-getUserData1() //output: after 3 seconds it will print the data { name: 'Sayantan Pal', url: 'https://www.google.com' }
 
-let myData1 = getUserData1();
-console.log(myData1);
-//output: Promise { <pending> } 
-// after 3 seconds it will print the data 
-// { name: 'Sayantan Pal', url: 'https://www.google.com' }
+// ✅ FIXED VERSION (With return - works correctly):
+const getUserData1 = async () => {
+    try {
+        let fetchedData = await fetchUserData1();
+        console.log(fetchedData);  // This prints to console (for debugging)
+        return fetchedData;        // ← THIS IS THE FIX! Return the data!
+    } catch (err) {
+        console.error(err.message)
+        return null;  // Good practice: return something even in catch
+    }
+};
+
+// getUserData1()  // Just calling - output prints from inside the function
+
+// Now when you use await, you get the ACTUAL data, not undefined!
+let myData1 = await getUserData1();
+console.log("Value of myData1:", myData1);  
+// Output: { name: 'Sayantan Pal', url: 'https://www.google.com' } ✅
+
+/*
+╔══════════════════════════════════════════════════════════════════════════════╗
+║  📊 EXECUTION BREAKDOWN - What happens now:                                  ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  TIME     │  WHAT HAPPENS                                                    ║
+║  ─────────┼──────────────────────────────────────────────────────────────────║
+║  0ms      │ await getUserData1() starts                                      ║
+║           │ → fetchUserData1() starts (3 second timer)                       ║
+║  ─────────┼──────────────────────────────────────────────────────────────────║
+║  3000ms   │ fetchUserData1() resolves with { name: 'Sayantan Pal', ... }     ║
+║           │ → console.log(fetchedData) prints the data                       ║
+║           │ → return fetchedData sends data back to caller                   ║
+║  ─────────┼──────────────────────────────────────────────────────────────────║
+║  3000ms   │ await completes, myData1 = { name: 'Sayantan Pal', ... }         ║
+║           │ → console.log("Value of myData1:", myData1) prints               ║
+║                                                                              ║
+║  OUTPUT:                                                                     ║
+║  { name: 'Sayantan Pal', url: 'https://www.google.com' }  ← from inside fn   ║
+║  Value of myData1: { name: 'Sayantan Pal', url: '...' }   ← from outside     ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+*/
 
 
 
