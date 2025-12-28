@@ -506,14 +506,14 @@
 // END OF GUIDE - Now let's write some code!
 // ═══════════════════════════════════════════════════════════════════════════════
 
-console.log("Hello World - DOM and BOM Guide Loaded!")
-console.log (document)
-console.log( document.getElementsByTagName("h1")[1].innerHTML)
-console.log( document.querySelector("h1"))
-console.log( document.querySelector("button"))
-console.log( location.href)
-console.log( window.innerWidth)
-console.log( window.innerHeight)
+// console.log("Hello World - DOM and BOM Guide Loaded!")
+// console.log (document)
+// console.log( document.getElementsByTagName("h1")[1].innerHTML)
+// console.log( document.querySelector("h1"))
+// console.log( document.querySelector("button"))
+// console.log( location.href)
+// console.log( window.innerWidth)
+// console.log( window.innerHeight)
 
 // Try these in the browser console:
 // document.querySelector('h1')
