@@ -210,7 +210,8 @@ const getUserData1 = async () => {
 // getUserData1()  // Just calling - output prints from inside the function
 
 // Now when you use await, you get the ACTUAL data, not undefined!
-let myData1 = await getUserData1();
+let myData1 = getUserData1(); // This will first print a promise {Promise { <pending> }} and then the actual data { name: 'Sayantan Pal', url: 'https://www.google.com' }
+// let myData1 = await getUserData1();
 console.log("Value of myData1:", myData1);  
 // Output: { name: 'Sayantan Pal', url: 'https://www.google.com' } ✅
 
@@ -271,9 +272,19 @@ console.log("Value of myData1:", myData1);
  *    You sit down, chat with friends (do other things) →
  *    Waiter brings food when ready → You eat
  * 
- * The `await` keyword is like telling JavaScript: 
- * "Wait for this task to complete before moving to the next line,
- *  BUT don't block other operations in the program!"
+ * ╔═══════════════════════════════════════════════════════════════════════════╗
+ * ║  ⚠️⚠️⚠️ VERY IMPORTANT - KEY CONCEPT FOR INTERVIEWS ⚠️⚠️⚠️                 ║
+ * ╠═══════════════════════════════════════════════════════════════════════════╣
+ * ║                                                                           ║
+ * ║  The `await` keyword is like telling JavaScript:                          ║
+ * ║  "Wait for this task to complete before moving to the next line,          ║
+ * ║   BUT don't block other operations in the program!"                       ║
+ * ║                                                                           ║
+ * ║  💡 This is what makes JavaScript NON-BLOCKING even with await!           ║
+ * ║     → await pauses ONLY the async function, not the entire program        ║
+ * ║     → Other code outside the async function continues to run              ║
+ * ║                                                                           ║
+ * ╚═══════════════════════════════════════════════════════════════════════════╝
  *
  * ─────────────────────────────────────────────────────────────────────────────
  * 📚 KEY CONCEPTS TO REMEMBER
@@ -455,9 +466,52 @@ async function fetchGitHubUser(username) {
  * A:  Use Promise.all([promise1, promise2, ...])
  *     Example: await Promise.all([fetch(url1), fetch(url2)])
  * 
- * Q7: What happens if you forget to await?
- * A:  You get the Promise object itself, NOT the resolved value!
- *     The code continues without waiting for completion.
+ * ╔═══════════════════════════════════════════════════════════════════════════╗
+ * ║  ⚠️⚠️⚠️ Q7: VERY IMPORTANT - COMMON MISTAKE IN INTERVIEWS! ⚠️⚠️⚠️          ║
+ * ╠═══════════════════════════════════════════════════════════════════════════╣
+ * ║                                                                           ║
+ * ║  Q: What happens if you forget to await?                                  ║
+ * ║  A: You get the Promise object itself, NOT the resolved value!            ║
+ * ║     The code continues without waiting for completion.                    ║
+ * ║                                                                           ║
+ * ║  🍕 PIZZA ANALOGY:                                                        ║
+ * ║  ─────────────────                                                        ║
+ * ║  Imagine ordering pizza online:                                           ║
+ * ║                                                                           ║
+ * ║  WITH await (correct):                                                    ║
+ * ║  → You order pizza → You WAIT at door → Pizza arrives → You eat pizza 🍕  ║
+ * ║                                                                           ║
+ * ║  WITHOUT await (wrong):                                                   ║
+ * ║  → You order pizza → You immediately try to eat → But you're holding      ║
+ * ║    the ORDER RECEIPT (Promise), not the actual pizza! 📄                  ║
+ * ║  → "Why am I eating paper?!" → That's Promise { <pending> }               ║
+ * ║                                                                           ║
+ * ║  ┌──────────────────────────────────────────────────────────────────────┐ ║
+ * ║  │ ❌ FORGETTING await:                                                 │ ║
+ * ║  │ async function getData() {                                           │ ║
+ * ║  │     const data = fetchData();  // Missing await!                     │ ║
+ * ║  │     console.log(data);         // Promise { <pending> } ❌           │ ║
+ * ║  │     console.log(data.name);    // undefined or ERROR! ❌             │ ║
+ * ║  │ }                                                                    │ ║
+ * ║  │                                                                      │ ║
+ * ║  │ ✅ WITH await:                                                       │ ║
+ * ║  │ async function getData() {                                           │ ║
+ * ║  │     const data = await fetchData();  // Wait for it!                 │ ║
+ * ║  │     console.log(data);               // { name: "John", ... } ✅     │ ║
+ * ║  │     console.log(data.name);          // "John" ✅                    │ ║
+ * ║  │ }                                                                    │ ║
+ * ║  └──────────────────────────────────────────────────────────────────────┘ ║
+ * ║                                                                           ║
+ * ║  💡 WHY THIS MATTERS:                                                     ║
+ * ║  → Without await, your code races ahead before data is ready              ║
+ * ║  → You'll try to use undefined properties → BUGS!                         ║
+ * ║  → This is one of the MOST COMMON async mistakes in real projects         ║
+ * ║                                                                           ║
+ * ║  🎯 HOW TO SPOT THIS BUG:                                                 ║
+ * ║  → If you see Promise { <pending> } in console → you forgot await!        ║
+ * ║  → If data.property is undefined unexpectedly → check for missing await   ║
+ * ║                                                                           ║
+ * ╚═══════════════════════════════════════════════════════════════════════════╝
  * 
  * ─────────────────────────────────────────────────────────────────────────────
  * 📊 VISUAL FLOW
