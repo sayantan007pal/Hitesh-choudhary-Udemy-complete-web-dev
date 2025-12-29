@@ -225,12 +225,14 @@ const animal = {
     }
 };
 
-const dog = {
+let dog = {
     barks: true
 };
 
 // Setting up inheritance: dog inherits from animal
-dog.__proto__ = animal;  // ⚠️ Not recommended in production, use Object.create()
+// dog.__proto__ = animal;  // ⚠️ Not recommended in production, use Object.create() instead like this: dog = Object.create(animal);
+dog = Object.create(animal);
+
 
 console.log(dog.barks);  // true (own property)
 console.log(dog.eats);   // true (inherited from animal)
@@ -265,17 +267,17 @@ car.honk();                  // "Beep beep!" (own method)
 // EXAMPLE 3: Constructor Functions & prototype property
 // ============================================================================
 
-function Person(name) {
+function Person1(name) {
     this.name = name;
 }
 
 // Adding method to Person's prototype (shared by ALL Person instances)
-Person.prototype.greet = function() {
+Person1.prototype.greet = function() {
     console.log(`Hello, I'm ${this.name}`);
 };
 
-const alice = new Person("Alice");
-const bob = new Person("Bob");
+const alice = new Person1("Alice");
+const bob = new Person1("Bob");
 
 alice.greet();  // "Hello, I'm Alice"
 bob.greet();    // "Hello, I'm Bob"
