@@ -4,11 +4,11 @@
     "description": "",
     "license": "ISC",
     "author": "",
-    "main": "index.js",
+    "main": "src/index.js",
     "type": "module",
     "scripts": {
-        "dev": "node index.js",
-        "start": "nodemon index.js"
+        "dev": "node src/index.js",
+        "start": "nodemon src/index.js"
     },
     "devDependencies": {
         "nodemon": "^3.1.11",
