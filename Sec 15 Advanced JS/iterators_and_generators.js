@@ -286,3 +286,34 @@ const customRange = {
 
 console.log("\n--- Custom Iterable Object ---");
 console.log([...customRange]); // [1, 2, 3, 4, 5]
+
+
+// //Why it fails: [Symbol.iterator]: ... is object property syntax, 
+// // but you're writing it directly inside a function body as if it were a statement.
+// function rangeIterator(start, end) {
+//     [Symbol.iterator]: function* () {  // ❌ ERROR: This syntax only works INSIDE an object!
+//         for (let i = this.start; i <= this.end; i++) {
+//             yield i;
+//         }
+//     }
+// }
+
+
+function rangeIterator(start, end) {
+    return {
+        start,
+        end,
+        [Symbol.iterator]: function* () {
+            for (let i = this.start; i <= this.end; i++) {
+                yield i;
+            }
+        }
+    };
+}
+
+// Usage:
+for (const num of rangeIterator(1, 5)) {
+    console.log(num);  // 1, 2, 3, 4, 5
+}
+
+console.log([...rangeIterator(3, 7)]);  // [3, 4, 5, 6, 7]

@@ -138,7 +138,7 @@ getBlogPost2()
 async function fetchUserData() {
     try {
         // await PAUSES here until the promise resolves
-        const response = await fetch('https://api.example.com/user');
+        const response = await fetch('https://jsonplaceholder.typicode.com/todos');
         const data = await response.json();
         console.log('User:', data);
         return data;
@@ -155,9 +155,9 @@ async function fetchAllData() {
     try {
         // All 3 API calls start at the SAME TIME! ⚡
         const [users, posts, comments] = await Promise.all([
-            fetch('https://api.example.com/users').then(res => res.json()),
-            fetch('https://api.example.com/posts').then(res => res.json()),
-            fetch('https://api.example.com/comments').then(res => res.json())
+            fetch('https://jsonplaceholder.typicode.com/todos').then(res => res.json()),
+            fetch('https://jsonplaceholder.typicode.com/todos').then(res => res.json()),
+            fetch('https://jsonplaceholder.typicode.com/todos').then(res => res.json())
         ]);
         
         console.log('Users:', users);
