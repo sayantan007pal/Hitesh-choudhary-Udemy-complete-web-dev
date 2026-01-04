@@ -117,6 +117,22 @@ function safeAsyncCall(asyncFn) {
     // ========================================================
 }
 
+// ❌ FAILED ATTEMPT #3: Correct async logic, but WRONG object keys!
+// This was SO CLOSE to working, but failed due to subtle bugs:
+//
+//     return new Promise((resolve) => {
+//         asyncFn().then((result)=>{
+//             resolve({"success: ":true, "data: ":result})  // ← Wrong keys!
+//         }).catch((err)=>{
+//             resolve({"success: ":false, "data: ":err})    // ← Wrong key + wrong value!
+//         })
+//     })
+//
+// PROBLEMS:
+// ❌ 1. Key names have colons and spaces: "success: " instead of "success"
+// ❌ 2. In catch block: using "data: " instead of "error"
+// ❌ 3. In catch block: passing entire error object instead of err.message
+
 
 // ❌ FAILED ATTEMPT #1: Using comparison logic (completely wrong approach)
 // function safeAsyncCall(asyncFn) {
@@ -719,5 +735,216 @@ module.exports = {
  *     This makes error handling more predictable because you always get a
  *     value to work with, never an exception. It's commonly used in
  *     functional programming and makes code easier to compose."
+ * 
+ */
+
+
+// =============================================================================
+// 📚 DETAILED EXPLANATION: Why Failed Attempt #3 Was SO CLOSE But Still Failed
+// =============================================================================
+/**
+ * ============================================================================
+ * 🔴 FAILED ATTEMPT #3: Correct Logic, Wrong Syntax
+ * ============================================================================
+ * 
+ *   return new Promise((resolve) => {
+ *       asyncFn().then((result) => {
+ *           resolve({"success: ":true, "data: ":result})   // ← Wrong!
+ *       }).catch((err) => {
+ *           resolve({"success: ":false, "data: ":err})     // ← Wrong!
+ *       })
+ *   })
+ * 
+ * 
+ * You were SOOO close! The async logic was 100% correct! But you made 
+ * THREE subtle but CRITICAL mistakes:
+ * 
+ * 
+ * ============================================================================
+ * ❌ MISTAKE 1: Object Key Syntax
+ * ============================================================================
+ * 
+ * WHAT YOU WROTE:
+ *   { "success: ": true, "data: ": result }
+ * 
+ * WHAT IT SHOULD BE:
+ *   { success: true, data: result }
+ *   // OR
+ *   { "success": true, "data": result }
+ * 
+ * 
+ * THE PROBLEM:
+ * ------------
+ * In JavaScript, when you write:
+ *   { "success: ": true }
+ * 
+ * The KEY of the object is literally the string "success: " (with colon and space!)
+ * 
+ * So when the test checks for `result.success`, it gets `undefined`
+ * because the actual key is `result["success: "]` not `result.success`!
+ * 
+ * 
+ * SIDE-BY-SIDE COMPARISON:
+ * ------------------------
+ * 
+ *   // YOUR CODE - Wrong
+ *   const obj1 = { "success: ": true }
+ *   console.log(obj1.success)       // undefined ❌
+ *   console.log(obj1["success: "])  // true ✅ (but tests don't use this!)
+ *   console.log(JSON.stringify(obj1)) // {"success: ":true}
+ * 
+ *   // CORRECT CODE
+ *   const obj2 = { success: true }
+ *   console.log(obj2.success)       // true ✅
+ *   console.log(JSON.stringify(obj2)) // {"success":true}
+ * 
+ * 
+ * 🏠 ANALOGY: Hotel Room Keys
+ * ---------------------------
+ * Think of object keys like hotel room numbers:
+ * 
+ *   - You booked room "101: "  (with colon and space)
+ *   - Guest arrives and asks for room "101"
+ *   - Front desk says: "Sorry, no room 101. We have room '101: ' though!"
+ *   - Guest is confused, thinks room doesn't exist
+ * 
+ * Your object has keys with extra characters, so lookups fail!
+ * 
+ * 
+ * ============================================================================
+ * ❌ MISTAKE 2: Wrong Key in Catch Block
+ * ============================================================================
+ * 
+ * WHAT YOU WROTE:
+ *   .catch((err) => {
+ *       resolve({"success: ":false, "data: ":err})  // Using "data: "
+ *   })
+ * 
+ * WHAT IT SHOULD BE:
+ *   .catch((error) => {
+ *       resolve({ success: false, error: error.message })  // Using "error"
+ *   })
+ * 
+ * 
+ * THE PROBLEM:
+ * ------------
+ * According to the specification, failed cases should return:
+ *   { success: false, error: errorMessage }
+ *               ^^^^^
+ *               NOT "data"!
+ * 
+ * The tests expect the error message to be in a property called `error`,
+ * not `data`. Using `data` for errors makes no semantic sense anyway -
+ * data is for successful results!
+ * 
+ * 
+ * ============================================================================
+ * ❌ MISTAKE 3: Passing Error Object Instead of Message
+ * ============================================================================
+ * 
+ * WHAT YOU WROTE:
+ *   resolve({"success: ":false, "data: ":err})  // Passing the whole error object
+ * 
+ * WHAT IT SHOULD BE:
+ *   resolve({ success: false, error: err.message })  // Extracting just the message
+ * 
+ * 
+ * THE PROBLEM:
+ * ------------
+ * JavaScript Error objects have many properties:
+ * 
+ *   const err = new Error("oops")
+ *   console.log(err)          // Error: oops
+ *   console.log(err.message)  // "oops"      ← Just the message string
+ *   console.log(err.stack)    // Full stack trace
+ *   console.log(err.name)     // "Error"
+ * 
+ * When you pass the whole error object, JSON.stringify converts it to `{}`
+ * because Error objects don't serialize nicely:
+ * 
+ *   JSON.stringify(new Error("oops"))  // "{}"  ← Empty object!
+ * 
+ * That's why your test showed: `"data: ":{}` - the error became empty!
+ * 
+ * 
+ * ============================================================================
+ * ✅ THE CORRECT VERSION
+ * ============================================================================
+ * 
+ *   return new Promise((resolve) => {
+ *       asyncFn()
+ *           .then(result => {
+ *               resolve({ success: true, data: result })
+ *           //           ↑ No quotes   ↑ No colon/space in key
+ *           })
+ *           .catch(error => {
+ *               resolve({ success: false, error: error.message })
+ *           //                            ↑ "error" not "data"
+ *           //                                    ↑ .message not whole object
+ *           })
+ *   })
+ * 
+ * 
+ * ============================================================================
+ * 📊 Visual Diff: Your Code vs Correct Code
+ * ============================================================================
+ * 
+ *   YOUR CODE:
+ *   ┌─────────────────────────────────────────────────────────────────┐
+ *   │ resolve({"success: ":true, "data: ":result})                    │
+ *   │          ↑ Wrong    ↑ Wrong                                     │
+ *   │ resolve({"success: ":false, "data: ":err})                      │
+ *   │          ↑ Wrong     ↑ Should be "error"  ↑ Should be .message  │
+ *   └─────────────────────────────────────────────────────────────────┘
+ * 
+ *   CORRECT CODE:
+ *   ┌─────────────────────────────────────────────────────────────────┐
+ *   │ resolve({ success: true, data: result })                        │
+ *   │           ↑ Clean key                                           │
+ *   │ resolve({ success: false, error: error.message })               │
+ *   │                           ↑ Right key   ↑ Extract message       │
+ *   └─────────────────────────────────────────────────────────────────┘
+ * 
+ * 
+ * ============================================================================
+ * 💡 KEY LESSONS - Remember These!
+ * ============================================================================
+ * 
+ *   ╔════════════════════════════════════════════════════════════════════════╗
+ *   ║                                                                         ║
+ *   ║   🔑 Object keys should be clean identifiers (no colons/spaces inside) ║
+ *   ║      { success: true }  NOT  { "success: ": true }                     ║
+ *   ║                                                                         ║
+ *   ║   🔑 Match the specification exactly - if it says "error", use "error" ║
+ *   ║      Don't use "data" for error cases!                                 ║
+ *   ║                                                                         ║
+ *   ║   🔑 Error objects don't serialize well - extract .message first       ║
+ *   ║      JSON.stringify(error) → "{}"  😱                                  ║
+ *   ║      JSON.stringify({error: error.message}) → '{"error":"oops"}' ✅    ║
+ *   ║                                                                         ║
+ *   ╚════════════════════════════════════════════════════════════════════════╝
+ * 
+ * 
+ * ============================================================================
+ * ✏️ INTERVIEW TIP: Object Key Syntax in JavaScript
+ * ============================================================================
+ * 
+ * Q: "What are valid object key syntaxes in JavaScript?"
+ * 
+ * A: "There are three ways to define object keys:
+ * 
+ *     1. IDENTIFIER syntax (preferred for clean keys):
+ *        { name: 'John', age: 30 }
+ * 
+ *     2. STRING syntax (for keys with special characters):
+ *        { 'first-name': 'John', '123': 'numeric key' }
+ * 
+ *     3. COMPUTED syntax (for dynamic keys):
+ *        const key = 'name'
+ *        { [key]: 'John' }  // Same as { name: 'John' }
+ * 
+ *     The key insight is that the STRING you put in quotes becomes the
+ *     LITERAL key. So { 'success: ': true } creates a key that literally
+ *     has a colon and space in it - probably not what you want!"
  * 
  */
