@@ -94,10 +94,10 @@ const myPromise = new Promise((resolve, reject) => {
 // Example: Consuming the promise
 myPromise
     .then((result) => {
-        console.log("Success :",result);
+        console.log({Success :result});
     })
     .catch((error) => {
-        console.log("Error:", error);
+        console.log({Error :error});
     })
     .finally(() => {
         console.log("Promise settled (resolved or rejected)");
@@ -147,13 +147,16 @@ function fetchPostComments(posts) {
 // ⛓️ PROMISE CHAINING IN ACTION
 // Each .then() receives the result from the previous promise
 fetchUser(1)
-    .then((user) => fetchUserPosts(user))       // Returns promise
-    .then((posts) => fetchPostComments(posts))  // Returns promise
+    .then((user) => fetchUserPosts(user))       // Returns promise of posts along with user
+    .then((posts) => fetchPostComments(posts))  // Returns promise of comments along with posts and user
     .then((comments) => {
         console.log("4️⃣ Final result - Comments:", comments);
-    })
+    })// returns final result with comments, posts and user
     .catch((error) => {
         console.log("Error anywhere in chain:", error);
+    })
+    .finally(() => {
+        console.log("promise completed with .then, .catch or .finally")
     });
 
 /*
@@ -172,7 +175,7 @@ async function getUserData() {
         const posts = await fetchUserPosts(user);   // Wait for posts
         const comments = await fetchPostComments(posts); // Wait for comments
         
-        console.log("Got all data:", comments);
+        console.log("Got all data:", comments, posts, user);
         return comments;
     } catch (error) {
         console.log("Error:", error);
@@ -233,10 +236,208 @@ Promise.any([Promise.reject("Error1"), promise3, promise2])
 
 ┌────────────────────────────────────────────────────────────────────────────┐
 │                    COMMON INTERVIEW QUESTIONS                               │
+└────────────────────────────────────────────────────────────────────────────┘
+
+══════════════════════════════════════════════════════════════════════════════
+     🔥 DEEP DIVE: CALLBACKS vs PROMISES - ARE THEY THE SAME? (NO!)
+══════════════════════════════════════════════════════════════════════════════
+
+┌────────────────────────────────────────────────────────────────────────────┐
+│  📌 SHORT ANSWER FOR INTERVIEWS:                                            │
+│  NO! They are NOT the same. A callback is just a FUNCTION passed to        │
+│  another function. A Promise is an OBJECT that represents a future value.  │
+│  Promises USE callbacks internally (.then takes a callback), but they      │
+│  provide much more structure, error handling, and composability.           │
+└────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  🍕 ANALOGY: ORDERING PIZZA                                                  │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  CALLBACK APPROACH (old-school):                                             │
+│  ─────────────────────────────────                                           │
+│  "I'll order pizza. When it arrives, here's what to do..." (you give        │
+│   them a callback). But what if the order fails? Kitchen fire? Wrong        │
+│   address? You need SEPARATE callbacks for each scenario!                   │
+│                                                                              │
+│  PROMISE APPROACH (modern):                                                  │
+│  ───────────────────────────                                                 │
+│  "I'll order pizza. Here's your RECEIPT (promise). This receipt will        │
+│   either show SUCCESS (pizza arrived) or FAILURE (order cancelled).        │
+│   You can check the receipt status anytime!"                                │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 SIDE-BY-SIDE CODE COMPARISON
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+❌ CALLBACK PATTERN (Old Way):
+────────────────────────────────
+
+function getUserCallback(userId, successCallback, errorCallback) {
+    setTimeout(() => {
+        if (userId > 0) {
+            successCallback({ id: userId, name: "Rahul" });
+        } else {
+            errorCallback("Invalid user ID");
+        }
+    }, 1000);
+}
+
+// Usage - notice the function being PASSED as argument
+getUserCallback(
+    1,
+    (user) => console.log("Got user:", user),     // success callback
+    (error) => console.log("Error:", error)       // error callback
+);
+
+✅ PROMISE PATTERN (Modern Way):
+────────────────────────────────
+
+function getUserPromise(userId) {
+    return new Promise((resolve, reject) => {     // Returns an OBJECT
+        setTimeout(() => {
+            if (userId > 0) {
+                resolve({ id: userId, name: "Rahul" });
+            } else {
+                reject("Invalid user ID");
+            }
+        }, 1000);
+    });
+}
+
+// Usage - notice the OBJECT being returned, then handled
+getUserPromise(1)
+    .then((user) => console.log("Got user:", user))
+    .catch((error) => console.log("Error:", error));
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+😱 CALLBACK HELL vs PROMISE CHAINING (The Real Problem!)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+❌ CALLBACK HELL (Pyramid of Doom):
+───────────────────────────────────
+Imagine: Get user → Get posts → Get comments → Get likes
+
+getUser(userId, (user) => {
+    getPosts(user.id, (posts) => {
+        getComments(posts[0].id, (comments) => {
+            getLikes(comments[0].id, (likes) => {
+                // Finally here! But look at the nesting... 😵
+                console.log(likes);
+            }, (err) => handleError(err));
+        }, (err) => handleError(err));
+    }, (err) => handleError(err));
+}, (err) => handleError(err));
+
+    ⬆️ Problems:
+    1. Hard to read (pyramid shape going right →)
+    2. Error handling repeated 4 times!
+    3. Difficult to debug
+    4. "Inversion of Control" - you give control to the function
+
+✅ PROMISE CHAINING (Flat & Clean):
+───────────────────────────────────
+
+getUser(userId)
+    .then(user => getPosts(user.id))
+    .then(posts => getComments(posts[0].id))
+    .then(comments => getLikes(comments[0].id))
+    .then(likes => console.log(likes))
+    .catch(err => handleError(err));      // ONE error handler for all!
+
+    ⬆️ Benefits:
+    1. Flat structure (not nested)
+    2. Single .catch() handles ALL errors
+    3. Each step clearly visible
+    4. Easy to add/remove steps
+
+✅✅ ASYNC/AWAIT (Even Cleaner!):
+────────────────────────────────
+
+async function getAllData(userId) {
+    try {
+        const user = await getUser(userId);
+        const posts = await getPosts(user.id);
+        const comments = await getComments(posts[0].id);
+        const likes = await getLikes(comments[0].id);
+        console.log(likes, user, posts, comments);
+    } catch (err) {
+        handleError(err);
+    }
+}
+
+    ⬆️ Looks like normal synchronous code! 🎉
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🧠 KEY DIFFERENCES TABLE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+┌─────────────────┬──────────────────────────┬──────────────────────────────┐
+│    Feature      │       CALLBACK           │         PROMISE              │
+├─────────────────┼──────────────────────────┼──────────────────────────────┤
+│ What is it?     │ A function passed as     │ An object representing       │
+│                 │ an argument              │ future value                 │
+├─────────────────┼──────────────────────────┼──────────────────────────────┤
+│ Error Handling  │ Separate error callback  │ Single .catch() for chain    │
+│                 │ needed for each step     │                              │
+├─────────────────┼──────────────────────────┼──────────────────────────────┤
+│ Chaining        │ Nested (callback hell)   │ Flat with .then() chains     │
+├─────────────────┼──────────────────────────┼──────────────────────────────┤
+│ State Tracking  │ No built-in state        │ Has states: pending,         │
+│                 │                          │ fulfilled, rejected          │
+├─────────────────┼──────────────────────────┼──────────────────────────────┤
+│ Return Value    │ Nothing returned         │ Returns a Promise object     │
+├─────────────────┼──────────────────────────┼──────────────────────────────┤
+│ Composition     │ Hard to combine          │ Easy: Promise.all(),         │
+│                 │ multiple operations      │ Promise.race(), etc.         │
+├─────────────────┼──────────────────────────┼──────────────────────────────┤
+│ Guarantees      │ May be called multiple   │ Called exactly ONCE          │
+│                 │ times or never           │ (resolve or reject)          │
+└─────────────────┴──────────────────────────┴──────────────────────────────┘
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💡 THE RELATIONSHIP: PROMISES USE CALLBACKS UNDER THE HOOD!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+This is where it gets interesting! Look at this:
+
+    promise.then(successCallback, errorCallback)
+                 ↑                ↑
+                 These are CALLBACKS!
+
+So promises don't REPLACE callbacks - they ORGANIZE them better!
+
+    ┌─────────────────────────────────────────────────────────────┐
+    │  CALLBACK = A tool (like a hammer)                          │
+    │  PROMISE  = A structured way to use that tool (like a kit)  │
+    └─────────────────────────────────────────────────────────────┘
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎤 INTERVIEW ANSWER TEMPLATE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+"Callbacks and Promises are NOT the same. A callback is simply a function
+passed to another function to be executed later. A Promise is an object
+that represents the eventual result of an async operation.
+
+Promises are built ON TOP of callbacks - .then() actually takes callbacks!
+But Promises provide:
+1. Better error handling with .catch()
+2. Flat chaining instead of nested callbacks
+3. Built-in states (pending, fulfilled, rejected)
+4. Composition with Promise.all(), Promise.race()
+5. A guarantee that success/error is called exactly once
+
+So Promises don't replace callbacks - they provide a structured way to
+use them, avoiding 'callback hell' and making async code more manageable."
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+┌────────────────────────────────────────────────────────────────────────────┐
+│                    CONTINUATION OF INTERVIEW QUESTIONS                      │
 ├────────────────────────────────────────────────────────────────────────────┤
-│ Q: Difference between callback and promise?                                 │
-│ A: Promises avoid "callback hell", provide .catch() for errors, and        │
-│    allow chaining. Callbacks can lead to nested, hard-to-read code.        │
 │                                                                             │
 │ Q: Can you use await outside async function?                                │
 │ A: Only in ES modules with top-level await (Node 14.8+), otherwise NO.     │
