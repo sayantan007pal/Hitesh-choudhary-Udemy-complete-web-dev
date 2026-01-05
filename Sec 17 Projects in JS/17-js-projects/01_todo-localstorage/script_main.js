@@ -1,9 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   const todoInput = document.getElementById("todo-input");
-
   const addTaskButton = document.getElementById("add-task-btn");
-
   const todoList = document.getElementById("todo-list");
 
   let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -17,37 +15,32 @@ document.addEventListener("DOMContentLoaded", () => {
     if (taskText === "") return;
 
     const newTask = {
-      id: Date.now(),       // Example: 1703673600000 (unique number)
-      text: taskText,       // Example: "Buy groceries"
-      completed: false,     // Task is not completed when first created
+      id: Date.now(),           
+      text: taskText,       
+      completed: false,     
     };
 
     tasks.push(newTask);
-
     saveTasks();
-
     renderTask(newTask);
 
-    todoInput.value = "";
+    todoInput.value = ""; //to clear the input field
 
     console.log(tasks);
   });
 
 
   function renderTask(task) {
-    
-
     const li = document.createElement("li");
 
     li.setAttribute("data-id", task.id);
 
     if (task.completed) li.classList.add("completed");
-
+   //for li.innerHTML we are using template literals to insert the task text and button
     li.innerHTML = `
-    <span>${task.text}</span>
+    <span>${task.text}</span> 
     <button>delete</button>
     `;
-
     li.addEventListener("click", (e) => {
       
 
@@ -76,8 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function saveTasks() {
-
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem("tasks", JSON.stringify(tasks)); //as setItem takes key value pair where key  and value is a string, so we need to convert tasks to string
   }
   
 }); 

@@ -140,3 +140,22 @@ console.log(incrementedNumber())
 // }
 // let incrementedNumber1 = outer1()
 // console.log(incrementedNumber1())
+
+
+function createCounter() {
+    let count1 = 0;                    // Private! No one can access directly
+    
+    return {
+        increment: () => {++count1},
+        decrement: () => {--count1},
+        getCount: () => { return count1} //without return keyword it will return undefined
+    };
+}
+const myCounter = createCounter();
+myCounter.increment();    // 1
+myCounter.increment();    // 2
+console.log(myCounter.count1);         // undefined ← Can't access directly!
+console.log(myCounter.getCount());    // 2 ← Only through closure methods
+console.log(myCounter.getCount())
+myCounter.decrement()
+console.log(myCounter.getCount())

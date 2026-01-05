@@ -86,7 +86,8 @@ function rateLimiter(fn, limit) {
     
     // ========================================================
 }
-const limitedFn = rateLimiter((...args) => "Success!", 1000)
+const limitedFn1 = rateLimiter((...args) => "Success!", 1000)
+const limitedFn2 = rateLimiter((...args) => 6, 1000)
 
 
 
