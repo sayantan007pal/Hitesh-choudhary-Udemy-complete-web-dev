@@ -178,7 +178,8 @@ let firstRatings = [1,2,3,4,5]
 let secondRatings = [5,6,7,8,9]
 console.log(firstRatings.myRatings())
 console.log(secondRatings.myRatings())
-
+let species = new Animal("Tiger")
+console.log(species.sound())
 
 
 /**

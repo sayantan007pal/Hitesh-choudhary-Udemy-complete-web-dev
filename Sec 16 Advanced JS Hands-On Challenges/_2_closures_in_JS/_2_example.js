@@ -50,8 +50,17 @@
 
 function createSecretHolder(initialSecret) {
     // ==================== YOUR CODE HERE ====================
-    
-    
+     let secret = 0;
+     function setSecret(newSecret){
+         secret = initialSecret
+         return secret
+        
+     }
+     function getSecret(){
+        return secret
+     }
+
+    return {getSecret(); setSecret()}
     
     
     

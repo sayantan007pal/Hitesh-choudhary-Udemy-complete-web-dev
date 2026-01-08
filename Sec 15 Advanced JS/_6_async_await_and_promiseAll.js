@@ -159,7 +159,7 @@ async function fetchAllData() {
             fetch('https://jsonplaceholder.typicode.com/todos').then(res => res.json()),
             fetch('https://jsonplaceholder.typicode.com/todos').then(res => res.json())
         ]);
-        
+
         console.log('Users:', users);
         console.log('Posts:', posts);
         console.log('Comments:', comments);
@@ -296,8 +296,9 @@ async function fetchInParallel() {
  * ║         await fetch(id);  // SLOW! Each waits for previous                ║
  * ║     }                                                                     ║
  * ║                                                                           ║
- * ║  ✅ BETTER: await Promise.all(ids.map(id => fetch(id)));                  ║
- * ║                                                                           ║
+ * ║  ✅ BETTER: await Promise.all(ids.map(id => fetch(id))); 
+ * or
+ * ║          await Promise.all(ids.map(id=> fetch(id).then(res=> res.json())))                                                                 ║
  * ║  💡 This is a MAJOR performance optimization!                             ║
  * ║     → Loop with await: O(n) time (sequential)                             ║
  * ║     → Promise.all: O(1) time complexity (parallel)                        ║

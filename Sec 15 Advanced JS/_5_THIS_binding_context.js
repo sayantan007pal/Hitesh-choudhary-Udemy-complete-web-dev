@@ -1,20 +1,33 @@
 
+  
 const person = {
-    name : "Sayantan",
-     greet(){
-        console.log(`Hi this is my name ${this.name}`)
-    },
-
+    name: "Sayantan",
+    age: 20,
+    greet: function() {
+        return `Hi this is my name ${this.name} and I am ${this.age} years old`
+    }
 }
 
-person.greet() // Hi this is my name Sayantan
+console.log("=== SCENARIO 1: person.greet() - Implicit Binding ===");
+console.log(person.greet()); // ✅ Works! this = person
 
-const myFirstName = person.greet
-myFirstName() //Hi this is my name undefined
+// ❌ THE "LOST this" PROBLEM - Copy function reference WITHOUT parentheses!
+const myFirstName = person.greet;  // ✅ No () - just copying the function reference
 
-const myFirstNameWithBind = person.greet.bind({name: "Samriddhi"})
-myFirstNameWithBind() //Hi this is my name Samriddhi
+console.log("\n=== SCENARIO 2: myFirstName() - Lost this! ===");
+// In ES Modules (strict mode), `this` becomes `undefined` when context is lost
+// So accessing `this.name` throws an error: "Cannot read properties of undefined"
+try {
+    console.log(myFirstName());  // ❌ THROWS ERROR in strict mode!
+} catch (error) {
+    console.log("❌ ERROR:", error.message);
+    console.log("   (this is undefined in ES modules, so this.name throws!)");
+}
 
+// ✅ THE FIX - Use bind() to permanently attach the context
+console.log("\n=== SCENARIO 3: with bind() - Fixed! ===");
+const myFirstNameWithBind = person.greet.bind({name: "Samriddhi", age: 21});
+console.log(myFirstNameWithBind());  // ✅ Works perfectly! `this` is bound forever
 
 /**
  * ═══════════════════════════════════════════════════════════════════════════════ 
@@ -291,6 +304,10 @@ myFirstNameWithBind() //Hi this is my name Samriddhi
  *         a: 10,
  *         getA: function() { return this.a; }
  *     };
+ *     
+ *     obj.getA()
+ *     console.log(obj.getA()) // ✅ 10 (implicit binding)
+ * 
  *     const getAFunc = obj.getA;
  *     console.log(getAFunc());  // ❓ undefined! (default binding, `this` = window)
  * 
