@@ -16,5 +16,14 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization']
 }))
 
+//routes
+import healthCheckRoutes from './routes/healthCheck.routes.js'
+
+app.use('/api/v1/healthcheck', healthCheckRoutes)
+
+app.get('/', (req, res)=>{
+    res.send("Welcome to the Project Management App")
+})
+
 
 export default app
