@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+
 const app = express()
 
 //basic configuration to resolve cors error like json limit, static files etc
@@ -14,5 +15,6 @@ app.use(cors({
     methods:['GET', 'POST', 'PATCH', 'OPTIONS', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }))
+
 
 export default app
