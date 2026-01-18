@@ -138,11 +138,284 @@ function arrayStats(arr){
 
 ### Problem 1: Square Numbers
 ```
-
+const square = (num)=>{
+    return num*num
+}
 ```
 
 ### Problem 2: Greeting Generator
 
+```
+const greet = (name) =>{
+    return `Hello ${name}, nice to meet you!`
+}
+```
+### Problem 3: Array Doubler
+
+```
+const doubleArray = (val)=>{
+    newArr = [...val]
+    return newArr.map((a)=>a*2)
+}
+```
+
+### Problem 4: Filter Adults
+```
+const filterAdults = (val) =>{
+    newArr = [...val]
+    return newArr.filter((a)=> a >= 18)
+}
+```
+### Problem 5: Sum Array
+```
+const sumArray = (val) =>{
+    newArr = [...val]
+    return newArr.reduce((sum,a)=> sum +a)
+}
+```
+### Problem 6: String Length Mapper
+const getStringLengths =(val)=>{
+    return val.map((a)=> a.length)
+}
+```
+
+```
+### Problem 7: Object Transformer
+```
+
+```
+### Problem 8: Conditional Filter
+```
+
+```
+### Problem 9: Compose Simple Functions
+```
+const add5 =(val) =>{
+    return val + 5
+}
+const multiply3 = (val) =>{
+    return val * 3
+}
+const subtract2 = (val) =>{
+    return val - 2
+}
+const composedOperation = (val)=>{
+    let ad = add5(val)
+    let mul = multiply3(ad)
+    let sub = subtract2(mul)
+    return sub
+}
+```
+### Problem 10: Advanced Array Manipulation
+```
+const processData = (val) =>{
+    let filt = val.filter((a)=> a>=10)
+    let sqr = filt.map((a)=>a*a)
+    let sum = sqr.reduce((sum, a)=> sum +a)
+    return sum
+}
+```
+
+## this and Context in JavaScript
+
+### Problem 1: Object Method
+```
+Person = {
+    firstName: 'Sayantan',
+    lastName: 'Pal',
+    getFullName: function(){
+        return `My Full Name is ${this.firstName} ${this.lastName}.`
+    }
+}
+```
+
+### Problem 2: Counter Object
+```
+counter ={
+    count:3,
+    increment: function(){
+         this.count+=1
+         return this
+    },
+    decrement: function(){
+        this.count-=1
+        return this
+    },
+    getCount: function(){
+        return this.count
+    }
+}
+```
+
+### Problem 3: Calculator Object
+```
+calculator={
+    result :5,
+    add: function(num){
+         this.result += num 
+        return this 
+    },
+    subtract: function(num){
+         this.result -=num
+        return this 
+    },
+    multiply: function(num){
+         this.result *= num
+        return this 
+    },
+    divide: function(num){
+         this.result /=num
+        return this 
+    },
+    getValue: function(){
+        return this.result
+    }
+
+}
+calculator.add(10).subtract(10).multiply(10).divide(10).getValue()
+
+console.log(calculator.getValue())
+```
+
+### Problem 4: Context Loss Problem
+```
+
+```
+
+### Problem 5: Method Borrowing
+```
+
+```
+
+### Problem 6: Bank Account
+```
+
+```
+
+### Problem 7: Bind Practice
+```
+
+```
+
+### Problem 8: Event Handler Simulation
+```
+
+```
+
+### Problem 9: Chain Methods
+```
+
+```
+
+### Problem 10: Complex Context Challenge
+```
+
+```
+
+---
+
+## Higher Order Functions and Nested Functions
+
+### Problem 1: Function Multiplier
+```
+
+```
+
+### Problem 2: Logger Wrapper
+```
+
+```
+
+### Problem 3: Counter Closure
+```
+
+```
+
+### Problem 4: Once Function
+```
+
+```
+
+### Problem 5: Partial Application
+```
+
+```
+
+### Problem 6: Array Filter Builder
+```
+
+```
+
+### Problem 7: Memoization
+```
+
+```
+
+### Problem 8: Function Composition
+```
+
+```
+
+### Problem 9: Rate Limiter
+```
+
+```
+
+### Problem 10: Advanced Closure - Private Variables
+```
+
+```
+
+---
+
+## Mixed Challenge Problems
+
+### Problem 1: Custom Array Methods
+```
+
+```
+
+### Problem 2: Function Pipeline
+```
+
+```
+
+### Problem 3: Retry Logic
+```
+
+```
+
+### Problem 4: Currying
+```
+
+```
+
+### Problem 5: Debounce
+```
+
+```
+
+### Problem 6: Method Chaining with Context
+```
+
+```
+
+### Problem 7: Event Emitter
+```
+
+```
+
+### Problem 8: Function Cache with TTL
+```
+
+```
+
+### Problem 9: Middleware Pattern
+```
+
+```
+
+### Problem 10: Advanced Calculator
 ```
 
 ```
