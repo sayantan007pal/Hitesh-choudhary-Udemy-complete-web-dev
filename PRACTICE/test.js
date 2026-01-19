@@ -1,6 +1,9 @@
-function once(func){
+const  filterByCondition=(arr, cond)=> {
+    return arr.filter(cond)
 
-    return function newFunc(){
-        return `Initializing`
-    }
 }
+
+const cond=(a)=>{
+    return a.length>3
+}
+console.log(filterByCondition(["sayantan","pal"],cond))

@@ -197,11 +197,24 @@ const getStringLengths =(val)=>{
 ```
 ### Problem 7: Object Transformer
 ```
-
+const createUserObjects= (arr)=>{
+    let id=0;
+    return arr.map((a)=>{
+        id++,
+        return {id:id, name:a}
+    })
+}
 ```
 ### Problem 8: Conditional Filter
 ```
+const  filterByCondition=(arr, cond)=> {
+    return arr.filter(cond)
 
+}
+
+const cond=(a)=>{
+    return a.length>3
+}
 ```
 ### Problem 9: Compose Simple Functions
 ```
@@ -480,7 +493,24 @@ function createCounter(){
 
 ### Problem 4: Once Function
 ```
+function once(func){
+ let called = false
+ let result 
 
+    return function newFunc(...args){
+        if(!called){
+
+            result= func(...args) 
+            called = true
+        }
+        return result
+    }
+}  
+
+const onceFunc = once(() => {
+    console.log("INITIALIZING")
+    return "Initialized"
+})
 ```
 
 ### Problem 5: Partial Application
