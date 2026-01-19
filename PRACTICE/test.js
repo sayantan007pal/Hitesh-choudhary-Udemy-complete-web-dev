@@ -1,30 +1,14 @@
-
-
-calculator={
-    result :5,
-    add: function(num){
-         this.result += num 
-        return this 
-    },
-    subtract: function(num){
-         this.result -=num
-        return this 
-    },
-    multiply: function(num){
-         this.result *= num
-        return this 
-    },
-    divide: function(num){
-         this.result /=num
-        return this 
-    },
-    getValue: function(){
-        return this.result
+game={
+    football:"RUNNING",
+    player : {
+        chess:"SITTING",
+        futbal:game.football,
+        howToPlay : function(){
+            return `we can play chess while ${this.chess}, but for football we need to keep ${this.futbal}`
+        }
     }
-
 }
-calculator.add(10).subtract(10).multiply(10).divide(10).getValue()
+console.log(game.player.howToPlay())
 
-console.log(calculator.getValue())
 // const value = new Person("Sayantan", "Pal")
 // console.log(value.getFullName())

@@ -128,6 +128,21 @@ function arrayStats(arr){
 ### Problem 10: Password Validator
 
 ```
+function isValidPassword(password){
+    if(password.length< 8){
+        return false
+    }
+    if(!/[A-Z]/.test(password)){
+        return false
+    }
+    if(!/[a-z]/.test(password)){
+        return false
+    }
+    if(!/[1-9]/.test.(password)){
+        return false
+    }
+    return true
+}
 
 ```
 
@@ -279,37 +294,130 @@ console.log(calculator.getValue())
 
 ### Problem 4: Context Loss Problem
 ```
+person={
+    name:"Sayantan",
+    age:25,
+    greet(){
+        setTimeout(()=>{
+            console.log(hi myself ${this.name} of ${this.age})
+        },2000)
+    }
+}
 
+```
+OR USING BIND
+```
+person={
+    name:'Sayantan',
+    age:25,
+    greet(){
+        setTimeout(function(){
+            console.log(hi myself ${this.name} of ${this.age})
+        }.bind(this),2000)
+    }
+}
 ```
 
 ### Problem 5: Method Borrowing
 ```
+car1={
+    model:'Camary',
+    brand:'Tyota',
+    getinfo(){
+        console.log(`the car is of ${this.brand} with ${this.model}`)
+    }
+}
+car2={
+    brand:'Tata',
+    model:'Punch',
+}
 
+car1.getinfo.call(car2)
 ```
 
 ### Problem 6: Bank Account
 ```
+bankaccount={
+    balance:0,
+    deposit(amount){
+        return this.balance += amount
+    }
+    withdraw(amount){
+        return this.balance -= amount
+    }
+    getBalance(){
+        return this.balance
+    }
 
+}
 ```
 
 ### Problem 7: Bind Practice
 ```
-
+person= {
+    name: 'Sayantan Pal',
+    age: 25
+}
+function introduce(){
+    return `Hello my name is ${this.name} and age is ${this.age}`
+}
+const value = introduce.bind(person)
+console.log(value)
 ```
 
 ### Problem 8: Event Handler Simulation
 ```
+button={
+    label:'RELOADING',
+    click: function(){
+        return `clicking this will result in ${this.label}`
+    }
+}
+//having context
+console.log(button.click())
 
+//Regaining context
+const valueWithContext = button.click.bind(button)
+console.log(valueWithContext)
+
+//losing context
+const value = buttton.click
+console.log(value())
 ```
 
 ### Problem 9: Chain Methods
 ```
-
+stringBuilder={
+    value:'',
+    append: function(str){
+        this.value+=str
+        return this
+    }
+    prepend: function(str){
+        this.value = str + this.value
+        return this
+    }
+    toString: function(){
+        return this.value
+    }
+    clear: function(){
+        return this.value=''
+    }
+}
 ```
 
 ### Problem 10: Complex Context Challenge
 ```
-
+game={
+    football:"RUNNING",
+    player : {
+        chess:"SITTING",
+        futbal:game.football,
+        howToPlay : function(){
+            return `we can play chess while ${this.chess}, but for football we need to keep ${this.futbal}`
+        }
+    }
+}
 ```
 
 ---
