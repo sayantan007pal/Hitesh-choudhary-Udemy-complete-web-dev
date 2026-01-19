@@ -426,17 +426,56 @@ game={
 
 ### Problem 1: Function Multiplier
 ```
+function createMultiplier(num){
+    return fucntion argument(val){
+        return num * val
+    }
 
+}
+cosnt double = createMultiplier(3)
+console.log(double(2))
 ```
 
 ### Problem 2: Logger Wrapper
 ```
-
+function logExecutionTime(func){
+    return function value(arg){
+        let timeNow = performance.now()
+        let result = func(arg)
+        let timeEnd = performance.now()
+        console.log( ` difference between start time and end time is ${(timeNow-timeEnd)} ms`)
+        return result
+    }
+}
+const value = logExecutionTime(function(arg){
+    return arg*arg
+})
+console.log(value(2000))
 ```
 
 ### Problem 3: Counter Closure
 ```
+function createCounter(){
+    let count = 0;
+    function increment(){
+         count++
+         return count
+    }
+    function decrement(){
+         count--
+         return count
+    }
+    function getValue(){
+        return count
+    }
 
+        return {
+            increment, 
+            decrement,
+            getValue
+        }
+
+}
 ```
 
 ### Problem 4: Once Function
