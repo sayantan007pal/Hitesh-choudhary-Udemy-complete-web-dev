@@ -1,9 +1,13 @@
-const  filterByCondition=(arr, cond)=> {
-    return arr.filter(cond)
-
+// The "I am hungry" function
+function sayHungry() {
+    return (`${this.name} is hungry`);
 }
 
-const cond=(a)=>{
-    return a.length>3
+const Sarah = {
+    name: "Sarah",
+    speak:sayHungry
 }
-console.log(filterByCondition(["sayantan","pal"],cond))
+console.log(Sarah.speak()) ;
+
+// john.speak();  // "John is hungry"  - John is speaking
+// sarah.speak(); // "Sarah is hungry" - Sarah is speaking
