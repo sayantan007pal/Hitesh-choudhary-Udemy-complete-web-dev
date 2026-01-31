@@ -1,4 +1,43 @@
 import Mailgen from 'mailgen'
+import dotenv from 'dotenv'
+import nodemailer from 'nodemailer'
+
+dotenv.config()
+
+const sendMail = async (options){
+    const mailGenerator = new MailGen({
+        theme: 'default',
+        product: {
+            name: 'Our Application',
+            link: 'https://ourapplication.com/'
+        }
+    })
+    const emailTextual = mailGenerator.generatePlaintext(options.mailgenContent)
+    
+    const emailHTML = mailGenerator.generate(options.mailgenContent)
+
+    const transporter= nodemailer.createTransport({
+        host: process.env.MAILTRAP_SMTP_HOST,
+        port: process.env.MAILTRAP_SMTP_PORT,
+        auth: {
+            user: process.env.MAILTRAP_SMTP_USER,
+            pass: process.env.MAILTRAP_SMTP_PASS,
+        }
+    })
+
+    const mail = {
+        from: '"Our Application" <no-reply@ourapplication.com>',
+        to: options.email,
+        subject: options.subject,
+        text: emailTextual,
+        html: emailHTML
+    }
+    try {
+        await transporter.sendMail(mail)
+    } catch (error) {
+        console.error('Error sending email:', error)
+    }
+}
 
 
 const emailVerificationMailgenContent = (username, verificationUrl)=>{
@@ -42,4 +81,4 @@ const passwordResetMailgenContent = (username, passwordResetUrl)=>{
 }
 
 
-export { emailVerificationMailgenContent, passwordResetMailgenContent }
+export { emailVerificationMailgenContent, passwordResetMailgenContent, sendMail }
