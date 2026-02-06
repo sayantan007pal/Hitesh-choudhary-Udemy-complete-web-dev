@@ -34,26 +34,26 @@ function isEven(val){
 ### Problem 4: String Reverser
 
 ```
-function reverseString(value){
-    const reversedVal = []
-    for(let i = 0; i < value.length; i++){
-        reversedVal[value.length -1 -i] = value[i]
-    }
-    reversedVal.toString()
-    return reversedVal.join('')
+function reverseString(  value){
+    reversedVal = [];
+        for(let i = 0 ; i < value.length ; i++){
+                reversedVal.push(value[value.length-1-i])
+        }
+        reversedVal.toString();
+        return reversedVal.join("");
 }
 ```
 
 ### Problem 5: Prime Number Checker
 
 ```
-function isPrime(val){
-    if(val %2== 0 || val = 0){
-        return false
+function isPrime( value){
+    if (value <= 1) return false;
+    for (let i = 2; i < value; i++) {
+        if (value % i === 0) return false;
     }
-    else {
-        return true
-    }
+    return true;
+
 }
 ```
 
@@ -77,6 +77,15 @@ function recursiveFactorial(val){
 
 }
 ```
+```
+function fatorial(val){
+    let factValue = 1
+    for(let i = 1; i <= val ; i++){  // Change: <= instead of <
+        factValue = factValue * i
+    }
+    return factValue
+}
+```
 
 ### Problem 7: Palindrome Checker
 
@@ -88,6 +97,18 @@ function palindromeChecker(value){
         }
     }
         return true
+}
+```
+```
+function recursivePalindrome(value){
+    let cpyValue = value;
+    if(cpyValue.length <= 1){
+        return true
+    }
+    if(cpyValue[cpyValue.length-1] !== cpyValue[0]){
+        return false
+    }
+    return recursivePalindrome(cpyValue.slice(1, -1))
 }
 ```
 
@@ -125,6 +146,16 @@ function arrayStats(arr){
 }
 ```
 
+```
+function arrayStats(arr){
+    let sum = arr.reduce((num, i)=> num +i)
+    let avg = sum/arr.length
+     let max = Math.max(...arr)
+     let min = Math.min(...arr)
+    return {min , max , sum , avg}
+}
+```
+
 ### Problem 10: Password Validator
 
 ```
@@ -138,7 +169,7 @@ function isValidPassword(password){
     if(!/[a-z]/.test(password)){
         return false
     }
-    if(!/[1-9]/.test.(password)){
+    if(!/[0-9]/.test(password)){
         return false
     }
     return true

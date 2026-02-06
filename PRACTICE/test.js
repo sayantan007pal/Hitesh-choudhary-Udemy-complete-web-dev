@@ -1,6 +1,19 @@
 // The "I am hungry" function
 
-console.log(Sarah.speak()) ;
+function isValidPassword(password){
+    if(password.length< 8){
+        return false
+    }
+    if(!/[A-Z]/.test(password)){
+        return false
+    }
+    if(!/[a-z]/.test(password)){
+        return false
+    }
+    if(!/[0-9]/.test(password)){
+        return false
+    }
+    return true
+}
 
-// john.speak();  // "John is hungry"  - John is speaking
-// sarah.speak(); // "Sarah is hungry" - Sarah is speaking
+console.log(isValidPassword("Password1")); // true

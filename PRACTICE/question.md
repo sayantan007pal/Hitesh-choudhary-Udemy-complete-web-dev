@@ -17,6 +17,10 @@ Create a function `reverseString` that takes a string as input and returns the r
 
 ### Problem 5: Prime Number Checker
 Write a function `isPrime` that takes a number and returns `true` if it's a prime number, `false` otherwise.
+A prime number must:
+
+Be greater than 1
+Have NO divisors except 1 and itself
 
 ### Problem 6: Factorial Calculator
 Create a function `factorial` that calculates and returns the factorial of a given number.
