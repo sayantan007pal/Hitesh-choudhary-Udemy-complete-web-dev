@@ -471,12 +471,12 @@ game={
 ### Problem 1: Function Multiplier
 ```
 function createMultiplier(num){
-    return fucntion argument(val){
+    return funcion argument(val){
         return num * val
     }
 
 }
-cosnt double = createMultiplier(3)
+const double = createMultiplier(3)
 console.log(double(2))
 ```
 
@@ -519,6 +519,25 @@ function createCounter(){
             getValue
         }
 
+}
+
+//also another way 
+
+function createCounter(){
+  let count = 0;
+    return {
+        increment : function (){
+          count++
+          return count
+        },
+        decrement: function (){
+          count --;
+          return count;
+        },
+        getValue: function(){
+          return count;
+        }
+    }
 }
 ```
 
