@@ -869,27 +869,24 @@ function customReduce(array, callback, initialValue) {
 
 ### Problem 2: Function Pipeline
 ```
-function logExecutionTime(fn) {
-  return function (...args) {
-    const start = performance.now();
-    const result = fn(...args);
-    const end = performance.now();
-    console.log(`Function "${fn.name || 'anonymous'}" took ${(end - start).toFixed(4)} ms to execute`);
+//pipe = left→right, compose = right→left
+
+function pipe(...fns) {
+  return function (value) {
+    let result = value;
+    for (let fn of fns) {
+      result = fn(result);
+    }
     return result;
   };
 }
 
-function slowSum(n) {
-  let sum = 0;
-  for (let i = 0; i <= n; i++) {
-    sum += i;
-  }
-  return sum;
-}
 
+const addTwo = (x) => x + 2;
+const multiplyByThree = (x) => x * 3;
+const square = (x) => x * x;
 
-const timedSlowSum = logExecutionTime(slowSum);
-
+const pipeline = pipe(addTwo, multiplyByThree, square);
 
 ```
 
