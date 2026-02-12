@@ -21,8 +21,6 @@ export default function LoginPage() {
         <h1>Login</h1>
         <hr />
         </div>  
-
-        
         <div>
         <label htmlFor="email">Email</label>
         <input 
