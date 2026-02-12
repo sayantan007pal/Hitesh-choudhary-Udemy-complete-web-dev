@@ -1,4 +1,4 @@
-const asyncHandler = (statusCompletion )=>{
+const abc = (statusCompletion )=>{
     return (req , res , next)=>{
         Promise
         .resolve(statusCompletion(req, res, next))

@@ -571,46 +571,55 @@ function partial(fn, ...presetArgs) {
   };
 }
 
-const add = (a, b, c) => a + b + c;
+function add(...args) {
+  return args.reduce((sum, current) => sum + current, 0);
+}
 
-const addFive = partial(add, 5);
-console.log(addFive(3, 2)); // 5 + 3 + 2 = 10
-
-const addFiveAndThree = partial(add, 5, 3);
-console.log(addFiveAndThree(2));
+const add5 = partial(add, 5);
+console.log(add5(10, 15, 6));
 ```
 
 ### Problem 6: Array Filter Builder
 ```
-
+function createFilter(condition) {
+    const filters = {
+        'even': (num) => num % 2 === 0,
+        'odd': (num) => num % 2 !== 0,
+        'positive': (num) => num > 0,
+        'negative': (num) => num < 0
+    };
+    
+    return filters[condition] || (() => true);
+}
 ```
 
 ### Problem 7: Memoization
 ```
 function memoize(fn) {
-  const cache = new Map();
-
-  return function (...args) {
+  const cache = {};
+  
+  return function memoized(...args) {
     const key = JSON.stringify(args);
-
-    if (cache.has(key)) {
-      console.log(`Cache hit for: ${key}`);
-      return cache.get(key);
+    
+    if (key in cache) {
+      return cache[key];
     }
-
-    console.log(`Computing for: ${key}`);
+    
     const result = fn.apply(this, args);
-    cache.set(key, result);
+    cache[key] = result;
     return result;
   };
 }
 
-
-const slowFibonacci = (n) => {
-  if (n <= 1) return n;
-  return slowFibonacci(n - 1) + slowFibonacci(n - 2);
+const slowAdd = (a, b) => {
+  // Simulate expensive computation
+  for (let i = 0; i < 1000000; i++) {}
+  return a + b;
 };
-console.log(slowFibonacci(10))
+
+const memoizedAdd = memoize(slowAdd);
+
+console.log(memoizedAdd(5, 3));
 ```
 
 ### Problem 8: Function Composition
@@ -629,7 +638,26 @@ const subtractFive = (x) => x - 5;
 // compose applies right to left: subtractFive → multiplyByThree → addTwo
 const composed = compose(addTwo, multiplyByThree, subtractFive);
 ```
-
+```
+function composeManual(...functions) {
+    return function(initialValue) {
+        let result = initialValue;
+        
+        // Loop from last function to first
+        for (let i = functions.length - 1; i >= 0; i--) {
+            result = functions[i](result);
+        }
+        
+        return result;
+    };
+}
+```
+```
+// Is the same as:
+const currentFunction = functions[i];  // Get the function
+const output = currentFunction(result); // Call it with result
+result = output; 
+```
 ### Problem 9: Rate Limiter
 ```
 function rateLimit(fn, timeLimit) {
@@ -888,6 +916,13 @@ const square = (x) => x * x;
 
 const pipeline = pipe(addTwo, multiplyByThree, square);
 
+```
+```
+const pipe = (...functions) => {
+  return (initialValue) => {
+    return functions.reduce((acc, fn) => fn(acc), initialValue);
+  };
+};
 ```
 
 ### Problem 3: Retry Logic
