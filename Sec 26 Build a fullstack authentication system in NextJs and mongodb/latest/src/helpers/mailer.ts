@@ -6,12 +6,13 @@ export async function sendEmail(to: string, emailType: string, userId: string) {
     try {
         const hashedToken = await bcrypt.hash(userId.toString(), 12); // Hash the userId to use as a token in the email link
         
-        if(emailType === "verification"){
+        if(emailType === "VERIFY_EMAIL"){
         await User.findByIdAndUpdate(userId, {
             emailVerificationExpiry: Date.now() + 3600000, // Set token expiry time (e.g., 1 hour)
             emailVerificationToken: hashedToken }); // Store the hashed token in the user's document for later verification
         } 
-        else if(emailType === "reset"){
+        else if(emailType === "RESET_PASSWORD"){
+
             await User.findByIdAndUpdate(userId, {
                 forgotPasswordExpiry: Date.now() + 3600000, // Set token expiry time (e.g., 1 hour)
                 forgotPasswordToken: hashedToken }); // Store the hashed token in the user's document for later verification
@@ -33,8 +34,8 @@ export async function sendEmail(to: string, emailType: string, userId: string) {
         const mailOptions = {
             from: process.env.EMAIL_FROM,
             to,
-            subject: emailType === "verification" ? "Verify your email" : "Reset your password",
-            html: `<p>Please click the link below to ${emailType === "verification" ? "verify your email" : "reset your password"}:</p>
+            subject: emailType === "VERIFY_EMAIL" ? "Verify your email" : "Reset your password",
+            html: `<p>Please click the link below to ${emailType === "VERIFY_EMAIL" ? "verify your email" : "reset your password"}:</p>
                    <a href="${process.env.DOMAIN}/${emailType}?token=${hashedToken}">Click here</a>`
         };
 

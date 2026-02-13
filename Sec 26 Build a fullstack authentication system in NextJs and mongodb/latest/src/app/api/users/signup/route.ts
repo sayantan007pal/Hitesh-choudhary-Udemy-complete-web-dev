@@ -2,6 +2,7 @@ import connectDB from "@/dbConfig/dbConfig";
 import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
+import { sendEmail } from "@/helpers/sendEmail";
 
 
 connectDB()
@@ -27,6 +28,10 @@ export async function POST(request: NextRequest) {
         })
         const savedUser = await newUser.save();
         console.log("=> User created:", savedUser);
+        //send verification email logic here
+
+        await sendEmail(to: email, emailType: "VERIFY_EMAIL", userId: savedUser._id); // Call the email sending function
+
         return NextResponse.json({message: "User created successfully"}, {status: 201})
     } catch (error: any) {
         console.error("Error in signup route:", error);
