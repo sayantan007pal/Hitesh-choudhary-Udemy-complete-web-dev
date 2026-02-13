@@ -20,9 +20,10 @@
     "react-hot-toast": "^2.6.0"
   },
   "devDependencies": {
-    "typescript": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20.0.0",
     "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0"
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^5.0.0"
   }
 }
