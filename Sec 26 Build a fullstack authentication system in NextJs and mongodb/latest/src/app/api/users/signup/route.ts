@@ -2,7 +2,7 @@ import connectDB from "@/dbConfig/dbConfig";
 import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import { sendEmail } from "@/helpers/sendEmail";
+import { sendEmail } from "@/helpers/mailer";
 
 
 connectDB()
@@ -28,11 +28,21 @@ export async function POST(request: NextRequest) {
         })
         const savedUser = await newUser.save();
         console.log("=> User created:", savedUser);
-        //send verification email logic here
+        
+        // Send verification email - if it fails, delete the user
+        try {
+            await sendEmail(email, "VERIFY_EMAIL", savedUser._id);
+        } catch (emailError) {
+            // Delete the user if email sending fails
+            await User.findByIdAndDelete(savedUser._id);
+            console.error("Email sending failed, user deleted:", emailError);
+            return NextResponse.json(
+                { message: "Failed to send verification email. Please try again." },
+                { status: 500 }
+            );
+        }
 
-        await sendEmail(to: email, emailType: "VERIFY_EMAIL", userId: savedUser._id); // Call the email sending function
-
-        return NextResponse.json({message: "User created successfully"}, {status: 201})
+        return NextResponse.json({message: "User created successfully. Please check your email for verification."}, {status: 201})
     } catch (error: any) {
         console.error("Error in signup route:", error);
         // Handle MongoDB duplicate key error (code 11000)
