@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -8,13 +8,40 @@ import React from "react";
 
 
 export default function SignUpPage() {
+    const router = useRouter();
     
-    const [user, setUser] = useState({email: "", password: "",username: ""});
+    const [user, setUser] = useState({email: "", password: "",username: "", fullName: ""});
     const [loading, setLoading] = useState(false);
-    
+    const [buttonDisabled, setButtonDisabled] = useState(false);
     const onSignUp = async () => {
-    
+
+       try {
+        setLoading(true);
+        const response = await axios.post("/api/users/signup", {
+            username: user.username,
+            email: user.email,
+            password: user.password,
+            fullName: user.fullName,
+        });
+        console.log("Signup success", response.data);
+        toast.success("Signup successful!");
+        router.push("/login");
+        return;
+    } catch (err:any) {
+        console.log("Signup failed", err.message);
+        toast.error(err.response?.data?.message || "Signup failed");
+    } finally {
+        setLoading(false);
     }
+    }
+
+    useEffect(() => {
+        if(user.email.length > 0 && user.password.length > 0 && user.username.length > 0 && user.fullName.length > 0){
+            setButtonDisabled(false);
+        } else {
+            setButtonDisabled(true);
+        }
+    }, [user])
     return (
         <>
         <div>
@@ -49,8 +76,8 @@ export default function SignUpPage() {
         />
         </div>
         <div>
-        <button onClick={onSignUp} disabled={loading}>
-            {loading ? "Signing Up..." : "Sign Up"}
+        <button onClick={onSignUp} disabled={loading || buttonDisabled}>
+            {loading ? "Signing up..." : "Sign Up"}
         </button>
         </div>
         <Link href="/login"> Visit Login page</Link> 
