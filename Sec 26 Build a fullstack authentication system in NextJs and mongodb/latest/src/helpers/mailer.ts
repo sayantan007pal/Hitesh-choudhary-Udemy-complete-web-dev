@@ -36,7 +36,7 @@ export async function sendEmail(to: string, emailType: string, userId: string) {
             to,
             subject: emailType === "VERIFY_EMAIL" ? "Verify your email" : "Reset your password",
             html: `<p>Please click the link below to ${emailType === "VERIFY_EMAIL" ? "verify your email" : "reset your password"}:</p>
-                   <a href="${process.env.DOMAIN}/${emailType}?token=${hashedToken}">Click here</a>`
+                   <a href="${process.env.DOMAIN}/${emailType === "VERIFY_EMAIL" ? "verifyemail" : "resetpassword"}?token=${encodeURIComponent(hashedToken)}">Click here</a>`
         };
 
         await transporter.sendMail(mailOptions);
