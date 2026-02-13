@@ -24,6 +24,12 @@ export async function POST(request: NextRequest) {
         if(!isPasswordValid){
             return NextResponse.json({message: "Invalid credentials"}, {status: 401})
         }
+        
+        //check if email is verified
+        if(!existingUser.isEmailVerified){
+            return NextResponse.json({message: "Please verify your email before logging in"}, {status: 403})
+        }
+        
         console.log("=> Login successful for user:", existingUser);
 
         //create session or token data
