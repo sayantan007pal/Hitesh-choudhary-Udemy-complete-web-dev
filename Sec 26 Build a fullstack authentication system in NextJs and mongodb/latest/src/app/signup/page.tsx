@@ -47,6 +47,16 @@ export default function SignUpPage() {
         <div>
         <h1>Sign Up</h1>
         <hr />
+                <label htmlFor="fullName">Full Name</label>
+        <input 
+        type="text" 
+        id="fullName" 
+        value={user.fullName} 
+        onChange={(e) => setUser({...user, fullName: e.target.value})} 
+        />
+        </div>
+
+            <div>
         <label htmlFor="username">Username</label>
         <input 
         type="text" 
@@ -76,7 +86,7 @@ export default function SignUpPage() {
         />
         </div>
         <div>
-        <button onClick={onSignUp} disabled={loading || buttonDisabled}>
+        <button onClick={onSignUp} disabled={loading }>
             {loading ? "Signing up..." : "Sign Up"}
         </button>
         </div>

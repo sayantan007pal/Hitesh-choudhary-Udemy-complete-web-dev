@@ -8,10 +8,10 @@ connectDB()
 
 export async function POST(request: NextRequest) {
     try {
-        const {email, password, username} = await request.json();
-        console.log("=> Received data:", { email, password, username });
+        const {email, password, username, fullName} = await request.json();
+        console.log("=> Received data:", { email, password, username, fullName });
 
-        if(!email || !password || !username){
+        if(!email || !password || !username || !fullName){
             return NextResponse.json({message: "All fields are required"}, {status: 400})
         }
         const existingUser = await User.findOne({email});
@@ -22,7 +22,8 @@ export async function POST(request: NextRequest) {
         const newUser = new User({
             email,
             password: hashedPassword,
-            username
+            username,
+            fullName
         })
         const savedUser = await newUser.save();
         console.log("=> User created:", savedUser);

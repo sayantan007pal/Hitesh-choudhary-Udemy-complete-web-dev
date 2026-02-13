@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -11,14 +11,38 @@ export default function LoginPage() {
     
     const [user, setUser] = useState({email: "", password: ""});
     const [loading, setLoading] = useState(false);
+    const [buttonDisabled, setButtonDisabled] = useState(false);
     
     const onLogin = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.post("/api/users/login", {
+                email: user.email,
+                password: user.password,
+            });
+            console.log("Login success", response.data);
+            toast.success("Login successful!");
+            // router.push("/profile");
+            
+        } catch (error: any) {
+            console.log("Login failed", error.message);
+            toast.error(error.response?.data?.message || "Login failed");
+        } finally {
+            setLoading(false);
+        }
     
     }
+    useEffect(() => {
+        if(user.email.length > 0 && user.password.length > 0){
+            setButtonDisabled(false);
+        } else {
+            setButtonDisabled(true);
+        }
+    }, [user])
     return (
         <>
         <div>
-        <h1>Login</h1>
+        <h1>{loading ? "Logging in..." : "Login"}</h1>
         <hr />
         </div>  
         <div>
@@ -40,7 +64,7 @@ export default function LoginPage() {
         />
         </div>
         <div>
-        <button onClick={onLogin} disabled={loading}>
+        <button onClick={onLogin} disabled={buttonDisabled || loading}>
             {loading ? "Logging in..." : "Login"}
         </button>
         </div>
