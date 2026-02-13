@@ -12,7 +12,7 @@ export default function LoginPage() {
     const [user, setUser] = useState({email: "", password: ""});
     const [loading, setLoading] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
-    
+        const router = useRouter();
     const onLogin = async () => {
         try {
             setLoading(true);
@@ -22,7 +22,7 @@ export default function LoginPage() {
             });
             console.log("Login success", response.data);
             toast.success("Login successful!");
-            // router.push("/profile");
+            router.push("/profile");
             
         } catch (error: any) {
             console.log("Login failed", error.message);
