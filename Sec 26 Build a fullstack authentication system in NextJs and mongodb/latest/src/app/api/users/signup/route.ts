@@ -28,8 +28,16 @@ export async function POST(request: NextRequest) {
         const savedUser = await newUser.save();
         console.log("=> User created:", savedUser);
         return NextResponse.json({message: "User created successfully"}, {status: 201})
-    } catch (error) {
+    } catch (error: any) {
         console.error("Error in signup route:", error);
+        // Handle MongoDB duplicate key error (code 11000)
+        if (error.code === 11000) {
+            const field = Object.keys(error.keyPattern)[0];
+            return NextResponse.json(
+                { message: `${field} already exists` },
+                { status: 400 }
+            );
+        }
         return NextResponse.json({message: "Internal Server Error"}, {status: 500})
     }
 }

@@ -41,7 +41,7 @@ export default function ProfilePage(){
         <div>
             <h1>Profile Page</h1>
             <hr />
-            <h2>{userData ? `Welcome, ${userData.userName}` : "Loading..."}</h2>
+            <h2>{userData ? `Welcome, ${userData.username}` : "Loading..."}</h2>
             <button
             onClick={logout}
           className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
