@@ -24,6 +24,30 @@ app.post('/teas', (req, res) => {
     res.status(201).send(newTea);
 });
 
+app.put('/teas/:id', (req,res)=>{
+    const tea = teaData.find(tea=>tea.id === parseInt(req.params.id));
+    if(tea){
+        tea.name = req.body.name;
+        tea.price = req.body.price;
+        
+        res.status(200).send(tea);
+    }
+    else{
+        res.status(404).send("Tea not found");
+    }
+
+})
+
+app.delete('/teas/:id', (req, res) => {
+    const tea = teaData.find(tea=>tea.id === parseInt(req.params.id));
+    if(tea){
+        teaData = teaData.filter(tea=>tea.id !== parseInt(req.params.id));
+        res.status(200).send("Tea deleted");
+    }
+    else{
+        res.status(404).send("Tea not found");
+    }
+})
 
 app.get('/teas', (req, res) => {
     res.status(200).send(teaData);
