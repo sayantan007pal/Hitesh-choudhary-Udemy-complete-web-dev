@@ -1,6 +1,9 @@
 import express from 'express';
 import path from 'path';
+import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
+
+dotenv.config(); // loads variables from .env into process.env
 
 const app = express();
 app.use(express.json()); // Parse JSON request bodies
@@ -8,7 +11,7 @@ app.use(express.json()); // Parse JSON request bodies
 const __filename = fileURLToPath(import.meta.url);// here
 const __dirname = path.dirname(__filename);
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 let teaData = [];
 let nextId = 1;
