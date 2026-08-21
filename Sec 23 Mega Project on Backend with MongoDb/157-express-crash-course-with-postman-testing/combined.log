@@ -1,0 +1,23 @@
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"message\":\"GET / 200 12 - 2.249 ms\",\"timestamp\":\"2026-08-16T19:45:29.857Z\"}","timestamp":"2026-08-16T19:45:29.858Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"message\":\"GET /json/version 404 151 - 0.519 ms\",\"timestamp\":\"2026-08-16T19:45:29.860Z\"}","timestamp":"2026-08-16T19:45:29.860Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/\",\"status\":\"200\",\"contentLength\":\"12\",\"responseTime\":\"2.619\"}","timestamp":"2026-08-16T19:52:54.670Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/json/version\",\"status\":\"404\",\"contentLength\":\"151\",\"responseTime\":\"0.492\"}","timestamp":"2026-08-16T19:52:54.672Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/\",\"status\":\"200\",\"contentLength\":\"12\",\"responseTime\":\"0.267\"}","timestamp":"2026-08-16T19:52:55.719Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/json/version\",\"status\":\"404\",\"contentLength\":\"151\",\"responseTime\":\"0.189\"}","timestamp":"2026-08-16T19:52:55.719Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/teas\",\"status\":\"201\",\"contentLength\":\"73\",\"responseTime\":\"0.418\"}","timestamp":"2026-08-16T19:53:48.625Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/teas\",\"status\":\"201\",\"contentLength\":\"67\",\"responseTime\":\"0.122\"}","timestamp":"2026-08-16T19:53:59.818Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/teas\",\"status\":\"201\",\"contentLength\":\"58\",\"responseTime\":\"0.189\"}","timestamp":"2026-08-16T19:54:01.173Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/teas\",\"status\":\"200\",\"contentLength\":\"202\",\"responseTime\":\"0.377\"}","timestamp":"2026-08-16T19:54:18.327Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"listenting to port http://localhost:4000","timestamp":"2026-08-16T19:55:57.859Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"listenting to port http://localhost:4000","timestamp":"2026-08-16T19:55:57.859Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Root route hit","timestamp":"2026-08-16T19:55:58.125Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/\",\"status\":\"200\",\"contentLength\":\"12\",\"responseTime\":\"1.984\"}","timestamp":"2026-08-16T19:55:58.128Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/json/version\",\"status\":\"404\",\"contentLength\":\"151\",\"responseTime\":\"0.542\"}","timestamp":"2026-08-16T19:55:58.129Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Fetched all teas: count=0","timestamp":"2026-08-16T19:56:13.382Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/teas\",\"status\":\"200\",\"contentLength\":\"2\",\"responseTime\":\"0.977\"}","timestamp":"2026-08-16T19:56:13.383Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Tea created: {\"id\":1,\"name\":\"Quality-focused system-worthy paradigm\",\"price\":743.93}","timestamp":"2026-08-16T19:56:18.546Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/teas\",\"status\":\"201\",\"contentLength\":\"71\",\"responseTime\":\"0.358\"}","timestamp":"2026-08-16T19:56:18.547Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Tea created: {\"id\":2,\"name\":\"Reduced cohesive array\",\"price\":86.78}","timestamp":"2026-08-16T19:56:32.159Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/teas\",\"status\":\"201\",\"contentLength\":\"54\",\"responseTime\":\"0.529\"}","timestamp":"2026-08-16T19:56:32.160Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Fetched all teas: count=2","timestamp":"2026-08-16T19:57:12.464Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/teas\",\"status\":\"200\",\"contentLength\":\"128\",\"responseTime\":\"2.569\"}","timestamp":"2026-08-16T19:57:12.466Z"}
