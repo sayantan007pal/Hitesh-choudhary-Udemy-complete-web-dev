@@ -1,0 +1,398 @@
+/* =========================================================
+   DESIGN TOKENS
+   Keeping every color/font as a CSS variable means the whole
+   site's look can change by editing values in ONE place.
+   ========================================================= */
+   :root {
+    --ink:        #10141F;   /* page background */
+    --panel:      #171C2A;   /* card / raised surface background */
+    --paper:      #F3F1EA;   /* primary text on dark background */
+    --muted:      #8A93A6;   /* secondary text */
+    --signal:     #E9A23B;   /* accent: amber "signal lamp" */
+    --signal-dim: #C97D1E;   /* accent hover/active state */
+    --line:       rgba(243, 241, 234, 0.12); /* subtle borders */
+  
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body:    'IBM Plex Sans', sans-serif;
+    --font-mono:    'IBM Plex Mono', monospace;
+  
+    /* clamp(min, preferred, max) gives "fluid" type that scales smoothly
+       with the viewport instead of jumping at breakpoints. */
+    --step-0: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    --step-1: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+    --step-2: clamp(1.75rem, 1.4rem + 1.5vw, 2.25rem);
+    --step-3: clamp(2.5rem, 1.9rem + 3vw, 4rem);
+  
+    --max-w: 1100px;
+  }
+  
+  /* =========================================================
+     RESET — removes browser default spacing/quirks so we start
+     from a predictable baseline.
+     ========================================================= */
+  *, *::before, *::after { box-sizing: border-box; }
+  * { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  img, svg { display: block; max-width: 100%; }
+  ul { list-style: none; }
+  a { color: inherit; text-decoration: none; }
+  
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-body);
+    font-size: var(--step-0);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  h1 { font-size: var(--step-3); }
+  h2 { font-size: var(--step-2); margin-bottom: 1.5rem; }
+  h3 { font-size: var(--step-1); margin-bottom: 0.5rem; }
+  
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--signal);
+    letter-spacing: 0.02em;
+    margin-bottom: 0.75rem;
+  }
+  
+  /* Visible keyboard focus — accessibility basic that's easy to forget */
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--signal);
+    outline-offset: 3px;
+  }
+  
+  .skip-link {
+    position: absolute;
+    left: -999px;
+    top: 0;
+    background: var(--signal);
+    color: var(--ink);
+    padding: 0.5rem 1rem;
+    z-index: 100;
+  }
+  .skip-link:focus { left: 1rem; top: 1rem; }
+  
+  /* Respect users who've asked their OS for reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  
+  /* =========================================================
+     LAYOUT HELPERS
+     ========================================================= */
+  section {
+    max-width: var(--max-w);
+    margin-inline: auto;
+    padding: 4rem 1.5rem;
+  }
+  
+  /* =========================================================
+     HEADER / NAV
+     Mobile-first: by default the menu is a full-height panel
+     that's hidden off-screen, toggled by the hamburger button.
+     The @media block near the bottom turns it back into a
+     normal horizontal row once there's room.
+     ========================================================= */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(16, 20, 31, 0.9);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  
+  .nav {
+    max-width: var(--max-w);
+    margin-inline: auto;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .nav__brand {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 1.1rem;
+  }
+  .nav__brand-dim { color: var(--muted); }
+  
+  .nav__toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+  .nav__toggle span {
+    width: 22px;
+    height: 2px;
+    background: var(--paper);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  /* Turn the three bars into an X when menu is open */
+  .nav__toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav__toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .nav__toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  
+  .nav__menu {
+    position: fixed;
+    inset: 0 0 0 30%;
+    background: var(--panel);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    border-left: 1px solid var(--line);
+  }
+  .nav__menu.is-open { transform: translateX(0); }
+  
+  .nav__link--cta {
+    color: var(--signal);
+  }
+  
+  /* =========================================================
+     HERO
+     Single column on mobile, two-column grid once there's
+     width for the waveform graphic to sit beside the text.
+     ========================================================= */
+  .hero {
+    display: grid;
+    gap: 2.5rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+  
+  .hero__sub {
+    color: var(--muted);
+    max-width: 42ch;
+    margin-top: 1rem;
+  }
+  
+  .hero__sub strong { color: var(--paper); }
+  
+  .ticker {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--signal);
+    margin-top: 1.75rem;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 0.85rem 1rem;
+    display: flex;
+    gap: 0.5rem;
+    min-height: 2.6em;
+    align-items: center;
+  }
+  .ticker__prompt { color: var(--muted); }
+  .ticker__cursor { animation: blink 1s step-end infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  
+  .hero__actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .btn {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    padding: 0.75rem 1.4rem;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    display: inline-block;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn--primary { background: var(--signal); color: var(--ink); }
+  .btn--primary:hover { background: var(--signal-dim); }
+  .btn--ghost { border-color: var(--line); color: var(--paper); }
+  .btn--ghost:hover { border-color: var(--signal); }
+  
+  .hero__visual { display: none; } /* shown once screen is wide enough, below */
+  
+  .waveform__bars rect {
+    fill: var(--signal);
+    opacity: 0.85;
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { transform: scaleY(0.4); }
+    50% { transform: scaleY(1); }
+  }
+  
+  /* =========================================================
+     ABOUT
+     ========================================================= */
+  .about__grid {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .about__grid p { color: var(--muted); }
+  
+  /* =========================================================
+     SKILLS
+     ========================================================= */
+  .skills__grid {
+    display: grid;
+    gap: 2rem;
+  }
+  .skills__group h3 {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+  .tag-list li {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 0.35rem 0.7rem;
+    border-radius: 4px;
+    color: var(--paper);
+  }
+  .tag-list--small li { font-size: 0.72rem; }
+  
+  /* =========================================================
+     PROJECTS / WORK
+     Cards styled like log/service entries.
+     ========================================================= */
+  .work__grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr; /* one column on mobile */
+  }
+  
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 1.5rem;
+  }
+  .card__service {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--signal);
+    margin-bottom: 0.6rem;
+  }
+  .card p { color: var(--muted); margin-bottom: 1rem; }
+  
+  /* =========================================================
+     CONTACT
+     ========================================================= */
+  .contact__lead { color: var(--muted); max-width: 50ch; margin-bottom: 2rem; }
+  
+  .form {
+    display: grid;
+    gap: 0.4rem;
+    max-width: 480px;
+  }
+  .form label {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.75rem;
+  }
+  .form input, .form textarea {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--paper);
+    padding: 0.7rem;
+    font-family: var(--font-body);
+  }
+  .form button { margin-top: 1.5rem; justify-self: start; border: none; cursor: pointer; }
+  .hidden-field { position: absolute; left: -9999px; } /* hides the honeypot field from humans, bots still fill it */
+  
+  .social-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    font-family: var(--font-mono);
+  }
+  .social-links a { color: var(--muted); }
+  .social-links a:hover { color: var(--signal); }
+  
+  /* =========================================================
+     FOOTER
+     ========================================================= */
+  .site-footer {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--line);
+  }
+  
+  /* =========================================================
+     BREAKPOINT 1 — ~600px (tablets, large phones)
+     ========================================================= */
+  @media (min-width: 600px) {
+    .work__grid { grid-template-columns: 1fr 1fr; }
+    .about__grid { grid-template-columns: 1fr 1fr; }
+  }
+  
+  /* =========================================================
+     BREAKPOINT 2 — ~900px (small laptops and up)
+     This is where the nav becomes a normal horizontal bar and
+     the hero becomes two columns — the extra width is finally
+     there to support it.
+     ========================================================= */
+  @media (min-width: 900px) {
+    .nav__toggle { display: none; }
+    .nav__menu {
+      position: static;
+      flex-direction: row;
+      background: none;
+      border: none;
+      padding: 0;
+      transform: none;
+      font-size: 0.95rem;
+      gap: 2.5rem;
+    }
+  
+    .hero {
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+    .hero__visual { display: block; }
+  
+    .skills__grid { grid-template-columns: repeat(3, 1fr); }
+    .work__grid { grid-template-columns: repeat(2, 1fr); }
+  }

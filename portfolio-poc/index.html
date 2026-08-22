@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ===== SEO: title + description =====
+       Real name first, clear role second. This is what shows up as the
+       blue link text + snippet in Google, and what AI search tools quote
+       when they cite your site. Edit the [brackets] with your real info. -->
+  <title>Sayantan [Lastname] — Full-Stack & AI Systems Engineer</title>
+  <meta name="description" content="Portfolio of Sayantan [Lastname], Associate Software Engineer at Prismforce. Builds AI-powered recruitment tools, voice AI interview agents, and full-stack systems with React, Node.js, Python and AWS.">
+  <meta name="keywords" content="Sayantan, full-stack developer, software engineer, Pune, React, Node.js, TypeScript, Python, FastAPI, AWS, voice AI, Prismforce">
+  <link rel="canonical" href="https://your-site-name.netlify.app/">
+
+  <!-- ===== Open Graph / social preview cards ===== -->
+  <meta property="og:title" content="Sayantan [Lastname] — Full-Stack & AI Systems Engineer">
+  <meta property="og:description" content="AI-powered products, backend pipelines, and full-stack engineering.">
+  <meta property="og:url" content="https://your-site-name.netlify.app/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+
+  <!-- ===== Structured data (schema.org) =====
+       This is the part that actually helps AI search tools (Perplexity,
+       Google AI Overviews, etc.) understand "this page is a person, here's
+       what they do." Fill in your real links. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Sayantan [Lastname]",
+    "jobTitle": "Associate Software Engineer",
+    "worksFor": { "@type": "Organization", "name": "Prismforce" },
+    "url": "https://your-site-name.netlify.app/",
+    "sameAs": [
+      "https://github.com/your-username",
+      "https://linkedin.com/in/your-username"
+    ],
+    "knowsAbout": ["React", "Node.js", "TypeScript", "Python", "FastAPI", "AWS", "MongoDB", "Docker"]
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+  <!-- Fonts: preconnect first so the browser opens the connection early -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Skip link: accessibility basic, also good practice generally -->
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary">
+      <a href="#top" class="nav__brand">S<span class="nav__brand-dim">.dev</span></a>
+
+      <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav__menu" id="navMenu">
+        <li><a href="#about" class="nav__link">About</a></li>
+        <li><a href="#work" class="nav__link">Work</a></li>
+        <li><a href="#skills" class="nav__link">Skills</a></li>
+        <li><a href="#contact" class="nav__link nav__link--cta">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero" id="top">
+      <div class="hero__text">
+        <p class="eyebrow">// full-stack &amp; ai systems engineer</p>
+        <h1>Sayantan<br>[Lastname]</h1>
+        <p class="hero__sub">
+          I build backend pipelines and AI-powered products — currently at
+          <strong>Prismforce</strong>, working on an AI recruitment platform.
+        </p>
+
+        <!-- The "signature" element: a terminal-style status line that
+             cycles through real pipelines from your projects. -->
+        <div class="ticker" aria-hidden="true">
+          <span class="ticker__prompt">$</span>
+          <span class="ticker__text" id="tickerText"></span><span class="ticker__cursor">▍</span>
+        </div>
+
+        <div class="hero__actions">
+          <a href="#work" class="btn btn--primary">View work</a>
+          <a href="assets/resume.pdf" class="btn btn--ghost">Resume</a>
+        </div>
+      </div>
+
+      <!-- Animated waveform: nods to the voice-AI work, built in pure SVG/CSS,
+           no image file needed. -->
+      <div class="hero__visual" aria-hidden="true">
+        <svg viewBox="0 0 220 120" class="waveform">
+          <g class="waveform__bars"></g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ===================== ABOUT ===================== -->
+    <section class="about" id="about">
+      <p class="eyebrow">about</p>
+      <h2>A bit about how I work</h2>
+      <div class="about__grid">
+        <p>
+          I'm an Associate Software Engineer at Prismforce, where I work on
+          SelectPrism — an AI-powered recruitment and interview platform.
+          My day-to-day spans the full stack: React and TypeScript on the
+          frontend, Node.js and Python/FastAPI on the backend, with MongoDB,
+          AWS (SQS, SNS, S3), Docker and Redis underneath.
+        </p>
+        <p>
+          I like problems where the interesting part is the plumbing —
+          getting data reliably from one system to the next, keeping
+          services observable, and making AI features actually production-
+          ready instead of just demo-ready. Outside of work I do competitive
+          programming in C++ and contribute to open source when I find a
+          good bug to chase.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== SKILLS ===================== -->
+    <section class="skills" id="skills">
+      <p class="eyebrow">stack</p>
+      <h2>Tools I reach for</h2>
+
+      <div class="skills__grid">
+        <div class="skills__group">
+          <h3>frontend</h3>
+          <ul class="tag-list">
+            <li>React</li><li>Next.js</li><li>TypeScript</li><li>HTML/CSS/JS</li>
+          </ul>
+        </div>
+        <div class="skills__group">
+          <h3>backend</h3>
+          <ul class="tag-list">
+            <li>Node.js</li><li>Python</li><li>FastAPI</li><li>MongoDB</li><li>Redis</li>
+          </ul>
+        </div>
+        <div class="skills__group">
+          <h3>infra &amp; tools</h3>
+          <ul class="tag-list">
+            <li>AWS (SQS/SNS/S3)</li><li>Docker</li><li>Git</li><li>Grafana/Loki</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PROJECTS ===================== -->
+    <section class="work" id="work">
+      <p class="eyebrow">work</p>
+      <h2>Selected projects</h2>
+
+      <div class="work__grid">
+
+        <article class="card">
+          <p class="card__service">service: voice-interview-agent</p>
+          <h3>Voice AI Interview Agent</h3>
+          <p>Real-time conversational interview agent built with Pipecat,
+             LiveKit and Deepgram for low-latency speech-to-text and
+             natural voice interaction.</p>
+          <ul class="tag-list tag-list--small">
+            <li>Pipecat</li><li>LiveKit</li><li>Deepgram</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <p class="card__service">service: resume-parser</p>
+          <h3>Resume Parsing Pipeline</h3>
+          <p>Document processing pipeline using FastAPI and Unstructured.io
+             to extract structured candidate data at scale, backed by SQS
+             and S3.</p>
+          <ul class="tag-list tag-list--small">
+            <li>FastAPI</li><li>Unstructured.io</li><li>AWS SQS</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <p class="card__service">service: auth-hardening</p>
+          <h3>Auth System Hardening</h3>
+          <p>Led remediation after a VAPT security audit — added CAPTCHA
+             and multi-layer Redis-based rate limiting across the auth
+             flow.</p>
+          <ul class="tag-list tag-list--small">
+            <li>Redis</li><li>Cloudflare Turnstile</li><li>Security</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <p class="card__service">service: open-source</p>
+          <h3>stdlib.js — PR #8600</h3>
+          <p>Fixed a DevContainer "no space left on device" build failure
+             affecting 500+ contributors on GitHub Codespaces.</p>
+          <ul class="tag-list tag-list--small">
+            <li>Open Source</li><li>DevContainers</li>
+          </ul>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ===================== CONTACT ===================== -->
+    <section class="contact" id="contact">
+      <p class="eyebrow">contact</p>
+      <h2>Let's talk</h2>
+      <p class="contact__lead">Open to interesting problems, collaborations, and roles. Reach out below or find me on the links.</p>
+
+      <!-- Netlify Forms: adding data-netlify="true" + a matching hidden
+           "form-name" input is all it takes. Netlify auto-detects this at
+           deploy time and gives you a working backend with zero server code. -->
+      <form class="form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact">
+        <p class="hidden-field"><label>Don't fill this out: <input name="bot-field"></label></p>
+
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+
+        <button type="submit" class="btn btn--primary">Send message</button>
+      </form>
+
+      <ul class="social-links">
+        <li><a href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://linkedin.com/in/your-username" target="_blank" rel="noopener">LinkedIn</a></li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Built with plain HTML, CSS &amp; JS — deployed on Netlify.</p>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
