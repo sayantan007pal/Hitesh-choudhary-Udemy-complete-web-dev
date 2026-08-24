@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sayantan-pal-dev.netlify.app/sitemap.xml
