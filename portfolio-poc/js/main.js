@@ -6,19 +6,21 @@
 const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('navMenu');
 
-navToggle.addEventListener('click', () => {
-  const isOpen = navMenu.classList.toggle('is-open');
-  navToggle.setAttribute('aria-expanded', isOpen);
-});
-
-// Close the menu automatically once a link is tapped —
-// otherwise it stays open and covers the page you just jumped to.
-navMenu.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    navMenu.classList.remove('is-open');
-    navToggle.setAttribute('aria-expanded', 'false');
+if (navToggle && navMenu) {
+  navToggle.addEventListener('click', () => {
+    const isOpen = navMenu.classList.toggle('is-open');
+    navToggle.setAttribute('aria-expanded', isOpen);
   });
-});
+
+  // Close the menu automatically once a link is tapped —
+  // otherwise it stays open and covers the page you just jumped to.
+  navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navMenu.classList.remove('is-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
 
 document.getElementById('themeToggle').onclick = () => {
   const light = document.documentElement.classList.toggle('light');
