@@ -89,15 +89,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .skip-link:focus { left: 1rem; top: 1rem; }
 
-/* Respect users who've asked their OS for reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
 
 /* =========================================================
    LAYOUT HELPERS
@@ -147,9 +138,7 @@ html.light .fall__icon--kimi svg {
   80%  { opacity: 0.45; }
   100% { transform: translateY(110vh); opacity: 0; }
 }
-@media (prefers-reduced-motion: reduce) {
-  .fall { display: none; }
-}
+
 
 /* =========================================================
    HEADER / NAV
