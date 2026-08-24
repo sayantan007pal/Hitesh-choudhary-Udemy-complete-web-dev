@@ -20,6 +20,11 @@ navMenu.querySelectorAll('a').forEach(link => {
   });
 });
 
+document.getElementById('themeToggle').onclick = () => {
+  const light = document.documentElement.classList.toggle('light');
+  localStorage.theme = light ? 'light' : 'dark';
+};
+
 // =========================================================
 // 2. HERO TICKER
 //    Cycles through short "pipeline" strings that describe

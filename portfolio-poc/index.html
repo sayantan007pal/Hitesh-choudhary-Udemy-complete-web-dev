@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>if (localStorage.theme === 'light') document.documentElement.classList.add('light')</script>
 
   <!-- ===== SEO: title + description =====
        Real name first, clear role second. This is what shows up as the
@@ -67,6 +68,7 @@
         <li><a href="#work" class="nav__link">Work</a></li>
         <li><a href="#skills" class="nav__link">Skills</a></li>
         <li><a href="#contact" class="nav__link nav__link--cta">Contact</a></li>
+        <li><button type="button" class="nav__link" id="themeToggle" aria-label="Switch theme" ></button></li>
       </ul>
     </nav>
   </header>

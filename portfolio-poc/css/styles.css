@@ -26,6 +26,14 @@
   --max-w: 1100px;
 }
 
+html.light {
+  --ink:   #F3F1EA;
+  --panel: #E7E3D6;
+  --paper: #10141F;
+  --muted: #5C6578;
+  --line:  rgba(16, 20, 31, 0.12);
+}
+
 /* =========================================================
    RESET — removes browser default spacing/quirks so we start
    from a predictable baseline.
@@ -111,7 +119,7 @@ section {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(16, 20, 31, 0.9);
+  background: color-mix(in srgb, var(--ink) 90%, transparent);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line);
 }
@@ -135,6 +143,22 @@ section {
 .nav__toggle {
   display: none; /* header is now always a single row — no hamburger at any width */
 }
+
+.nav__menu button {
+  background: none;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+#themeToggle {
+  font-size: 1.75rem;
+  line-height: 1;
+  color: var(--signal);
+  -webkit-text-stroke: 0.6px currentColor;
+}
+#themeToggle::before { content: "☀"; }          /* dark page → sun = switch to light */
+html.light #themeToggle::before { content: "☾"; } /* light page → moon = switch to dark */
 
 .nav__menu {
   display: flex;
