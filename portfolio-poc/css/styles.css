@@ -135,19 +135,12 @@ main,
   height: auto;
   display: block;
 }
-/* Brand colors */
-.fall__icon--openai path { fill: #FFFFFF; }
-html.light .fall__icon--openai path { fill: #000000; }
-.fall__icon--claude path { fill: #D97757; }
-.fall__icon--ollama path { fill: #FFFFFF; }
-html.light .fall__icon--ollama path { fill: #000000; }
-.fall__icon--kimi path { fill: #FFFFFF; }
-html.light .fall__icon--kimi path { fill: #000000; }
-.fall__icon--cursor .cursor-cube { fill: #43413C; }
-.fall__icon--cursor .cursor-arrow { fill: #EDECEC; }
-.fall__icon--vscode .vscode-a { fill: #0065A9; }
-.fall__icon--vscode .vscode-b { fill: #007ACC; }
-.fall__icon--vscode .vscode-c { fill: #1F9CF0; }
+/* White icons in sprite → black on light theme */
+html.light .fall__icon--openai svg,
+html.light .fall__icon--ollama svg,
+html.light .fall__icon--kimi svg {
+  filter: invert(1);
+}
 @keyframes fall {
   0%   { transform: translateY(0);     opacity: 0; }
   12%  { opacity: 0.45; }
