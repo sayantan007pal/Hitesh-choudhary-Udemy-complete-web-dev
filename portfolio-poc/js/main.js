@@ -86,30 +86,3 @@ function wait(ms) {
 }
 
 runTicker();
-
-// =========================================================
-// 3. WAVEFORM GRAPHIC
-//    Builds a set of animated bars purely in JS/SVG — no image
-//    file needed. Each bar gets a random height and a slightly
-//    different animation delay so they don't pulse in unison.
-// =========================================================
-const barsGroup = document.querySelector('.waveform__bars');
-
-if (barsGroup) {
-  const barCount = 24;
-  const gap = 4;
-  const barWidth = (220 - gap * (barCount - 1)) / barCount;
-
-  for (let i = 0; i < barCount; i++) {
-    const height = 20 + Math.random() * 80; // random height between 20-100
-    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-    rect.setAttribute('x', i * (barWidth + gap));
-    rect.setAttribute('y', (120 - height) / 2);
-    rect.setAttribute('width', barWidth);
-    rect.setAttribute('height', height);
-    rect.setAttribute('rx', 1.5);
-    rect.style.transformOrigin = 'center';
-    rect.style.animationDelay = `${Math.random() * 1.6}s`;
-    barsGroup.appendChild(rect);
-  }
-}
