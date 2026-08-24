@@ -166,12 +166,6 @@ html.light #themeToggle::before { content: "☾"; } /* light page → moon = swi
   gap: 1rem;
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  /* Safety net for very narrow phones: if the links genuinely can't all
-     fit, this scrolls sideways instead of wrapping to a second row or
-     overflowing the page — so it stays one row, as requested, at every
-     width. */
-  overflow-x: auto;
-  white-space: nowrap;
 }
 
 .nav__link--cta {
