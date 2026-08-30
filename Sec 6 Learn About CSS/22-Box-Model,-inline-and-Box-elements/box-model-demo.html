@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Box Model — live demo</title>
+    <style>
+      :root {
+        --bg: #12141a;
+        --panel: #1c2028;
+        --text: #e8eaed;
+        --muted: #9aa0a6;
+        --line: #2e3440;
+        --content: #3dff9a;
+        --content-bg: rgba(61, 255, 154, 0.18);
+        --padding: #ffd166;
+        --padding-bg: rgba(255, 209, 102, 0.22);
+        --border: #4cc9f0;
+        --margin: #ff6b9d;
+        --margin-bg: rgba(255, 107, 157, 0.18);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.5;
+      }
+
+      header.page {
+        max-width: 52rem;
+        margin: 0 auto;
+        padding: 2rem 1.25rem 0.5rem;
+      }
+
+      header.page h1 {
+        font-size: 1.5rem;
+        margin: 0 0 0.5rem;
+      }
+
+      header.page p {
+        color: var(--muted);
+        margin: 0;
+      }
+
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem 1.25rem;
+        margin-top: 1rem;
+        font-size: 0.875rem;
+        color: var(--muted);
+      }
+
+      .legend span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      .swatch {
+        width: 0.85rem;
+        height: 0.85rem;
+        border-radius: 2px;
+      }
+
+      .swatch.content {
+        background: var(--content-bg);
+        border: 2px solid var(--content);
+      }
+      .swatch.padding {
+        background: var(--padding-bg);
+        border: 2px solid var(--padding);
+      }
+      .swatch.border {
+        background: transparent;
+        border: 2px solid var(--border);
+      }
+      .swatch.margin {
+        background: var(--margin-bg);
+        border: 2px dashed var(--margin);
+      }
+
+      main {
+        max-width: 52rem;
+        margin: 0 auto;
+        padding: 1rem 1.25rem 3rem;
+        display: grid;
+        gap: 1.25rem;
+      }
+
+      section.panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 1rem 1.1rem 1.15rem;
+      }
+
+      section.panel h2 {
+        font-size: 1rem;
+        margin: 0 0 0.25rem;
+      }
+
+      section.panel .rule {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.8rem;
+        color: #9ae6b4;
+        margin: 0 0 0.85rem;
+        overflow-x: auto;
+      }
+
+      section.panel .hint {
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin: 0.65rem 0 0;
+      }
+
+      .math {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.78rem;
+        color: var(--padding);
+        margin: 0.35rem 0 0.75rem;
+      }
+
+      /* ---------- 1 Layered box ---------- */
+      .onion {
+        width: fit-content;
+        margin: 0.5rem auto;
+      }
+
+      .onion .m {
+        background: var(--margin-bg);
+        border: 2px dashed var(--margin);
+        padding: 24px;
+      }
+
+      .onion .b {
+        border: 8px solid var(--border);
+        background: var(--padding-bg);
+        padding: 20px;
+      }
+
+      .onion .c {
+        background: var(--content-bg);
+        border: 1px solid var(--content);
+        padding: 0.6rem 1rem;
+        min-width: 180px;
+        text-align: center;
+        color: var(--content);
+        font-weight: 600;
+      }
+
+      .onion-labels {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1rem;
+        justify-content: center;
+        font-size: 0.75rem;
+        color: var(--muted);
+        margin-top: 0.5rem;
+      }
+
+      /* ---------- 2 content-box vs border-box ---------- */
+      .sizing-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+
+      @media (max-width: 640px) {
+        .sizing-row {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .parent-slot {
+        border: 1px dashed #4a5160;
+        padding: 0;
+        width: 300px;
+        max-width: 100%;
+      }
+
+      .parent-slot .label {
+        font-size: 0.72rem;
+        color: var(--muted);
+        margin: 0.4rem 0.5rem;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+
+      .measure {
+        width: 300px;
+        padding: 20px;
+        border: 5px solid var(--border);
+        color: #0f1115;
+        font-size: 0.8rem;
+      }
+
+      .measure p {
+        margin: 0;
+      }
+
+      .content-box-demo {
+        box-sizing: content-box;
+        background: #ff8fa3;
+      }
+
+      .border-box-demo {
+        box-sizing: border-box;
+        background: #7dffc1;
+      }
+
+      /* ---------- 3 display trio ---------- */
+      .flow-line {
+        background: #0f1115;
+        padding: 0.75rem;
+        border-radius: 6px;
+        border: 1px dashed #4a5160;
+        line-height: 1.8;
+      }
+
+      .chip {
+        padding: 8px 12px;
+        border: 2px solid var(--content);
+        background: var(--content-bg);
+        width: 120px;
+        height: 48px;
+      }
+
+      .chip.as-inline {
+        display: inline;
+      }
+
+      .chip.as-ib {
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      .chip.as-block {
+        display: block;
+        margin-top: 0.4rem;
+      }
+
+      /* ---------- 4 block → inline-block nav ---------- */
+      .toolbar {
+        background: #0f1115;
+        padding: 0.5rem;
+        border-radius: 6px;
+        border: 1px dashed #4a5160;
+      }
+
+      .toolbar .item {
+        background: var(--padding-bg);
+        border: 1px solid var(--padding);
+        padding: 0.45rem 0.85rem;
+        margin: 0.15rem;
+      }
+
+      .toolbar.stacked .item {
+        display: block;
+      }
+
+      .toolbar.row .item {
+        display: inline-block;
+      }
+
+      /* ---------- 5 inline → block links ---------- */
+      .link-stack a {
+        color: #8ab4f8;
+        text-decoration: none;
+        padding: 0.55rem 0.75rem;
+        border: 1px solid #4a5160;
+        background: #0f1115;
+        margin: 0.25rem 0;
+      }
+
+      .link-stack.inline-mode a {
+        display: inline;
+      }
+
+      .link-stack.block-mode a {
+        display: block;
+        width: 100%;
+      }
+
+      .link-stack.block-mode a:hover {
+        background: rgba(76, 201, 240, 0.12);
+        border-color: var(--border);
+      }
+
+      /* ---------- 6 margin collapse ---------- */
+      .collapse-stage {
+        background: #0f1115;
+        border: 1px dashed #4a5160;
+        border-radius: 6px;
+        padding: 0.5rem;
+      }
+
+      .collapse-a,
+      .collapse-b {
+        background: var(--content-bg);
+        border: 1px solid var(--content);
+        padding: 0.4rem 0.6rem;
+      }
+
+      .collapse-a {
+        margin-bottom: 20px;
+      }
+
+      .collapse-b {
+        margin-top: 30px;
+      }
+
+      .gap-callout {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.75rem;
+        color: var(--margin);
+        margin: 0.35rem 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="page">
+      <h1>CSS box model — live demo</h1>
+      <p>
+        Companion to the box-model note. Inspect any box, then open DevTools →
+        Elements → <strong>Layout</strong> (or the box diagram in Styles). That
+        diagram is the ground truth for content, padding, border, and margin.
+      </p>
+      <div class="legend">
+        <span><i class="swatch content"></i> content</span>
+        <span><i class="swatch padding"></i> padding</span>
+        <span><i class="swatch border"></i> border</span>
+        <span><i class="swatch margin"></i> margin</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="panel" id="demo-layers">
+        <h2>1. Four layers of a box</h2>
+        <p class="rule">
+          content (photo) → padding (mat) → border (frame) → margin (wall gap)
+        </p>
+        <div class="onion">
+          <div class="m">
+            <div class="b">
+              <div class="c">content</div>
+            </div>
+          </div>
+        </div>
+        <div class="onion-labels">
+          <span>dashed pink = margin 24px</span>
+          <span>cyan frame = border 8px</span>
+          <span>gold fill = padding 20px</span>
+          <span>green inner = content</span>
+        </div>
+        <p class="hint">
+          Background paints through padding. Margin is transparent — it only
+          pushes neighbors. Outline and box-shadow sit in the margin area
+          visually but do not change layout size.
+        </p>
+      </section>
+
+      <section class="panel" id="demo-sizing">
+        <h2>2. content-box vs border-box (same declared width: 300px)</h2>
+        <p class="rule">
+          width: 300px; padding: 20px; border: 5px solid; /* both boxes */
+        </p>
+        <p class="math">
+          content-box outer = 300 + 40 + 10 = 350px (overflows a 300px parent)<br />
+          border-box outer = 300px (content shrinks to 250px)
+        </p>
+        <div class="sizing-row">
+          <div>
+            <div class="parent-slot">
+              <div class="label">parent = 300px wide</div>
+              <div class="measure content-box-demo">
+                <p><strong>content-box</strong> (default)</p>
+                <p>outer width 350px — spills out</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="parent-slot">
+              <div class="label">parent = 300px wide</div>
+              <div class="measure border-box-demo">
+                <p><strong>border-box</strong></p>
+                <p>outer width 300px — fits</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="hint">
+          Inspect each .measure. content-box: width is a promise about the
+          <em>content</em> only. border-box: width is a promise about the
+          <em>visible box</em> (content + padding + border). Margin is never
+          inside either formula.
+        </p>
+      </section>
+
+      <section class="panel" id="demo-display">
+        <h2>3. display: inline vs inline-block vs block</h2>
+        <p class="rule">
+          same CSS on all three: width: 120px; height: 48px; padding: 8px 12px;
+        </p>
+        <div class="flow-line">
+          Text
+          <span class="chip as-inline">inline</span>
+          still flows
+          <span class="chip as-ib">inline-block</span>
+          then a
+          <span class="chip as-block">block</span>
+          which took its own row.
+        </div>
+        <p class="hint">
+          inline ignores width/height — the chip is only as wide as the word.
+          inline-block honors size and still sits in the sentence.
+          block starts a new row (here it is narrower than the parent because
+          width: 120px is set).
+        </p>
+      </section>
+
+      <section class="panel" id="demo-block-to-inline">
+        <h2>4. Block → inline-block (divs sitting on one row)</h2>
+        <p class="rule">
+          .item { display: block } vs .item { display: inline-block }
+        </p>
+        <p class="math">default block — each div takes a full row</p>
+        <div class="toolbar stacked">
+          <div class="item">Home</div>
+          <div class="item">Docs</div>
+          <div class="item">Blog</div>
+        </div>
+        <p class="math" style="margin-top: 0.85rem">
+          same divs, display: inline-block — a toolbar
+        </p>
+        <div class="toolbar row">
+          <div class="item">Home</div>
+          <div class="item">Docs</div>
+          <div class="item">Blog</div>
+        </div>
+        <p class="hint">
+          display is a seating policy, not a new element. The tags are still
+          divs. Use inline-block when you need width/height/padding on items
+          that share a line. (Modern navs often use flex; this is the CSS 2.1
+          pattern interviews still ask for.)
+        </p>
+      </section>
+
+      <section class="panel" id="demo-inline-to-block">
+        <h2>5. Inline → block (full-width clickable links)</h2>
+        <p class="rule">a { display: inline } vs a { display: block; width: 100% }</p>
+        <p class="math">default — links sit in the sentence</p>
+        <div class="link-stack inline-mode">
+          <a href="#demo-inline-to-block">Overview</a>
+          <a href="#demo-inline-to-block">Pricing</a>
+          <a href="#demo-inline-to-block">Contact</a>
+        </div>
+        <p class="math" style="margin-top: 0.85rem">
+          same anchors, display: block — stacked hit targets
+        </p>
+        <div class="link-stack block-mode">
+          <a href="#demo-inline-to-block">Overview</a>
+          <a href="#demo-inline-to-block">Pricing</a>
+          <a href="#demo-inline-to-block">Contact</a>
+        </div>
+        <p class="hint">
+          An &lt;a&gt; is inline by default. display: block makes the whole row
+          clickable. Semantics stay "link"; only the layout contract changes.
+        </p>
+      </section>
+
+      <section class="panel" id="demo-collapse">
+        <h2>6. Margin collapsing (adjacent block boxes)</h2>
+        <p class="rule">
+          .a { margin-bottom: 20px } + .b { margin-top: 30px } → gap is 30px, not 50px
+        </p>
+        <div class="collapse-stage">
+          <div class="collapse-a">box A — margin-bottom: 20px</div>
+          <div class="collapse-b">box B — margin-top: 30px</div>
+        </div>
+        <p class="gap-callout">collapsed gap between border edges = max(20, 30) = 30px</p>
+        <p class="hint">
+          Vertical margins of adjacent block boxes in normal flow collapse.
+          Does not happen between inline boxes, flex/grid items, or when a
+          border/padding separates parent and child. Inspect A and B in the
+          Layout panel — the gap between their border edges is 30px.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

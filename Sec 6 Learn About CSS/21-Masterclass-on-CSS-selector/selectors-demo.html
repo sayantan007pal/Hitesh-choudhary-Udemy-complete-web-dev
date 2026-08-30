@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Selectors — live demo</title>
+    <style>
+      :root {
+        --bg: #12141a;
+        --panel: #1c2028;
+        --text: #e8eaed;
+        --muted: #9aa0a6;
+        --line: #2e3440;
+        --match: #3dff9a;
+        --match-bg: rgba(61, 255, 154, 0.12);
+        --hover: #ffd166;
+        --focus: #4cc9f0;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.5;
+      }
+
+      header.page {
+        max-width: 52rem;
+        margin: 0 auto;
+        padding: 2rem 1.25rem 0.5rem;
+      }
+
+      header.page h1 {
+        font-size: 1.5rem;
+        margin: 0 0 0.5rem;
+      }
+
+      header.page p {
+        color: var(--muted);
+        margin: 0;
+      }
+
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem 1.25rem;
+        margin-top: 1rem;
+        font-size: 0.875rem;
+        color: var(--muted);
+      }
+
+      .legend span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      .swatch {
+        width: 0.85rem;
+        height: 0.85rem;
+        border-radius: 2px;
+        border: 2px solid var(--match);
+        background: var(--match-bg);
+      }
+
+      .swatch.hover {
+        border-color: var(--hover);
+        background: rgba(255, 209, 102, 0.15);
+      }
+
+      main {
+        max-width: 52rem;
+        margin: 0 auto;
+        padding: 1rem 1.25rem 3rem;
+        display: grid;
+        gap: 1.25rem;
+      }
+
+      section.panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 1rem 1.1rem 1.15rem;
+      }
+
+      section.panel h2 {
+        font-size: 1rem;
+        margin: 0 0 0.25rem;
+      }
+
+      section.panel .rule {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.8rem;
+        color: #9ae6b4;
+        margin: 0 0 0.85rem;
+        overflow-x: auto;
+      }
+
+      section.panel .hint {
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin: 0.65rem 0 0;
+      }
+
+      /* Shared match chrome — each demo scopes its own selector */
+      .tree,
+      .form-row,
+      .sibs,
+      .mix,
+      .group-headings,
+      .quote,
+      .links {
+        font-size: 0.95rem;
+      }
+
+      .box {
+        border: 1px dashed #4a5160;
+        border-radius: 6px;
+        padding: 0.45rem 0.6rem;
+        margin: 0.35rem 0;
+      }
+
+      .tag {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.72rem;
+        color: var(--muted);
+        margin-right: 0.35rem;
+      }
+
+      /* ---------- 1 Universal (scoped so the whole page is not outlined) ---------- */
+      #demo-universal .universe * {
+        outline: 2px solid var(--match);
+        outline-offset: 2px;
+        background: var(--match-bg);
+      }
+
+      /* ---------- 2 Type ---------- */
+      #demo-type .universe p {
+        outline: 2px solid var(--match);
+        outline-offset: 2px;
+        background: var(--match-bg);
+      }
+
+      /* ---------- 3 Class ---------- */
+      #demo-class .universe .lead {
+        outline: 2px solid var(--match);
+        outline-offset: 2px;
+        background: var(--match-bg);
+      }
+
+      #demo-class .universe .lead.highlight {
+        box-shadow: inset 0 -3px 0 var(--hover);
+      }
+
+      /* ---------- 4 ID ---------- */
+      #demo-id .universe #top {
+        outline: 2px solid var(--match);
+        outline-offset: 2px;
+        background: var(--match-bg);
+      }
+
+      /* ---------- 5 Attribute ---------- */
+      #demo-attr .universe input[type="email"] {
+        outline: 2px solid var(--match);
+        outline-offset: 2px;
+        background: var(--match-bg);
+      }
+
+      #demo-attr input {
+        width: min(100%, 16rem);
+        padding: 0.35rem 0.5rem;
+        border-radius: 4px;
+        border: 1px solid #4a5160;
+        background: #0f1115;
+        color: var(--text);
+      }
+
+      /* ---------- 6 Combinators (same tree, four rules in four blocks) ---------- */
+      #demo-desc .container p {
+        outline: 2px solid var(--match);
+        outline-offset: 2px;
+        background: var(--match-bg);
+      }
+
+      #demo-child .container > p {
+        outline: 2px solid var(--match);
+        outline-offset: 2px;
+        background: var(--match-bg);
+      }
+
+      #demo-adj .container h2 + p {
+        outline: 2px solid var(--match);
+        outline-offset: 2px;
+        background: var(--match-bg);
+      }
+
+      #demo-gen .container h2 ~ p {
+        outline: 2px solid var(--match);
+        outline-offset: 2px;
+        background: var(--match-bg);
+      }
+
+      /* ---------- 7 Pseudo-class ---------- */
+      #demo-pseudo-class a:hover {
+        outline: 2px solid var(--hover);
+        outline-offset: 3px;
+        background: rgba(255, 209, 102, 0.18);
+        color: var(--hover);
+      }
+
+      #demo-pseudo-class button:disabled {
+        outline: 2px solid var(--match);
+        outline-offset: 2px;
+        background: var(--match-bg);
+        opacity: 0.55;
+        cursor: not-allowed;
+      }
+
+      #demo-pseudo-class input:focus-visible {
+        outline: 2px solid var(--focus);
+        outline-offset: 2px;
+      }
+
+      #demo-pseudo-class li:first-child {
+        outline: 2px solid var(--match);
+        outline-offset: 2px;
+        background: var(--match-bg);
+        font-weight: 700;
+      }
+
+      #demo-first-type .mix p:first-child {
+        /* expected: nothing — first child of .mix is h2 */
+        outline: 2px solid #ff6b6b;
+        outline-offset: 2px;
+      }
+
+      #demo-first-type .mix p:first-of-type {
+        outline: 2px solid var(--match);
+        outline-offset: 2px;
+        background: var(--match-bg);
+      }
+
+      #demo-pseudo-class a {
+        color: #8ab4f8;
+      }
+
+      #demo-pseudo-class button,
+      #demo-pseudo-class input {
+        font: inherit;
+        padding: 0.35rem 0.7rem;
+        border-radius: 4px;
+        border: 1px solid #4a5160;
+        background: #0f1115;
+        color: var(--text);
+      }
+
+      /* ---------- 8 Pseudo-element ---------- */
+      #demo-pseudo-el .quote::before {
+        content: "\201C";
+        color: #ffd166;
+        font-size: 2rem;
+        line-height: 0;
+        margin-right: 0.15rem;
+        vertical-align: -0.35rem;
+      }
+
+      #demo-pseudo-el .quote {
+        font-size: 1.05rem;
+        max-width: 36rem;
+      }
+
+      #demo-pseudo-el .card-line {
+        background: #0f1115;
+        padding: 0.75rem 1rem;
+        border-radius: 6px;
+        position: relative;
+      }
+
+      #demo-pseudo-el .card-line::after {
+        content: "";
+        display: block;
+        height: 4px;
+        margin-top: 0.6rem;
+        background: #ffd166;
+        border-radius: 2px;
+      }
+
+      #demo-pseudo-el input::placeholder {
+        color: #6b7280;
+        font-style: italic;
+      }
+
+      #demo-pseudo-el input {
+        width: min(100%, 16rem);
+        padding: 0.4rem 0.55rem;
+        border-radius: 4px;
+        border: 1px solid #4a5160;
+        background: #0f1115;
+        color: var(--text);
+      }
+
+      #demo-pseudo-el ::selection {
+        background: navy;
+        color: white;
+      }
+
+      /* ---------- 9 Grouping ---------- */
+      #demo-group .group-headings h1,
+      #demo-group .group-headings h2,
+      #demo-group .group-headings h3 {
+        font-family: Georgia, "Times New Roman", serif;
+        line-height: 1.2;
+        outline: 2px solid var(--match);
+        outline-offset: 2px;
+        background: var(--match-bg);
+        padding: 0.2rem 0.4rem;
+        display: table;
+        margin: 0.4rem 0;
+      }
+
+      #demo-group p {
+        margin: 0.4rem 0 0;
+        color: var(--muted);
+      }
+
+      ul.plain {
+        margin: 0.4rem 0 0;
+        padding-left: 1.2rem;
+      }
+
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        align-items: center;
+        margin-top: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="page">
+      <h1>CSS selectors — live demo</h1>
+      <p>
+        Companion to the masterclass note. Green outline = the selector on that
+        panel matched. Open DevTools → Elements → Styles to see which rule won.
+      </p>
+      <div class="legend">
+        <span><i class="swatch"></i> matched by the panel's selector</span>
+        <span><i class="swatch hover"></i> hover / extra compound</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="panel" id="demo-universal">
+        <h2>Universal <code>*</code></h2>
+        <p class="rule">#demo-universal .universe * { outline: green }</p>
+        <div class="universe">
+          <div class="box"><span class="tag">&lt;div&gt;</span>wrapper
+            <p class="box"><span class="tag">&lt;p&gt;</span>paragraph <span><span class="tag">&lt;span&gt;</span>nested span</span></p>
+          </div>
+        </div>
+        <p class="hint">Every element inside .universe is outlined — including the nested span. Text nodes are not elements.</p>
+      </section>
+
+      <section class="panel" id="demo-type">
+        <h2>Type <code>p</code></h2>
+        <p class="rule">#demo-type .universe p { }</p>
+        <div class="universe">
+          <header class="box"><span class="tag">&lt;header&gt;</span>not a paragraph</header>
+          <p class="box"><span class="tag">&lt;p&gt;</span>plain paragraph</p>
+          <p class="box"><span class="tag">&lt;p class="lead"&gt;</span>lead paragraph</p>
+        </div>
+        <p class="hint">Job title: every &lt;p&gt;, regardless of class. The header is skipped.</p>
+      </section>
+
+      <section class="panel" id="demo-class">
+        <h2>Class <code>.lead</code></h2>
+        <p class="rule">.lead { } &nbsp; /* gold underline = .lead.highlight (both badges, one node) */</p>
+        <div class="universe">
+          <p class="box"><span class="tag">&lt;p&gt;</span>plain — no badge</p>
+          <p class="box lead"><span class="tag">&lt;p class="lead"&gt;</span>lead only</p>
+          <p class="box lead highlight"><span class="tag">&lt;p class="lead highlight"&gt;</span>lead + highlight (compound)</p>
+        </div>
+        <p class="hint">Dot = badge. Many nodes can wear it. .lead.highlight (no space) is two badges on the same person.</p>
+      </section>
+
+      <section class="panel" id="demo-id">
+        <h2>ID <code>#top</code></h2>
+        <p class="rule">#top { }</p>
+        <div class="universe">
+          <header class="box" id="top"><span class="tag">&lt;header id="top"&gt;</span>site chrome</header>
+          <p class="box"><span class="tag">&lt;p&gt;</span>not the id</p>
+        </div>
+        <p class="hint">Hash = passport. Use for fragments and JS; avoid for styling because of specificity.</p>
+      </section>
+
+      <section class="panel" id="demo-attr">
+        <h2>Attribute <code>input[type="email"]</code></h2>
+        <p class="rule">input[type="email"] { }</p>
+        <div class="universe form-row">
+          <p>
+            <label class="tag" for="name">type="text"</label><br />
+            <input id="name" type="text" placeholder="name" />
+          </p>
+          <p>
+            <label class="tag" for="mail">type="email"</label><br />
+            <input id="mail" type="email" placeholder="you@corp.dev" />
+          </p>
+        </div>
+        <p class="hint">Square brackets = WHERE clause. Only the email input matches. ^= $= *= ~= |= are the other operators.</p>
+      </section>
+
+      <section class="panel" id="demo-desc">
+        <h2>Descendant <code>.container p</code> (space)</h2>
+        <p class="rule">.container p { } /* any depth */</p>
+        <div class="container">
+          <h2 class="box title"><span class="tag">&lt;h2&gt;</span>Heading</h2>
+          <p class="box"><span class="tag">&lt;p&gt;</span>First paragraph</p>
+          <p class="box note"><span class="tag">&lt;p class="note"&gt;</span>Note paragraph <span class="highlight">mark</span></p>
+          <blockquote class="box">
+            <span class="tag">&lt;blockquote&gt;</span>
+            <p class="box"><span class="tag">&lt;p&gt;</span>Quoted paragraph (nested — still matches descendant)</p>
+          </blockquote>
+        </div>
+        <p class="hint">Space = anywhere downstairs. Three paragraphs match, including the one inside blockquote.</p>
+      </section>
+
+      <section class="panel" id="demo-child">
+        <h2>Child <code>.container &gt; p</code></h2>
+        <p class="rule">.container &gt; p { } /* one hop only */</p>
+        <div class="container">
+          <h2 class="box title"><span class="tag">&lt;h2&gt;</span>Heading</h2>
+          <p class="box"><span class="tag">&lt;p&gt;</span>First paragraph</p>
+          <p class="box note"><span class="tag">&lt;p class="note"&gt;</span>Note paragraph</p>
+          <blockquote class="box">
+            <span class="tag">&lt;blockquote&gt;</span>
+            <p class="box"><span class="tag">&lt;p&gt;</span>Quoted paragraph (direct child of blockquote — skipped)</p>
+          </blockquote>
+        </div>
+        <p class="hint">Arrow = direct child. The quoted paragraph is a grandchild of .container, so it does not match.</p>
+      </section>
+
+      <section class="panel" id="demo-adj">
+        <h2>Adjacent sibling <code>h2 + p</code></h2>
+        <p class="rule">h2 + p { } /* next seat only */</p>
+        <div class="container">
+          <h2 class="box title"><span class="tag">&lt;h2&gt;</span>Heading</h2>
+          <p class="box"><span class="tag">&lt;p&gt;</span>First paragraph (immediately after h2)</p>
+          <p class="box note"><span class="tag">&lt;p&gt;</span>Note paragraph (after a p, not after h2)</p>
+          <blockquote class="box">
+            <p class="box"><span class="tag">&lt;p&gt;</span>Quoted — not a sibling of h2</p>
+          </blockquote>
+        </div>
+        <p class="hint">Plus = the person in the next seat. Only the first paragraph after the heading matches.</p>
+      </section>
+
+      <section class="panel" id="demo-gen">
+        <h2>General sibling <code>h2 ~ p</code></h2>
+        <p class="rule">h2 ~ p { } /* everyone after me in the row */</p>
+        <div class="container">
+          <h2 class="box title"><span class="tag">&lt;h2&gt;</span>Heading</h2>
+          <p class="box"><span class="tag">&lt;p&gt;</span>First paragraph</p>
+          <p class="box note"><span class="tag">&lt;p&gt;</span>Note paragraph</p>
+          <blockquote class="box">
+            <p class="box"><span class="tag">&lt;p&gt;</span>Quoted — still not a sibling of h2</p>
+          </blockquote>
+        </div>
+        <p class="hint">Tilde = all following sibling paragraphs. Superset of h2 + p. Nested p is still out.</p>
+      </section>
+
+      <section class="panel" id="demo-pseudo-class">
+        <h2>Pseudo-class <code>:</code> (state / position)</h2>
+        <p class="rule">a:hover { } &nbsp; button:disabled { } &nbsp; input:focus-visible { } &nbsp; li:first-child { }</p>
+        <div class="row">
+          <a href="#demo-pseudo-class">Hover this link</a>
+          <button type="button">Enabled</button>
+          <button type="button" disabled>Disabled</button>
+          <input type="email" placeholder="tab here for :focus-visible" />
+        </div>
+        <ul class="plain">
+          <li>One (first-child — outlined)</li>
+          <li>Two</li>
+          <li>Three</li>
+        </ul>
+        <p class="hint">One colon = mood/condition. The node already exists. Keyboard-tab the input: prefer :focus-visible over outline:none.</p>
+      </section>
+
+      <section class="panel" id="demo-first-type">
+        <h2>Trap: <code>:first-child</code> vs <code>:first-of-type</code></h2>
+        <p class="rule">p:first-child { red } — misses &nbsp;|&nbsp; p:first-of-type { green } — hits Alpha</p>
+        <div class="mix">
+          <h2 class="box"><span class="tag">&lt;h2&gt;</span>Title (this is :first-child)</h2>
+          <p class="box"><span class="tag">&lt;p&gt;</span>Alpha — first p, not first child</p>
+          <p class="box"><span class="tag">&lt;p&gt;</span>Beta</p>
+        </div>
+        <p class="hint">Red rule matches nothing here. Green matches Alpha. Same HTML, different question: "am I kid #1?" vs "am I the first kid with my tag?"</p>
+      </section>
+
+      <section class="panel" id="demo-pseudo-el">
+        <h2>Pseudo-element <code>::</code> (ghost box)</h2>
+        <p class="rule">.quote::before { content: "\201C" } &nbsp; .card-line::after { content: "" } &nbsp; ::placeholder &nbsp; ::selection</p>
+        <p class="quote">CSS does not style the page. It runs queries against a tree.</p>
+        <div class="card-line" style="margin-top: 0.75rem">
+          Card with a generated gold rule (::after needs content: "" to exist)
+        </div>
+        <p style="margin: 0.75rem 0 0.35rem">
+          <input type="text" placeholder="this italic grey is ::placeholder" />
+        </p>
+        <p class="hint">Select any text in this panel — ::selection is navy. Double colon = not in your HTML. Omit content and ::before / ::after never generate.</p>
+      </section>
+
+      <section class="panel" id="demo-group">
+        <h2>Grouping <code>h1, h2, h3</code></h2>
+        <p class="rule">h1, h2, h3 { font-family: Georgia; }</p>
+        <div class="group-headings">
+          <h1>Heading 1</h1>
+          <h2>Heading 2</h2>
+          <h3>Heading 3</h3>
+          <p>A paragraph is not in the comma list — skipped.</p>
+        </div>
+        <p class="hint">Comma = CC line / OR. Not a descendant (space) and not a compound (no space). Each selector in the list keeps its own specificity.</p>
+      </section>
+    </main>
+  </body>
+</html>
