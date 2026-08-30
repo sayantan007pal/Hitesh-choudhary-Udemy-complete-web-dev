@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snake — Deque + Set Edition</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <h1 class="title">Snake</h1>
+
+    <div class="hud">
+      <div class="hud-block">
+        <span class="hud-label">Score</span>
+        <span id="score" class="hud-value">0</span>
+      </div>
+      <div class="hud-block">
+        <span class="hud-label">Status</span>
+        <span id="status" class="hud-value">Idle</span>
+      </div>
+      <button id="restart" class="restart-btn" type="button">Restart</button>
+    </div>
+
+    <div class="board-frame">
+      <canvas id="board"></canvas>
+      <div id="overlay" class="overlay"></div>
+    </div>
+
+    <p class="hint">Arrow keys / WASD to move &middot; Space to pause</p>
+
+    <footer class="legend">
+      <p>
+        Body is a <strong>Deque&lt;Position&gt;</strong> (doubly linked list): push a new head,
+        pop the tail, both O(1). Collisions are checked against a
+        <strong>Set&lt;string&gt;</strong> of occupied cells, O(1) per lookup instead of scanning
+        the body.
+      </p>
+    </footer>
+  </main>
+
+  <script type="module" src="dist/main.js"></script>
+</body>
+</html>

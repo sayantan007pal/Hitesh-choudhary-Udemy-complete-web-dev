@@ -1,0 +1,14 @@
+{
+  "name": "snake-ts",
+  "version": "1.0.0",
+  "description": "Vanilla TypeScript Snake game built to demonstrate Deque + Set based DSA and simple OOP design.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}

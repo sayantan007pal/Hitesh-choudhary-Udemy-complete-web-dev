@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login — BEFORE (block flow, px, no flex)</title>
+    <style>
+      /*
+        BEFORE: default CSS block flow.
+        - body height = content height only (no 100vh)
+        - no display:flex, so justify-content / align-items do nothing
+        - every size is a frozen px value
+        The red outline is a debug aid: it shows that body is only as tall as the card.
+      */
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #1a1a1a;
+        margin: 0;
+        padding: 0;
+        outline: 3px dashed #e63946;
+        outline-offset: -3px;
+      }
+      .card {
+        background-color: #d5d4d4;
+        border-radius: 8px;
+        padding: 30px;
+        width: 300px;
+      }
+      h2 {
+        color: #1a50a0;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      form {
+        /* still block layout — inputs stack because they are block-level,
+           not because of flexbox */
+      }
+      input {
+        display: block;
+        width: 278px;
+        box-sizing: border-box;
+        margin-bottom: 15px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid black;
+        background-color: #d8d8d8;
+        font-size: 16px;
+      }
+      button {
+        display: block;
+        width: 278px;
+        box-sizing: border-box;
+        background-color: #1b81da;
+        color: #fff;
+        padding: 10px;
+        border-radius: 8px;
+        border: none;
+        font-size: 16px;
+      }
+      .caption {
+        color: #e63946;
+        font-size: 12px;
+        padding: 8px 12px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <p class="caption">
+      BEFORE — body hugs the card (red dashed outline). Card sits at the top-left.
+      Open login-after.html to compare.
+    </p>
+    <div class="card">
+      <h2>Login</h2>
+      <form>
+        <input type="email" name="email" placeholder="Email" />
+        <input type="password" name="password" placeholder="Password" />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </body>
+</html>

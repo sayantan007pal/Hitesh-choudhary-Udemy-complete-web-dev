@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login — AFTER (flex, 100dvh, rem, clamp)</title>
+    <style>
+      /*
+        AFTER: evolved version of the course login.html
+        Four ideas, stacked:
+          1. min-height: 100dvh  → body fills the visible window (mobile-safe)
+          2. display: flex + center → one flex item (the card) sits in the middle
+          3. rem / em              → spacing follows user font size
+          4. clamp()               → card width is fluid but bounded
+      */
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #1a1a1a;
+        margin: 0;
+        padding: 0;
+        /* 1. Viewport canvas — dvh tracks the mobile URL bar */
+        min-height: 100dvh;
+        /* 2. Flex container: one child, both axes centered */
+        display: flex;
+        justify-content: center; /* main axis (row) */
+        align-items: center; /* cross axis (column) */
+      }
+
+      .card {
+        background-color: #d5d4d4;
+        border-radius: 0.5rem;
+        /* 3. rem padding — 1.875rem == 30px at the default 16px root */
+        padding: 1.875rem;
+        /* 4. Thermostat: never below 280px, never above 360px,
+              preferred = 90% of the viewport width */
+        width: clamp(280px, 90vw, 360px);
+      }
+
+      h2 {
+        color: #1a50a0;
+        text-align: center;
+        margin: 0 0 1.25rem;
+        font-size: clamp(1.25rem, 2vw + 1rem, 1.75rem);
+      }
+
+      form {
+        /* Second flex context: stack fields on the column main axis */
+        display: flex;
+        flex-direction: column;
+        gap: 0.9375rem; /* replaces margin-bottom on each input */
+      }
+
+      input {
+        padding: 0.625rem;
+        border-radius: 0.3125rem;
+        border: 1px solid #111; /* px stays for hairline borders */
+        background-color: #d8d8d8;
+        font-size: 1rem;
+      }
+
+      button {
+        background-color: #1b81da;
+        color: #fff;
+        /* em: padding scales with THIS button's font-size */
+        padding: 0.625em 1em;
+        border-radius: 0.5rem;
+        border: none;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0741ac;
+      }
+
+      .caption {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        color: #7dcea0;
+        font-size: 0.75rem;
+        padding: 0.5rem 0.75rem;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <p class="caption">
+      AFTER — min-height: 100dvh + flex centering + rem/clamp. Resize the window
+      and watch the card width move between 280px and 360px.
+    </p>
+    <div class="card">
+      <h2>Login</h2>
+      <form>
+        <input type="email" name="email" placeholder="Email" />
+        <input type="password" name="password" placeholder="Password" />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </body>
+</html>
