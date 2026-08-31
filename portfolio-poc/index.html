@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -15,19 +15,12 @@
     />
     <meta name="author" content="Sayantan Pal" />
     <meta name="robots" content="index, follow" />
-    <meta name="google-site-verification" content="dCXlWfoZJRUY3VuRVxlAYqNm7YRlDILNABW3tAD5Na0" />
+    <meta
+      name="google-site-verification"
+      content="dCXlWfoZJRUY3VuRVxlAYqNm7YRlDILNABW3tAD5Na0"
+    />
 
     <link rel="canonical" href="https://sayantan-pal-dev.netlify.app/" />
-
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://sayantan-pal-dev.netlify.app/" />
-    <meta property="og:title" content="Sayantan Pal — Software Engineer at Prismforce" />
-    <meta property="og:description" content="Full-stack & AI engineer at Prismforce. SelectPrism, resume parsing, AI proctoring, and interview pipelines." />
-    <meta property="og:image" content="https://sayantan-pal-dev.netlify.app/assets/sayantan-image.jpg" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Sayantan Pal — Software Engineer at Prismforce" />
-    <meta name="twitter:description" content="Full-stack & AI engineer at Prismforce building SelectPrism." />
-    <meta name="twitter:image" content="https://sayantan-pal-dev.netlify.app/assets/sayantan-image.jpg" />
 
     <script type="application/ld+json">
       {
@@ -72,203 +65,439 @@
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
+  <body>
+    <div class="fall">
+      <span
+        class="fall__icon fall__icon--openai"
+        style="--x: 8%; --d: 0s; --t: 14s"
+        ><svg viewBox="0 0 24 24">
+          <use href="assets/icons/fall-icons.svg#openai" /></svg
+      ></span>
+      <span
+        class="fall__icon fall__icon--cursor"
+        style="--x: 22%; --d: 3s; --t: 16s"
+        ><svg viewBox="0 0 24 24">
+          <use href="assets/icons/fall-icons.svg#cursor" /></svg
+      ></span>
+      <span
+        class="fall__icon fall__icon--claude"
+        style="--x: 38%; --d: 6s; --t: 13s"
+        ><svg viewBox="0 0 24 24">
+          <use href="assets/icons/fall-icons.svg#claude" /></svg
+      ></span>
+      <span
+        class="fall__icon fall__icon--ollama"
+        style="--x: 54%; --d: 2s; --t: 18s"
+        ><svg viewBox="0 0 24 24">
+          <use href="assets/icons/fall-icons.svg#ollama" /></svg
+      ></span>
+      <span
+        class="fall__icon fall__icon--kimi"
+        style="--x: 70%; --d: 8s; --t: 15s"
+        ><svg viewBox="0 0 24 24">
+          <use href="assets/icons/fall-icons.svg#kimi" /></svg
+      ></span>
+      <span
+        class="fall__icon fall__icon--vscode"
+        style="--x: 86%; --d: 11s; --t: 17s"
+        ><svg viewBox="0 0 100 100">
+          <use href="assets/icons/fall-icons.svg#vscode" /></svg
+      ></span>
+    </div>
 
-  <!-- Icon paths live in assets/icons/fall-icons.svg (sprite) -->
-  <div class="fall" aria-hidden="true">
-    <span class="fall__icon fall__icon--openai" style="--x:8%;--d:0s;--t:14s"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons/fall-icons.svg#openai"/></svg></span>
-    <span class="fall__icon fall__icon--cursor" style="--x:22%;--d:3s;--t:16s"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons/fall-icons.svg#cursor"/></svg></span>
-    <span class="fall__icon fall__icon--claude" style="--x:38%;--d:6s;--t:13s"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons/fall-icons.svg#claude"/></svg></span>
-    <span class="fall__icon fall__icon--ollama" style="--x:54%;--d:2s;--t:18s"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons/fall-icons.svg#ollama"/></svg></span>
-    <span class="fall__icon fall__icon--kimi" style="--x:70%;--d:8s;--t:15s"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons/fall-icons.svg#kimi"/></svg></span>
-    <span class="fall__icon fall__icon--vscode" style="--x:86%;--d:11s;--t:17s"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="assets/icons/fall-icons.svg#vscode"/></svg></span>
-  </div>
+    <header class="site-header">
+      <nav class="nav">
+        <ul class="nav__menu">
+          <li>
+            <a href="#top" class="nav__brand"
+              >Sayantan<span class="nav__brand-dim">.Pal</span></a
+            >
+          </li>
+          <li><a href="#about" class="nav__link">About</a></li>
+          <li><a href="#work" class="nav__link">Work</a></li>
+          <li><a href="#skills" class="nav__link">Skills</a></li>
+          <li>
+            <a href="#contact" class="nav__link nav__link--cta">Contact</a>
+          </li>
+          <li>
+            <button type="button" class="nav__link" id="themeToggle"></button>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero__text">
+          <p class="eyebrow">// full-stack &amp; ai systems engineer</p>
+          <h1>Sayantan<br />Pal</h1>
+          <p class="hero__sub">
+            I build full-stack AI-powered systems and currently at
+            <strong>Prismforce</strong>, working on
+            <strong>Selectprism</strong>, an AI recruitment platform.
+          </p>
+          <figure class="hero__visual">
+            <img
+              src="assets/sayantan-image.jpg"
+              width="800"
+              height="800"
+              class="waveform"
+              alt="Sayantan Pal"
+            />
+          </figure>
 
-  <!-- Skip link: accessibility basic, also good practice generally -->
-  <a class="skip-link" href="#main">Skip to content</a>
+          <div class="ticker">
+            <span class="ticker__prompt">$</span>
+            <span class="ticker__text" id="tickerText"></span
+            ><span class="ticker__cursor">▍</span>
+          </div>
 
-  <header class="site-header">
-    <nav class="nav" aria-label="Primary">
+          <div class="hero__actions">
+            <a href="#work" class="btn btn--primary">View work</a>
+            <a
+              href="https://drive.google.com/file/d/1gIsnDQEmI83tmYSz5s_uewDQI7IBHpvU/view?usp=sharing"
+              class="btn btn--ghost"
+              >Resume</a
+            >
+          </div>
+        </div>
+      </section>
 
+      <section>
+        <div class="about" id="about">
+          <p class="eyebrow">//about me</p>
+          <h2>A bit about how I work</h2>
+          <div class="about__grid">
+            <p>
+              I'm a Associate Software Developer at Prismforce, where I work on
+              selectprism, A AI-powered recruitment and Interview platform for
+              the hiring managers. My daily tasks involve full-stack
+              development, consisting React and Next.js based Frontend and
+              Nodejs (Typescript) and FastApi (Python) based Backend, with
+              MongoDB as the database and on infra side AWS (EC2, KMS, S3, SNS,
+              SQS, etc.), docker and Redis (for caching).
+            </p>
+            <p>
+              I like problems where solution involves e2e from FE to BE with a
+              lot of exposure to database and infra side. I'm a quick learner
+              and I'm always looking for new challenges and opportunities to
+              grow. Outside of work I do competitive programming in C++ and
+              contribute to open source when I find a good bug to chase.
+            </p>
+          </div>
+        </div>
+      </section>
 
-      <ul class="nav__menu" id="navMenu">
-        <li><a href="#top" class="nav__brand">S<span class="nav__brand-dot">.</span>dev</a></li>
-        <li><a href="#about" class="nav__link">About</a></li>
-        <li><a href="#work" class="nav__link">Work</a></li>
-        <li><a href="#skills" class="nav__link">Skills</a></li>
-        <li><a href="#contact" class="nav__link nav__link--cta">Contact</a></li>
-        <li><button type="button" class="nav__link" id="themeToggle" aria-label="Switch theme" ></button></li>
-      </ul>
-    </nav>
-  </header>
+      <section class="skills" id="skills">
+        <p class="eyebrow">//stack</p>
+        <h2>Tools I reach for</h2>
+        <div class="skills__grid">
+          <div class="skills__group">
+            <h3>Frontend</h3>
+            <ul class="tag-list">
+              <li>React</li>
+              <li>Next.js</li>
+              <li>Tailwind CSS</li>
+              <li>Typescript</li>
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>JavaScript</li>
+            </ul>
+          </div>
+          <div class="skills__group">
+            <h3>Backend</h3>
+            <ul class="tag-list">
+              <li>Node.js</li>
+              <li>FastApi</li>
+              <li>Python</li>
+              <li>Typescript</li>
+            </ul>
+          </div>
+          <div class="skills__group">
+            <h3>Database</h3>
+            <ul class="tag-list">
+              <li>MongoDB</li>
+              <li>Redis</li>
+              <li>MySQL</li>
+            </ul>
+          </div>
+          <div class="skills__group">
+            <h3>Infra &amp; Tools</h3>
+            <ul class="tag-list">
+              <li>AWS (SQS/SNS/S3)</li>
+              <li>Docker</li>
+              <li>Git</li>
+              <li>Grafana/Loki</li>
+              <li>Kubernetes</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
-  <main id="main">
+      <section class="work" id="work">
+        <p class="eyebrow">//experience</p>
+        <h2>Prismforce</h2>
+        <p class="section-sub">
+          Associate Software Engineer · Feb 2025 – Present · Pune, India
+        </p>
+        <div class="work__grid">
+          <article class="card">
+            <p class="card__service">service: platform-architecture</p>
+            <h3>SelectPrism Platform Architecture</h3>
+            <p>
+              Architected the SelectPrism recruitment platform from the ground
+              up, scaling to
+              <strong>1,000+ concurrent interview sessions</strong>. Optimized
+              the API layer with MongoDB schema validation and RTK Query
+              caching, cutting average response time from
+              <strong>340ms to 220ms — a 35% improvement</strong>.
+            </p>
+            <ul class="tag-list tag-list--small">
+              <li>Node.js</li>
+              <li>TypeScript</li>
+              <li>MongoDB</li>
+            </ul>
+          </article>
+          <article class="card">
+            <p class="card__service">service: resume-parser</p>
+            <h3>Resume Parsing Pipeline</h3>
+            <p>
+              Built an Ollama-powered local LLM parsing system, validated
+              against 500 manually labeled resumes —
+              <strong>92% accuracy</strong> on critical field extraction.
+            </p>
+            <ul class="tag-list tag-list--small">
+              <li>FastAPI</li>
+              <li>Ollama</li>
+              <li>NLP</li>
+            </ul>
+          </article>
+          <article class="card">
+            <p class="card__service">service: proctoring-system</p>
+            <h3>AI Proctoring &amp; Anti-Cheat System</h3>
+            <p>
+              YOLO-based face detection verifying a candidate is present and
+              attentive, paired with a "GPTness" layer flagging responses that
+              read as recited rather than reasoned live — reducing
+              flagged-session manual review time by an estimated
+              <strong>77%</strong>. Owned the report's frontend end to end, from
+              Figma to production.
+            </p>
+            <ul class="tag-list tag-list--small">
+              <li>YOLOv8</li>
+              <li>Computer Vision</li>
+              <li>Next.js</li>
+            </ul>
+          </article>
+          <article class="card">
+            <p class="card__service">service: unified-pipeline-api</p>
+            <h3>Unified Interview Pipeline API</h3>
+            <p>
+              Collapsed JD parsing, resume upload, interview creation and link
+              generation — four disconnected steps — into one Node.js API,
+              alongside client webhook integrations. Shipped as the backbone of
+              the GetKnit launch, cutting interview setup time by an estimated
+              <strong>70%</strong>.
+            </p>
+            <ul class="tag-list tag-list--small">
+              <li>Node.js</li>
+              <li>API Design</li>
+              <li>Webhooks</li>
+            </ul>
+          </article>
+          <article class="card">
+            <p class="card__service">service: frontend-componentization</p>
+            <h3>Interview Frontend Componentization</h3>
+            <p>
+              Led the breakup of a monolithic interview-side UI into a reusable
+              component library, cutting new-feature build time by an estimated
+              <strong>[95]%</strong> and eliminating duplicated view logic
+              across the platform.
+            </p>
+            <ul class="tag-list tag-list--small">
+              <li>Next.js</li>
+              <li>React</li>
+              <li>Design Systems</li>
+            </ul>
+          </article>
+          <article class="card">
+            <p class="card__service">service: auth-hardening</p>
+            <h3>Auth System Hardening</h3>
+            <p>
+              Led remediation after a VAPT security audit — Redis-based rate
+              limiting, bcrypt password hashing, and reCAPTCHA v2 — passing the
+              follow-up audit with
+              <strong>zero critical vulnerabilities</strong>.
+            </p>
+            <ul class="tag-list tag-list--small">
+              <li>Redis</li>
+              <li>Security</li>
+              <li>reCAPTCHA</li>
+            </ul>
+          </article>
+        </div>
+      </section>
 
-    <!-- ===================== HERO ===================== -->
-    <section class="hero" id="top">
-      <div class="hero__text">
-        <p class="eyebrow">// full-stack &amp; ai systems engineer</p>
-        <h1>Sayantan<br>Pal</h1>
-        <p class="hero__sub">
-          I build backend pipelines and AI-powered products — currently at
-          <strong>Prismforce</strong>, working on an AI recruitment platform.
+      <section class="work" id="projects">
+        <p class="eyebrow">//projects</p>
+        <h2>Selected projects</h2>
+        <div class="work__grid">
+          <article class="card">
+            <p class="card__service">service: prismspark-hackathon</p>
+            <h3>AI Whiteboard Interview — PrismSpark '26</h3>
+            <p>
+              Built and actually deployed — not just demoed — a live AI
+              whiteboard interview round with a team: real-time problem-solving
+              evaluation with GPTness detection baked in. We bought a domain to
+              ship it live. <strong>Won the Jury Special Award.</strong>
+            </p>
+            <ul class="tag-list tag-list--small">
+              <li>Agentic AI</li>
+              <li>Hackathon</li>
+              <li>GPTness Detection</li>
+            </ul>
+          </article>
+          <article class="card">
+            <p class="card__service">service: questionify</p>
+            <h3>Questionify — Multi-Agent Assessment Platform</h3>
+            <p>
+              Production-grade agentic pipeline — Research → Question Generation
+              → Judge — orchestrated over AWS SQS, evaluating every generated
+              question against <strong>6 quality criteria</strong> before it
+              reaches a candidate.
+            </p>
+            <ul class="tag-list tag-list--small">
+              <li>Next.js</li>
+              <li>AWS SQS</li>
+              <li>Multi-Agent AI</li>
+            </ul>
+          </article>
+          <article class="card">
+            <p class="card__service">service: resume-matching</p>
+            <h3>AI Resume Matching Engine</h3>
+            <p>
+              End-to-end semantic search pipeline — PDF parsing, Ollama
+              embeddings, MongoDB vector search — reaching
+              <strong>88% top-5 accuracy</strong> against 200 recruiter-labeled
+              job-resume pairs.
+            </p>
+            <ul class="tag-list tag-list--small">
+              <li>Python</li>
+              <li>Ollama</li>
+              <li>Vector Search</li>
+            </ul>
+          </article>
+          <article class="card">
+            <p class="card__service">service: tennis-vision</p>
+            <h3>Tennis Analysis System</h3>
+            <p>
+              Fine-tuned YOLOv8 for player tracking across
+              <strong>1,200+ frames</strong> with persistent ID through
+              occlusion, plus a PyTorch CNN for court keypoint extraction at
+              <strong>92% accuracy</strong>.
+            </p>
+            <ul class="tag-list tag-list--small">
+              <li>YOLOv8</li>
+              <li>PyTorch</li>
+              <li>OpenCV</li>
+            </ul>
+          </article>
+          <article class="card">
+            <p class="card__service">service: research</p>
+            <h3>Cardiac Risk Prediction — ML + IoT</h3>
+            <p>
+              Co-authored and presented a framework combining edge IoT sensor
+              data with ML-powered anomaly detection for continuous, real-time
+              cardiac risk monitoring, at ICDEC 2025.
+            </p>
+            <ul class="tag-list tag-list--small">
+              <li>Machine Learning</li>
+              <li>IoT</li>
+              <li>Published Research</li>
+            </ul>
+          </article>
+          <article class="card">
+            <p class="card__service">service: open-source</p>
+            <h3>stdlib.js — PR #8600</h3>
+            <p>
+              Fixed a DevContainer "no space left on device" build failure on a
+              <strong>12.5k★</strong> repo — a broken ShellCheck dependency, a
+              10GB+ base image over the 32GB Codespaces limit, and missing
+              Python support — unblocking <strong>538+ contributors</strong>.
+            </p>
+            <ul class="tag-list tag-list--small">
+              <li>Open Source</li>
+              <li>DevContainers</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="contact" id="contact">
+        <p class="eyebrow">//contact</p>
+        <h2>Let's talk</h2>
+        <p class="contact__lead">
+          Open to interesting problems, collaborations, and roles. Reach out
+          below or find me on the links.
         </p>
 
-        <div class="hero__visual">
-          <img src="assets/sayantan-image.jpg" alt="Sayantan Pal at his desk" width="800" height="800">
-        </div>
+        <form
+          class="form"
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+        >
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required />
 
-        <div class="ticker" aria-hidden="true">
-          <span class="ticker__prompt">$</span>
-          <span class="ticker__text" id="tickerText"></span><span class="ticker__cursor">▍</span>
-        </div>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
 
-        <div class="hero__actions">
-          <a href="#work" class="btn btn--primary">View work</a>
-          <a href="assets/resume.pdf" class="btn btn--ghost">Resume</a>
-        </div>
-      </div>
-    </section>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
 
-    <!-- ===================== ABOUT ===================== -->
-    <section class="about" id="about">
-      <p class="eyebrow">about</p>
-      <h2>A bit about how I work</h2>
-      <div class="about__grid">
-        <p>
-          I'm an Associate Software Engineer at Prismforce, where I work on
-          SelectPrism — an AI-powered recruitment and interview platform.
-          My day-to-day spans the full stack: React and TypeScript on the
-          frontend, Node.js and Python/FastAPI on the backend, with MongoDB,
-          AWS (SQS, SNS, S3), Docker and Redis underneath.
-        </p>
-        <p>
-          I like problems where the interesting part is the plumbing —
-          getting data reliably from one system to the next, keeping
-          services observable, and making AI features actually production-
-          ready instead of just demo-ready. Outside of work I do competitive
-          programming in C++ and contribute to open source when I find a
-          good bug to chase.
-        </p>
-      </div>
-    </section>
+          <button type="submit" class="btn btn--primary">Send message</button>
+        </form>
 
-    <!-- ===================== SKILLS ===================== -->
-    <section class="skills" id="skills">
-      <p class="eyebrow">stack</p>
-      <h2>Tools I reach for</h2>
-
-      <div class="skills__grid">
-        <div class="skills__group">
-          <h3>frontend</h3>
-          <ul class="tag-list">
-            <li>React</li><li>Next.js</li><li>TypeScript</li><li>HTML/CSS/JS</li>
-          </ul>
-        </div>
-        <div class="skills__group">
-          <h3>backend</h3>
-          <ul class="tag-list">
-            <li>Node.js</li><li>Python</li><li>FastAPI</li><li>MongoDB</li><li>Redis</li>
-          </ul>
-        </div>
-        <div class="skills__group">
-          <h3>infra &amp; tools</h3>
-          <ul class="tag-list">
-            <li>AWS (SQS/SNS/S3)</li><li>Docker</li><li>Git</li><li>Grafana/Loki</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== PROJECTS ===================== -->
-    <section class="work" id="work">
-      <p class="eyebrow">work</p>
-      <h2>Selected projects</h2>
-
-      <div class="work__grid">
-
-        <article class="card">
-          <p class="card__service">service: voice-interview-agent</p>
-          <h3>Voice AI Interview Agent</h3>
-          <p>Real-time conversational interview agent built with Pipecat,
-             LiveKit and Deepgram for low-latency speech-to-text and
-             natural voice interaction.</p>
-          <ul class="tag-list tag-list--small">
-            <li>Pipecat</li><li>LiveKit</li><li>Deepgram</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <p class="card__service">service: resume-parser</p>
-          <h3>Resume Parsing Pipeline</h3>
-          <p>Document processing pipeline using FastAPI and Unstructured.io
-             to extract structured candidate data at scale, backed by SQS
-             and S3.</p>
-          <ul class="tag-list tag-list--small">
-            <li>FastAPI</li><li>Unstructured.io</li><li>AWS SQS</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <p class="card__service">service: auth-hardening</p>
-          <h3>Auth System Hardening</h3>
-          <p>Led remediation after a VAPT security audit — added CAPTCHA
-             and multi-layer Redis-based rate limiting across the auth
-             flow.</p>
-          <ul class="tag-list tag-list--small">
-            <li>Redis</li><li>Cloudflare Turnstile</li><li>Security</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <p class="card__service">service: open-source</p>
-          <h3>stdlib.js — PR #8600</h3>
-          <p>Fixed a DevContainer "no space left on device" build failure
-             affecting 500+ contributors on GitHub Codespaces.</p>
-          <ul class="tag-list tag-list--small">
-            <li>Open Source</li><li>DevContainers</li>
-          </ul>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- ===================== CONTACT ===================== -->
-    <section class="contact" id="contact">
-      <p class="eyebrow">contact</p>
-      <h2>Let's talk</h2>
-      <p class="contact__lead">Open to interesting problems, collaborations, and roles. Reach out below or find me on the links.</p>
-
-      <!-- Netlify Forms: adding data-netlify="true" + a matching hidden
-           "form-name" input is all it takes. Netlify auto-detects this at
-           deploy time and gives you a working backend with zero server code. -->
-      <form class="form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-        <input type="hidden" name="form-name" value="contact">
-        <p class="hidden-field"><label>Don't fill this out: <input name="bot-field"></label></p>
-
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" required>
-
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="4" required></textarea>
-
-        <button type="submit" class="btn btn--primary">Send message</button>
-      </form>
-
-      <ul class="social-links">
-        <li><a href="https://github.com/sayantan007pal" target="_blank" rel="noopener">GitHub</a></li>
-        <li><a href="https://www.linkedin.com/in/sayantan-pal-05b99b125/" target="_blank" rel="noopener">LinkedIn</a></li>
-      </ul>
-    </section>
-
-  </main>
-
-  <footer class="site-footer">
-    <p>Built with plain HTML, CSS &amp; JS — deployed on Netlify.</p>
-  </footer>
-
-  <script src="js/main.js" defer></script>
-</body>
+        <ul class="social-links">
+          <li>
+            <a
+              href="https://github.com/sayantan007pal"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/in/sayantan-pal-05b99b125/"
+              target="_blank"
+              rel="noopener"
+              >LinkedIn</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://leetcode.com/sayantanpal100/"
+              target="_blank"
+              rel="noopener"
+              >LeetCode</a
+            >
+          </li>
+          <li>
+            <a
+              href="mailto:sayantanpal100@gmail.com"
+              target="_blank"
+              rel="noopener"
+              >Email</a
+            >
+          </li>
+        </ul>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2026 Sayantan Pal. All rights reserved.</p>
+    </footer>
+    <script src="js/main.js" defer></script>
+  </body>
 </html>

@@ -1,8 +1,4 @@
-/* =========================================================
-   DESIGN TOKENS
-   Keeping every color/font as a CSS variable means the whole
-   site's look can change by editing values in ONE place.
-   ========================================================= */
+ /* Keeping every color/font as a CSS variable   */
 :root {
   --ink:        #10141F;   /* page background */
   --panel:      #171C2A;   /* card / raised surface background */
@@ -16,8 +12,7 @@
   --font-body:    'IBM Plex Sans', sans-serif;
   --font-mono:    'IBM Plex Mono', monospace;
 
-  /* clamp(min, preferred, max) gives "fluid" type that scales smoothly
-     with the viewport instead of jumping at breakpoints. */
+  /* clamp(min, preferred, max) */
   --step-0: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
   --step-1: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
   --step-2: clamp(1.75rem, 1.4rem + 1.5vw, 2.25rem);
@@ -34,16 +29,11 @@ html.light {
   --line:  rgba(16, 20, 31, 0.12);
 }
 
-/* =========================================================
-   RESET — removes browser default spacing/quirks so we start
-   from a predictable baseline.
-   ========================================================= */
+/*
+    removes browser default spacing 
+*/
 *, *::before, *::after { box-sizing: border-box; }
 * { margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-img, svg { display: block; max-width: 100%; }
-ul { list-style: none; }
-a { color: inherit; text-decoration: none; }
 
 body {
   background: var(--ink);
@@ -53,6 +43,11 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
+
+html { scroll-behavior: smooth; }
+img, svg { display: block; max-width: 100%; }
+ul { list-style: none; }
+a { color: inherit; text-decoration: none; }
 
 h1, h2, h3 {
   font-family: var(--font-display);
@@ -72,7 +67,7 @@ h3 { font-size: var(--step-1); margin-bottom: 0.5rem; }
   margin-bottom: 0.75rem;
 }
 
-/* Visible keyboard focus — accessibility basic that's easy to forget */
+/* Visible keyboard focus */
 a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
   outline: 2px solid var(--signal);
   outline-offset: 3px;
@@ -90,18 +85,18 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .skip-link:focus { left: 1rem; top: 1rem; }
 
 
-/* =========================================================
+/*
    LAYOUT HELPERS
-   ========================================================= */
+ */
 section {
   max-width: var(--max-w);
   margin-inline: auto;
   padding: 4rem 1.5rem;
 }
 
-/* =========================================================
-   FALLING AI ICONS — decorative page background
-   ========================================================= */
+/*
+   FALLING AI ICONS
+ */
 .fall {
   position: fixed;
   inset: 0;
@@ -126,7 +121,7 @@ main,
   height: auto;
   display: block;
 }
-/* White icons in sprite → black on light theme */
+/* White icons converted to black on light theme */
 html.light .fall__icon--openai svg,
 html.light .fall__icon--ollama svg,
 html.light .fall__icon--kimi svg {
@@ -140,13 +135,10 @@ html.light .fall__icon--kimi svg {
 }
 
 
-/* =========================================================
-   HEADER / NAV
-   Mobile-first: by default the menu is a full-height panel
-   that's hidden off-screen, toggled by the hamburger button.
+/*
+   HEADER 
    The @media block near the bottom turns it back into a
-   normal horizontal row once there's room.
-   ========================================================= */
+   normal horizontal row once there's room.*/
 .site-header {
   position: sticky;
   top: 0;
@@ -168,13 +160,10 @@ html.light .fall__icon--kimi svg {
 .nav__brand {
   font-family: var(--font-mono);
   font-weight: 500;
-  font-size: 1.1rem;
+  font-size: 0.90rem;
 }
 .nav__brand-dim { color: var(--muted); }
 
-.nav__toggle {
-  display: none; /* header is now always a single row — no hamburger at any width */
-}
 
 .nav__menu button {
   background: none;
@@ -204,11 +193,9 @@ html.light #themeToggle::before { content: "☾"; } /* light page → moon = swi
   color: var(--signal);
 }
 
-/* =========================================================
-   HERO
+/* HERO
    Single column on mobile, two-column grid once there's
-   width for the photo to sit beside the text.
-   ========================================================= */
+   width for the photo to sit beside the text.*/
 .hero {
   display: grid;
   gap: 2.5rem;
@@ -277,18 +264,14 @@ html.light #themeToggle::before { content: "☾"; } /* light page → moon = swi
   border: 1px solid var(--line);
 }
 
-/* =========================================================
-   ABOUT
-   ========================================================= */
+/* ABOUT */
 .about__grid {
   display: grid;
   gap: 1.25rem;
 }
 .about__grid p { color: var(--muted); }
 
-/* =========================================================
-   SKILLS
-   ========================================================= */
+/* SKILLS */
 .skills__grid {
   display: grid;
   gap: 2rem;
@@ -318,10 +301,8 @@ html.light #themeToggle::before { content: "☾"; } /* light page → moon = swi
 }
 .tag-list--small li { font-size: 0.72rem; }
 
-/* =========================================================
-   PROJECTS / WORK
-   Cards styled like log/service entries.
-   ========================================================= */
+/* PROJECTS / WORK
+   Cards styled like log/service entries.*/
 .work__grid {
   display: grid;
   gap: 1.25rem;
@@ -342,9 +323,7 @@ html.light #themeToggle::before { content: "☾"; } /* light page → moon = swi
 }
 .card p { color: var(--muted); margin-bottom: 1rem; }
 
-/* =========================================================
-   CONTACT
-   ========================================================= */
+/* CONTACT */
 .contact__lead { color: var(--muted); max-width: 50ch; margin-bottom: 2rem; }
 
 .form {
@@ -378,9 +357,7 @@ html.light #themeToggle::before { content: "☾"; } /* light page → moon = swi
 .social-links a { color: var(--muted); }
 .social-links a:hover { color: var(--signal); }
 
-/* =========================================================
-   FOOTER
-   ========================================================= */
+/* FOOTER */
 .site-footer {
   text-align: center;
   padding: 2rem 1.5rem;
@@ -389,20 +366,15 @@ html.light #themeToggle::before { content: "☾"; } /* light page → moon = swi
   border-top: 1px solid var(--line);
 }
 
-/* =========================================================
-   BREAKPOINT 1 — ~600px (tablets, large phones)
-   ========================================================= */
+/* BREAKPOINT 1 — ~600px (tablets, large phones) */
 @media (min-width: 600px) {
   .work__grid { grid-template-columns: 1fr 1fr; }
   .about__grid { grid-template-columns: 1fr 1fr; }
 }
 
-/* =========================================================
-   BREAKPOINT 2 — ~900px (small laptops and up)
-   The nav is already a horizontal bar at every width now —
-   this just gives it more breathing room once there's space,
-   and switches the hero to two columns.
-   ========================================================= */
+/* 
+   BREAKPOINT-2 - 900px (small laptops and up)
+*/
 @media (min-width: 900px) {
   .nav__menu { gap: 2.5rem; font-size: 0.95rem; }
 
