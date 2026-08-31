@@ -66,107 +66,90 @@
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <div class="fall">
-      <span
-        class="fall__icon fall__icon--openai"
-        style="--x: 8%; --d: 0s; --t: 14s"
-        ><svg viewBox="0 0 24 24">
-          <use href="assets/icons/fall-icons.svg#openai" /></svg
-      ></span>
-      <span
-        class="fall__icon fall__icon--cursor"
-        style="--x: 22%; --d: 3s; --t: 16s"
-        ><svg viewBox="0 0 24 24">
-          <use href="assets/icons/fall-icons.svg#cursor" /></svg
-      ></span>
-      <span
-        class="fall__icon fall__icon--claude"
-        style="--x: 38%; --d: 6s; --t: 13s"
-        ><svg viewBox="0 0 24 24">
-          <use href="assets/icons/fall-icons.svg#claude" /></svg
-      ></span>
-      <span
-        class="fall__icon fall__icon--ollama"
-        style="--x: 54%; --d: 2s; --t: 18s"
-        ><svg viewBox="0 0 24 24">
-          <use href="assets/icons/fall-icons.svg#ollama" /></svg
-      ></span>
-      <span
-        class="fall__icon fall__icon--kimi"
-        style="--x: 70%; --d: 8s; --t: 15s"
-        ><svg viewBox="0 0 24 24">
-          <use href="assets/icons/fall-icons.svg#kimi" /></svg
-      ></span>
-      <span
-        class="fall__icon fall__icon--vscode"
-        style="--x: 86%; --d: 11s; --t: 17s"
-        ><svg viewBox="0 0 100 100">
-          <use href="assets/icons/fall-icons.svg#vscode" /></svg
-      ></span>
+      <svg class="fall-icon fall-light" style="--x: 8%; --d: 0s; --t: 14s" viewBox="0 0 24 24">
+        <use href="assets/icons/fall-icons.svg#openai" />
+      </svg>
+      <svg class="fall-icon" style="--x: 22%; --d: 3s; --t: 16s" viewBox="0 0 24 24">
+        <use href="assets/icons/fall-icons.svg#cursor" />
+      </svg>
+      <svg class="fall-icon" style="--x: 38%; --d: 6s; --t: 13s" viewBox="0 0 24 24">
+        <use href="assets/icons/fall-icons.svg#claude" />
+      </svg>
+      <svg class="fall-icon fall-light" style="--x: 54%; --d: 2s; --t: 18s" viewBox="0 0 24 24">
+        <use href="assets/icons/fall-icons.svg#ollama" />
+      </svg>
+      <svg class="fall-icon fall-light" style="--x: 70%; --d: 8s; --t: 15s" viewBox="0 0 24 24">
+        <use href="assets/icons/fall-icons.svg#kimi" />
+      </svg>
+      <svg class="fall-icon" style="--x: 86%; --d: 11s; --t: 17s" viewBox="0 0 100 100">
+        <use href="assets/icons/fall-icons.svg#vscode" />
+      </svg>
     </div>
 
     <header class="site-header">
-      <nav class="nav">
-        <ul class="nav__menu">
+      <nav class="nav-bar">
+        <ul class="nav-bar-menu">
           <li>
-            <a href="#top" class="nav__brand"
-              >Sayantan<span class="nav__brand-dim">.Pal</span></a
+            <a href="#top" class="nav-bar-menu-name"
+              >Sayantan<span class="nav-bar-menu-name-dim">.Pal</span></a
             >
           </li>
-          <li><a href="#about" class="nav__link">About</a></li>
-          <li><a href="#work" class="nav__link">Work</a></li>
-          <li><a href="#skills" class="nav__link">Skills</a></li>
+          <li><a href="#about" class="nav-bar-menu-items">About</a></li>
+          <li><a href="#work" class="nav-bar-menu-items">Work</a></li>
+          <li><a href="#skills" class="nav-bar-menu-items">Skills</a></li>
           <li>
-            <a href="#contact" class="nav__link nav__link--cta">Contact</a>
+            <a href="#contact" class="nav-bar-menu-items nav-bar-menu-items-contact">Contact</a>
           </li>
           <li>
-            <button type="button" class="nav__link" id="themeToggle"></button>
+            <button type="button" class="nav-bar-theme" id="themeToggle"></button>
           </li>
         </ul>
       </nav>
     </header>
     <main id="main">
       <section class="hero" id="top">
-        <div class="hero__text">
-          <p class="eyebrow">// full-stack &amp; ai systems engineer</p>
+        <div class="hero-text">
+          <p class="section-eyebrow">// full-stack &amp; ai systems engineer</p>
           <h1>Sayantan<br />Pal</h1>
-          <p class="hero__sub">
+          <p class="hero-text-description">
             I build full-stack AI-powered systems and currently at
             <strong>Prismforce</strong>, working on
             <strong>Selectprism</strong>, an AI recruitment platform.
           </p>
-          <figure class="hero__visual">
+          <figure class="hero-text-visual">
             <img
               src="assets/sayantan-image.jpg"
               width="800"
               height="800"
-              class="waveform"
               alt="Sayantan Pal"
             />
           </figure>
 
-          <div class="ticker">
-            <span class="ticker__prompt">$</span>
-            <span class="ticker__text" id="tickerText"></span
-            ><span class="ticker__cursor">▍</span>
+          <div class="hero-text-ticker">
+            <span class="hero-text-ticker-prompt">$</span>
+            <span class="hero-text-ticker-line">
+              <span class="hero-text-ticker-text" id="tickerText"></span
+              ><span class="hero-text-ticker-cursor">▍</span>
+            </span>
           </div>
 
-          <div class="hero__actions">
-            <a href="#work" class="btn btn--primary">View work</a>
+          <div class="hero-text-actions">
+            <a href="#work" class="btn btn-primary">View work</a>
             <a
               href="https://drive.google.com/file/d/1gIsnDQEmI83tmYSz5s_uewDQI7IBHpvU/view?usp=sharing"
-              class="btn btn--ghost"
+              class="btn btn-ghost"
               >Resume</a
             >
           </div>
         </div>
       </section>
 
-      <section>
-        <div class="about" id="about">
-          <p class="eyebrow">//about me</p>
+      <section class="about" id="about">
+          <p class="section-eyebrow">//about me</p>
           <h2>A bit about how I work</h2>
-          <div class="about__grid">
+          <div class="about-grid">
             <p>
               I'm a Associate Software Developer at Prismforce, where I work on
               selectprism, A AI-powered recruitment and Interview platform for
@@ -184,14 +167,13 @@
               contribute to open source when I find a good bug to chase.
             </p>
           </div>
-        </div>
       </section>
 
       <section class="skills" id="skills">
-        <p class="eyebrow">//stack</p>
+        <p class="section-eyebrow">//stack</p>
         <h2>Tools I reach for</h2>
-        <div class="skills__grid">
-          <div class="skills__group">
+        <div class="skills-grid">
+          <div class="skills-group">
             <h3>Frontend</h3>
             <ul class="tag-list">
               <li>React</li>
@@ -203,7 +185,7 @@
               <li>JavaScript</li>
             </ul>
           </div>
-          <div class="skills__group">
+          <div class="skills-group">
             <h3>Backend</h3>
             <ul class="tag-list">
               <li>Node.js</li>
@@ -212,7 +194,7 @@
               <li>Typescript</li>
             </ul>
           </div>
-          <div class="skills__group">
+          <div class="skills-group">
             <h3>Database</h3>
             <ul class="tag-list">
               <li>MongoDB</li>
@@ -220,7 +202,7 @@
               <li>MySQL</li>
             </ul>
           </div>
-          <div class="skills__group">
+          <div class="skills-group">
             <h3>Infra &amp; Tools</h3>
             <ul class="tag-list">
               <li>AWS (SQS/SNS/S3)</li>
@@ -234,14 +216,14 @@
       </section>
 
       <section class="work" id="work">
-        <p class="eyebrow">//experience</p>
+        <p class="section-eyebrow">//experience</p>
         <h2>Prismforce</h2>
-        <p class="section-sub">
+        <p class="work-sub">
           Associate Software Engineer · Feb 2025 – Present · Pune, India
         </p>
-        <div class="work__grid">
-          <article class="card">
-            <p class="card__service">service: platform-architecture</p>
+        <div class="work-grid">
+          <article class="work-card">
+            <p class="work-card-service">service: platform-architecture</p>
             <h3>SelectPrism Platform Architecture</h3>
             <p>
               Architected the SelectPrism recruitment platform from the ground
@@ -251,45 +233,45 @@
               caching, cutting average response time from
               <strong>340ms to 220ms — a 35% improvement</strong>.
             </p>
-            <ul class="tag-list tag-list--small">
+            <ul class="tag-list tag-list-small">
               <li>Node.js</li>
               <li>TypeScript</li>
               <li>MongoDB</li>
             </ul>
           </article>
-          <article class="card">
-            <p class="card__service">service: resume-parser</p>
+          <article class="work-card">
+            <p class="work-card-service">service: resume-parser</p>
             <h3>Resume Parsing Pipeline</h3>
             <p>
               Built an Ollama-powered local LLM parsing system, validated
               against 500 manually labeled resumes —
               <strong>92% accuracy</strong> on critical field extraction.
             </p>
-            <ul class="tag-list tag-list--small">
+            <ul class="tag-list tag-list-small">
               <li>FastAPI</li>
               <li>Ollama</li>
               <li>NLP</li>
             </ul>
           </article>
-          <article class="card">
-            <p class="card__service">service: proctoring-system</p>
+          <article class="work-card">
+            <p class="work-card-service">service: proctoring-system</p>
             <h3>AI Proctoring &amp; Anti-Cheat System</h3>
             <p>
               YOLO-based face detection verifying a candidate is present and
               attentive, paired with a "GPTness" layer flagging responses that
               read as recited rather than reasoned live — reducing
               flagged-session manual review time by an estimated
-              <strong>77%</strong>. Owned the report's frontend end to end, from
-              Figma to production.
+              <strong>77%</strong>. Owned the report's frontend end to end,
+              from Figma to production.
             </p>
-            <ul class="tag-list tag-list--small">
+            <ul class="tag-list tag-list-small">
               <li>YOLOv8</li>
               <li>Computer Vision</li>
               <li>Next.js</li>
             </ul>
           </article>
-          <article class="card">
-            <p class="card__service">service: unified-pipeline-api</p>
+          <article class="work-card">
+            <p class="work-card-service">service: unified-pipeline-api</p>
             <h3>Unified Interview Pipeline API</h3>
             <p>
               Collapsed JD parsing, resume upload, interview creation and link
@@ -298,14 +280,14 @@
               the GetKnit launch, cutting interview setup time by an estimated
               <strong>70%</strong>.
             </p>
-            <ul class="tag-list tag-list--small">
+            <ul class="tag-list tag-list-small">
               <li>Node.js</li>
               <li>API Design</li>
               <li>Webhooks</li>
             </ul>
           </article>
-          <article class="card">
-            <p class="card__service">service: frontend-componentization</p>
+          <article class="work-card">
+            <p class="work-card-service">service: frontend-componentization</p>
             <h3>Interview Frontend Componentization</h3>
             <p>
               Led the breakup of a monolithic interview-side UI into a reusable
@@ -313,14 +295,14 @@
               <strong>[95]%</strong> and eliminating duplicated view logic
               across the platform.
             </p>
-            <ul class="tag-list tag-list--small">
+            <ul class="tag-list tag-list-small">
               <li>Next.js</li>
               <li>React</li>
               <li>Design Systems</li>
             </ul>
           </article>
-          <article class="card">
-            <p class="card__service">service: auth-hardening</p>
+          <article class="work-card">
+            <p class="work-card-service">service: auth-hardening</p>
             <h3>Auth System Hardening</h3>
             <p>
               Led remediation after a VAPT security audit — Redis-based rate
@@ -328,7 +310,7 @@
               follow-up audit with
               <strong>zero critical vulnerabilities</strong>.
             </p>
-            <ul class="tag-list tag-list--small">
+            <ul class="tag-list tag-list-small">
               <li>Redis</li>
               <li>Security</li>
               <li>reCAPTCHA</li>
@@ -338,11 +320,11 @@
       </section>
 
       <section class="work" id="projects">
-        <p class="eyebrow">//projects</p>
+        <p class="section-eyebrow">//projects</p>
         <h2>Selected projects</h2>
-        <div class="work__grid">
-          <article class="card">
-            <p class="card__service">service: prismspark-hackathon</p>
+        <div class="work-grid">
+          <article class="work-card">
+            <p class="work-card-service">service: prismspark-hackathon</p>
             <h3>AI Whiteboard Interview — PrismSpark '26</h3>
             <p>
               Built and actually deployed — not just demoed — a live AI
@@ -350,14 +332,14 @@
               evaluation with GPTness detection baked in. We bought a domain to
               ship it live. <strong>Won the Jury Special Award.</strong>
             </p>
-            <ul class="tag-list tag-list--small">
+            <ul class="tag-list tag-list-small">
               <li>Agentic AI</li>
               <li>Hackathon</li>
               <li>GPTness Detection</li>
             </ul>
           </article>
-          <article class="card">
-            <p class="card__service">service: questionify</p>
+          <article class="work-card">
+            <p class="work-card-service">service: questionify</p>
             <h3>Questionify — Multi-Agent Assessment Platform</h3>
             <p>
               Production-grade agentic pipeline — Research → Question Generation
@@ -365,14 +347,14 @@
               question against <strong>6 quality criteria</strong> before it
               reaches a candidate.
             </p>
-            <ul class="tag-list tag-list--small">
+            <ul class="tag-list tag-list-small">
               <li>Next.js</li>
               <li>AWS SQS</li>
               <li>Multi-Agent AI</li>
             </ul>
           </article>
-          <article class="card">
-            <p class="card__service">service: resume-matching</p>
+          <article class="work-card">
+            <p class="work-card-service">service: resume-matching</p>
             <h3>AI Resume Matching Engine</h3>
             <p>
               End-to-end semantic search pipeline — PDF parsing, Ollama
@@ -380,14 +362,14 @@
               <strong>88% top-5 accuracy</strong> against 200 recruiter-labeled
               job-resume pairs.
             </p>
-            <ul class="tag-list tag-list--small">
+            <ul class="tag-list tag-list-small">
               <li>Python</li>
               <li>Ollama</li>
               <li>Vector Search</li>
             </ul>
           </article>
-          <article class="card">
-            <p class="card__service">service: tennis-vision</p>
+          <article class="work-card">
+            <p class="work-card-service">service: tennis-vision</p>
             <h3>Tennis Analysis System</h3>
             <p>
               Fine-tuned YOLOv8 for player tracking across
@@ -395,28 +377,28 @@
               occlusion, plus a PyTorch CNN for court keypoint extraction at
               <strong>92% accuracy</strong>.
             </p>
-            <ul class="tag-list tag-list--small">
+            <ul class="tag-list tag-list-small">
               <li>YOLOv8</li>
               <li>PyTorch</li>
               <li>OpenCV</li>
             </ul>
           </article>
-          <article class="card">
-            <p class="card__service">service: research</p>
+          <article class="work-card">
+            <p class="work-card-service">service: research</p>
             <h3>Cardiac Risk Prediction — ML + IoT</h3>
             <p>
               Co-authored and presented a framework combining edge IoT sensor
               data with ML-powered anomaly detection for continuous, real-time
               cardiac risk monitoring, at ICDEC 2025.
             </p>
-            <ul class="tag-list tag-list--small">
+            <ul class="tag-list tag-list-small">
               <li>Machine Learning</li>
               <li>IoT</li>
               <li>Published Research</li>
             </ul>
           </article>
-          <article class="card">
-            <p class="card__service">service: open-source</p>
+          <article class="work-card">
+            <p class="work-card-service">service: open-source</p>
             <h3>stdlib.js — PR #8600</h3>
             <p>
               Fixed a DevContainer "no space left on device" build failure on a
@@ -424,7 +406,7 @@
               10GB+ base image over the 32GB Codespaces limit, and missing
               Python support — unblocking <strong>538+ contributors</strong>.
             </p>
-            <ul class="tag-list tag-list--small">
+            <ul class="tag-list tag-list-small">
               <li>Open Source</li>
               <li>DevContainers</li>
             </ul>
@@ -433,15 +415,15 @@
       </section>
 
       <section class="contact" id="contact">
-        <p class="eyebrow">//contact</p>
+        <p class="section-eyebrow">//contact</p>
         <h2>Let's talk</h2>
-        <p class="contact__lead">
+        <p class="contact-lead">
           Open to interesting problems, collaborations, and roles. Reach out
           below or find me on the links.
         </p>
 
         <form
-          class="form"
+          class="contact-form"
           name="contact"
           method="POST"
           data-netlify="true"
@@ -456,10 +438,10 @@
           <label for="message">Message</label>
           <textarea id="message" name="message" rows="4" required></textarea>
 
-          <button type="submit" class="btn btn--primary">Send message</button>
+          <button type="submit" class="btn btn-primary">Send message</button>
         </form>
 
-        <ul class="social-links">
+        <ul class="contact-social">
           <li>
             <a
               href="https://github.com/sayantan007pal"
@@ -495,7 +477,7 @@
         </ul>
       </section>
     </main>
-    <footer>
+    <footer class="site-footer">
       <p>&copy; 2026 Sayantan Pal. All rights reserved.</p>
     </footer>
     <script src="js/main.js" defer></script>
