@@ -147,7 +147,7 @@ export class Game {
         this.config.overlayEl.textContent = message;
         this.config.overlayEl.hidden = !visible;
     }
-    updateHud() {
+    thupdateHud() {
         this.config.scoreEl.textContent = String(this.score);
         this.config.statusEl.textContent = this.status;
     }
